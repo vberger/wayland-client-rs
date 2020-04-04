@@ -1,0 +1,9 @@
+var ALIASES = {};
+ALIASES["wayland_client"] = {};
+ALIASES["wayland_commons"] = {};
+ALIASES["wayland_cursor"] = {};
+ALIASES["wayland_egl"] = {};
+ALIASES["wayland_protocols"] = {};
+ALIASES["wayland_scanner"] = {};
+ALIASES["wayland_server"] = {};
+ALIASES["wayland_sys"] = {};
