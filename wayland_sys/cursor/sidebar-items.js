@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["wl_cursor_theme",""]],"fn":[["is_lib_available",""],["wl_cursor_frame",""],["wl_cursor_frame_and_duration",""],["wl_cursor_image_get_buffer",""],["wl_cursor_theme_destroy",""],["wl_cursor_theme_get_cursor",""],["wl_cursor_theme_load",""]],"struct":[["wl_cursor",""],["wl_cursor_image",""]]});
