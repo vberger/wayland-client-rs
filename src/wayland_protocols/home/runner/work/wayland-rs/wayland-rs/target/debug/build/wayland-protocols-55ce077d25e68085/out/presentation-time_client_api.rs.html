@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/work/wayland-rs/wayland-rs/target/debug/build/wayland-protocols-dce3450980da91a6/out/presentation-time_server_api.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>presentation-time_server_api.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script src="../../../../../../../../../../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../../../../../../../../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../../../../../../../../wayland_protocols/index.html'><div class='logo-container'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../../../../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../../../../../../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../../../../../../../../../../settings.html"><img src="../../../../../../../../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/work/wayland-rs/wayland-rs/target/debug/build/wayland-protocols-55ce077d25e68085/out/presentation-time_client_api.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>presentation-time_client_api.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script src="../../../../../../../../../../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../../../../../../../../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../../../../../../../../wayland_protocols/index.html'><div class='logo-container'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../../../../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../../../../../../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../../../../../../../../../../settings.html"><img src="../../../../../../../../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -595,18 +595,6 @@
 <span id="595">595</span>
 <span id="596">596</span>
 <span id="597">597</span>
-<span id="598">598</span>
-<span id="599">599</span>
-<span id="600">600</span>
-<span id="601">601</span>
-<span id="602">602</span>
-<span id="603">603</span>
-<span id="604">604</span>
-<span id="605">605</span>
-<span id="606">606</span>
-<span id="607">607</span>
-<span id="608">608</span>
-<span id="609">609</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_void</span>};
 <span class="kw">const</span> <span class="ident">NULLPTR</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
@@ -621,11 +609,11 @@
 ];
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;timed presentation related wl_surface requests\n\nThe main feature of this interface is accurate presentation\ntiming feedback to ensure smooth video playback while maintaining\naudio/video synchronization. Some features use the concept of a\npresentation clock, which is defined in the\npresentation.clock_id event.\n\nA content update for a wl_surface is submitted by a\nwl_surface.commit request. Request &#39;feedback&#39; associates with\nthe wl_surface.commit and provides feedback on the content\nupdate, particularly the final realized presentation time.\n\n\n\nWhen the final realized presentation time is available, e.g.\nafter a framebuffer flip completes, the requested\npresentation_feedback.presented events are sent. The final\npresentation time can differ from the compositor&#39;s predicted\ndisplay update time and the update&#39;s target time, especially\nwhen the compositor misses its target vertical blanking period.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wp_presentation</span> {
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;fatal presentation errors\n\nThese fatal protocol errors may be emitted in response to\nillegal presentation requests.&quot;</span>]</span>
@@ -652,13 +640,10 @@
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Request</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unbind from the presentation interface\n\nInforms the server that the client will no longer be using\nthis protocol object. Existing objects created by this object\nare not affected.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unbind from the presentation interface\n\nInforms the server that the client will no longer be using\nthis protocol object. Existing objects created by this object\nare not affected.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;request presentation feedback information\n\nRequest presentation feedback for the current content submission\non the given surface. This creates a new presentation_feedback\nobject, which will deliver the feedback information once. If\nmultiple presentation_feedback objects are created for the same\nsubmission, they will all deliver the same information.\n\nFor details on what information is returned, see the\npresentation_feedback interface.&quot;</span>]</span>
-        <span class="ident">Feedback</span> {
-            <span class="ident">surface</span>: <span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span>,
-            <span class="ident">callback</span>: <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_presentation_feedback</span>::<span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span>,
-        },
+        <span class="ident">Feedback</span> { <span class="ident">surface</span>: <span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span> },
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
@@ -675,7 +660,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -703,62 +688,45 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
-                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
-                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Feedback</span> {
-                        <span class="ident">surface</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>()
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                        <span class="ident">callback</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="ident">map</span>.<span class="ident">get_new</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                    })
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">0</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
+                },
+                <span class="ident">Request</span>::<span class="ident">Feedback</span> { <span class="ident">surface</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">1</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()), <span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),],
+                },
+            }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
-                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
-                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Feedback</span> {
-                        <span class="ident">surface</span>: <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>)
-                            .<span class="ident">into</span>(),
-                        <span class="ident">callback</span>: {
-                            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">obj</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>);
-                            <span class="ident">me</span>.<span class="ident">make_child_for</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_presentation_feedback</span>::<span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span>(
-                                <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">n</span>,
-                            )
-                            .<span class="ident">unwrap</span>()
-                        },
-                    })
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+                <span class="ident">Request</span>::<span class="ident">Feedback</span> { <span class="ident">surface</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
+                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">o</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
+                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+            }
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -773,7 +741,7 @@
             <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[<span class="kw">super</span>::<span class="ident">ArgumentType</span>::<span class="ident">Uint</span>],
             <span class="ident">destructor</span>: <span class="bool-val">false</span>,
         }];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -795,52 +763,60 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">ClockId</span> {
+                        <span class="ident">clk_id</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Event</span>::<span class="ident">ClockId</span> { <span class="ident">clk_id</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">clk_id</span>),],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">ClockId</span> { <span class="ident">clk_id</span>: <span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">u</span> })
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Event</span>::<span class="ident">ClockId</span> { <span class="ident">clk_id</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">clk_id</span>;
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpPresentation</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentation</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpPresentation</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentation</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentation</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentation</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">WpPresentation</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentation</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">WpPresentation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -856,10 +832,20 @@
         }
     }
     <span class="kw">impl</span> <span class="ident">WpPresentation</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;clock ID for timestamps\n\nThis event tells the client in which clock domain the\ncompositor interprets the timestamps used by the presentation\nextension. This clock is called the presentation clock.\n\nThe compositor sends this event when the client binds to the\npresentation interface. The presentation clock does not change\nduring the lifetime of the client connection.\n\nThe clock identifier is platform dependent. On Linux/glibc,\nthe identifier value is one of the clockid_t values accepted\nby clock_gettime(). clock_gettime() is defined by\nPOSIX.1-2001.\n\nTimestamps in this clock domain are expressed as tv_sec_hi,\ntv_sec_lo, tv_nsec triples, each component being an unsigned\n32-bit value. Whole seconds are in tv_sec which is a 64-bit\nvalue combined from tv_sec_hi and tv_sec_lo, and the\nadditional fractional part in tv_nsec as nanoseconds. Hence,\nfor valid timestamps tv_nsec must be in [0, 999999999].\n\nNote that clock_id applies only to the presentation clock,\nand implies nothing about e.g. the timestamps used in the\nWayland core protocol input events.\n\nCompositors should prefer a clock which does not jump and is\nnot slewed e.g. by NTP. The absolute value of the clock is\nirrelevant. Precision of one millisecond or better is\nrecommended. Clients must be able to query the current clock\nvalue directly, not by asking the compositor.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clock_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">clk_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">ClockId</span> { <span class="ident">clk_id</span>: <span class="ident">clk_id</span> };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unbind from the presentation interface\n\nInforms the server that the client will no longer be using\nthis protocol object. Existing objects created by this object\nare not affected.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
+        }
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;request presentation feedback information\n\nRequest presentation feedback for the current content submission\non the given surface. This creates a new presentation_feedback\nobject, which will deliver the feedback information once. If\nmultiple presentation_feedback objects are created for the same\nsubmission, they will all deliver the same information.\n\nFor details on what information is returned, see the\npresentation_feedback interface.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">feedback</span>(
+            <span class="kw-2">&amp;</span><span class="self">self</span>,
+            <span class="ident">surface</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_presentation_feedback</span>::<span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span> {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Feedback</span> {
+                <span class="ident">surface</span>: <span class="ident">surface</span>.<span class="ident">clone</span>(),
+            };
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>()
         }
     }
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
@@ -905,11 +891,11 @@
 }
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;presentation time feedback event\n\nA presentation_feedback object returns an indication that a\nwl_surface content update has become visible to the user.\nOne object corresponds to one content update submission\n(wl_surface.commit). There are two possible outcomes: the\ncontent update is presented to the user, and a presentation\ntimestamp delivered; or, the user did not see the content\nupdate because it was superseded or its surface destroyed,\nand the content update is discarded.\n\nOnce a presentation_feedback object has delivered a &#39;presented&#39;\nor &#39;discarded&#39; event it is automatically destroyed.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wp_presentation_feedback</span> {
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="macro">bitflags</span><span class="macro">!</span> { # [ <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;bitmask of flags in presented event\n\nThese flags provide information about how the presentation of\nthe related content update was done. The intent is to help\nclients assess the reliability of the feedback and the visual\nquality with respect to possible tearing and timings. The\nflags are:\n\nVSYNC:\nThe presentation was synchronized to the \&quot;vertical retrace\&quot; by\nthe display hardware such that tearing does not happen.\nRelying on user space scheduling is not acceptable for this\nflag. If presentation is done by a copy to the active\nfrontbuffer, then it must guarantee that tearing cannot\nhappen.\n\nHW_CLOCK:\nThe display hardware provided measurements that the hardware\ndriver converted into a presentation timestamp. Sampling a\nclock in user space is not acceptable for this flag.\n\nHW_COMPLETION:\nThe display hardware signalled that it started using the new\nimage content. The opposite of this is e.g. a timer being used\nto guess when the display hardware has switched to the new\nimage content.\n\nZERO_COPY:\nThe presentation of this update was done zero-copy. This means\nthe buffer from the client was given to display hardware as\nis, without copying it. Compositing with OpenGL counts as\ncopying, even if textured directly from the client buffer.\nPossible zero-copy cases include direct scanout of a\nfullscreen surface and a surface on a hardware overlay.&quot;</span> ] <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Kind</span> : <span class="ident">u32</span> { # [ <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;presentation was vsync&#39;d&quot;</span> ] <span class="kw">const</span> <span class="ident">Vsync</span> <span class="op">=</span> <span class="number">1</span> ; # [ <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;hardware provided the presentation timestamp&quot;</span> ] <span class="kw">const</span> <span class="ident">HwClock</span> <span class="op">=</span> <span class="number">2</span> ; # [ <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;hardware signalled the start of the presentation&quot;</span> ] <span class="kw">const</span> <span class="ident">HwCompletion</span> <span class="op">=</span> <span class="number">4</span> ; # [ <span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;presentation was done zero-copy&quot;</span> ] <span class="kw">const</span> <span class="ident">ZeroCopy</span> <span class="op">=</span> <span class="number">8</span> ; } }
@@ -925,7 +911,7 @@
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Request</span> {}
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
@@ -941,27 +927,23 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -1010,7 +992,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -1036,101 +1018,130 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">SyncOutput</span> {
+                        <span class="ident">output</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>()
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Presented</span> {
+                        <span class="ident">tv_sec_hi</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">tv_sec_lo</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">tv_nsec</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">refresh</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">seq_hi</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">seq_lo</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">flags</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Discarded</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Event</span>::<span class="ident">SyncOutput</span> { <span class="ident">output</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">output</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),],
-                },
-                <span class="ident">Event</span>::<span class="ident">Presented</span> {
-                    <span class="ident">tv_sec_hi</span>,
-                    <span class="ident">tv_sec_lo</span>,
-                    <span class="ident">tv_nsec</span>,
-                    <span class="ident">refresh</span>,
-                    <span class="ident">seq_hi</span>,
-                    <span class="ident">seq_lo</span>,
-                    <span class="ident">flags</span>,
-                } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">tv_sec_hi</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">tv_sec_lo</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">tv_nsec</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">refresh</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">seq_hi</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">seq_lo</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">flags</span>),
-                    ],
-                },
-                <span class="ident">Event</span>::<span class="ident">Discarded</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">2</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">SyncOutput</span> {
+                        <span class="ident">output</span>: <span class="ident">Proxy</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wl_output</span>::<span class="ident">WlOutput</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>).<span class="ident">into</span>(),
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">7</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Presented</span> {
+                        <span class="ident">tv_sec_hi</span>: <span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">u</span>,
+                        <span class="ident">tv_sec_lo</span>: <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">u</span>,
+                        <span class="ident">tv_nsec</span>: <span class="ident">_args</span>[<span class="number">2</span>].<span class="ident">u</span>,
+                        <span class="ident">refresh</span>: <span class="ident">_args</span>[<span class="number">3</span>].<span class="ident">u</span>,
+                        <span class="ident">seq_hi</span>: <span class="ident">_args</span>[<span class="number">4</span>].<span class="ident">u</span>,
+                        <span class="ident">seq_lo</span>: <span class="ident">_args</span>[<span class="number">5</span>].<span class="ident">u</span>,
+                        <span class="ident">flags</span>: <span class="ident">_args</span>[<span class="number">6</span>].<span class="ident">u</span>,
+                    })
+                }
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Discarded</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Event</span>::<span class="ident">SyncOutput</span> { <span class="ident">output</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">output</span>.<span class="ident">as_ref</span>().<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Event</span>::<span class="ident">Presented</span> {
-                    <span class="ident">tv_sec_hi</span>,
-                    <span class="ident">tv_sec_lo</span>,
-                    <span class="ident">tv_nsec</span>,
-                    <span class="ident">refresh</span>,
-                    <span class="ident">seq_hi</span>,
-                    <span class="ident">seq_lo</span>,
-                    <span class="ident">flags</span>,
-                } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">7</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">tv_sec_hi</span>;
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">tv_sec_lo</span>;
-                    <span class="ident">_args_array</span>[<span class="number">2</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">tv_nsec</span>;
-                    <span class="ident">_args_array</span>[<span class="number">3</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">refresh</span>;
-                    <span class="ident">_args_array</span>[<span class="number">4</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">seq_hi</span>;
-                    <span class="ident">_args_array</span>[<span class="number">5</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">seq_lo</span>;
-                    <span class="ident">_args_array</span>[<span class="number">6</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">flags</span>;
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Event</span>::<span class="ident">Discarded</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpPresentationFeedback</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentationFeedback</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpPresentationFeedback</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentationFeedback</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentationFeedback</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpPresentationFeedback</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">WpPresentationFeedback</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpPresentationFeedback</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">WpPresentationFeedback</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -1145,42 +1156,7 @@
             <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="ident">wp_presentation_feedback_interface</span> }
         }
     }
-    <span class="kw">impl</span> <span class="ident">WpPresentationFeedback</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;presentation synchronized to this output\n\nAs presentation can be synchronized to only one output at a\ntime, this event tells which output it was. This event is only\nsent prior to the presented event.\n\nAs clients may bind to the same global wl_output multiple\ntimes, this event is sent for each bound instance that matches\nthe synchronized output. If a client has not bound to the\nright wl_output global at all, this event is not sent.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sync_output</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_output</span>::<span class="ident">WlOutput</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">SyncOutput</span> {
-                <span class="ident">output</span>: <span class="ident">output</span>.<span class="ident">clone</span>(),
-            };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;the content update was displayed\n\nThe associated content update was displayed to the user at the\nindicated time (tv_sec_hi/lo, tv_nsec). For the interpretation of\nthe timestamp, see presentation.clock_id event.\n\nThe timestamp corresponds to the time when the content update\nturned into light the first time on the surface&#39;s main output.\nCompositors may approximate this from the framebuffer flip\ncompletion events from the system, and the latency of the\nphysical display path if known.\n\nThis event is preceded by all related sync_output events\ntelling which output&#39;s refresh cycle the feedback corresponds\nto, i.e. the main output for the surface. Compositors are\nrecommended to choose the output containing the largest part\nof the wl_surface, or keeping the output they previously\nchose. Having a stable presentation output association helps\nclients predict future output refreshes (vblank).\n\nThe &#39;refresh&#39; argument gives the compositor&#39;s prediction of how\nmany nanoseconds after tv_sec, tv_nsec the very next output\nrefresh may occur. This is to further aid clients in\npredicting future refreshes, i.e., estimating the timestamps\ntargeting the next few vblanks. If such prediction cannot\nusefully be done, the argument is zero.\n\nIf the output does not have a constant refresh rate, explicit\nvideo mode switches excluded, then the refresh argument must\nbe zero.\n\nThe 64-bit value combined from seq_hi and seq_lo is the value\nof the output&#39;s vertical retrace counter when the content\nupdate was first scanned out to the display. This value must\nbe compatible with the definition of MSC in\nGLX_OML_sync_control specification. Note, that if the display\npath has a non-zero latency, the time instant specified by\nthis counter may differ from the timestamp&#39;s.\n\nIf the output does not have a concept of vertical retrace or a\nrefresh cycle, or the output device is self-refreshing without\na way to query the refresh count, then the arguments seq_hi\nand seq_lo must be zero.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">presented</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>,
-            <span class="ident">tv_sec_hi</span>: <span class="ident">u32</span>,
-            <span class="ident">tv_sec_lo</span>: <span class="ident">u32</span>,
-            <span class="ident">tv_nsec</span>: <span class="ident">u32</span>,
-            <span class="ident">refresh</span>: <span class="ident">u32</span>,
-            <span class="ident">seq_hi</span>: <span class="ident">u32</span>,
-            <span class="ident">seq_lo</span>: <span class="ident">u32</span>,
-            <span class="ident">flags</span>: <span class="ident">u32</span>,
-        ) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">Presented</span> {
-                <span class="ident">tv_sec_hi</span>: <span class="ident">tv_sec_hi</span>,
-                <span class="ident">tv_sec_lo</span>: <span class="ident">tv_sec_lo</span>,
-                <span class="ident">tv_nsec</span>: <span class="ident">tv_nsec</span>,
-                <span class="ident">refresh</span>: <span class="ident">refresh</span>,
-                <span class="ident">seq_hi</span>: <span class="ident">seq_hi</span>,
-                <span class="ident">seq_lo</span>: <span class="ident">seq_lo</span>,
-                <span class="ident">flags</span>: <span class="ident">flags</span>,
-            };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;the content update was not displayed\n\nThe content update was never displayed to the user.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">discarded</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">Discarded</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
-        }
-    }
+    <span class="kw">impl</span> <span class="ident">WpPresentationFeedback</span> {}
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this event&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EVT_SYNC_OUTPUT_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this event&quot;</span>]</span>
