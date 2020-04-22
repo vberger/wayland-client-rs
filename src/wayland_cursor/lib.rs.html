@@ -406,6 +406,26 @@
 <span id="406">406</span>
 <span id="407">407</span>
 <span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -644,6 +664,11 @@
             <span class="ident">frame_duration</span>: <span class="ident">millis</span>,
         }
     }
+
+    <span class="doccomment">/// Total number of images forming this cursor animation</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+        <span class="self">self</span>.<span class="ident">images</span>.<span class="ident">len</span>()
+    }
 }
 
 <span class="kw">impl</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Cursor</span> {
@@ -713,6 +738,21 @@
         }
 
         <span class="ident">buf</span>
+    }
+
+    <span class="doccomment">/// Dimensions of this image</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {
+        (<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
+    }
+
+    <span class="doccomment">/// Location of the pointer hotspot in this image</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hotspot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {
+        (<span class="self">self</span>.<span class="ident">xhot</span>, <span class="self">self</span>.<span class="ident">yhot</span>)
+    }
+
+    <span class="doccomment">/// Time (in milliseconds) for which this image should be displayed</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">delay</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+        <span class="self">self</span>.<span class="ident">delay</span>
     }
 }
 
