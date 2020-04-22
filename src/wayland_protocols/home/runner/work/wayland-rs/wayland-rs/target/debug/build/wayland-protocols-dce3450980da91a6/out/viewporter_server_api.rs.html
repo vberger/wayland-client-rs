@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/work/wayland-rs/wayland-rs/target/debug/build/wayland-protocols-6db576ed2261f37b/out/viewporter_client_api.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>viewporter_client_api.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script src="../../../../../../../../../../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../../../../../../../../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../../../../../../../../wayland_protocols/index.html'><div class='logo-container'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../../../../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../../../../../../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../../../../../../../../../../settings.html"><img src="../../../../../../../../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/work/wayland-rs/wayland-rs/target/debug/build/wayland-protocols-dce3450980da91a6/out/viewporter_server_api.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>viewporter_server_api.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script src="../../../../../../../../../../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../../../../../../../../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../../../../../../../../wayland_protocols/index.html'><div class='logo-container'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../../../../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../../../../../../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../../../../../../../../../../settings.html"><img src="../../../../../../../../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -533,6 +533,10 @@
 <span id="533">533</span>
 <span id="534">534</span>
 <span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_void</span>};
 <span class="kw">const</span> <span class="ident">NULLPTR</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
@@ -544,11 +548,11 @@
 ];
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;surface cropping and scaling\n\nThe global interface exposing surface cropping and scaling\ncapabilities is used to instantiate an interface extension for a\nwl_surface object. This extended interface will then allow\ncropping and scaling the surface contents, effectively\ndisconnecting the direct relationship between the buffer and the\nsurface size.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wp_viewporter</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -571,10 +575,13 @@
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Request</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unbind from the cropping and scaling interface\n\nInforms the server that the client will not be using this\nprotocol object anymore. This does not affect any other objects,\nwp_viewport objects included.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unbind from the cropping and scaling interface\n\nInforms the server that the client will not be using this\nprotocol object anymore. This does not affect any other objects,\nwp_viewport objects included.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;extend surface interface for crop and scale\n\nInstantiate an interface extension for the given wl_surface to\ncrop and scale its content. If the given wl_surface already has\na wp_viewport object associated, the viewport_exists\nprotocol error is raised.&quot;</span>]</span>
-        <span class="ident">GetViewport</span> { <span class="ident">surface</span>: <span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span> },
+        <span class="ident">GetViewport</span> {
+            <span class="ident">id</span>: <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">WpViewport</span><span class="op">&gt;</span>,
+            <span class="ident">surface</span>: <span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span>,
+        },
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
@@ -591,7 +598,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -620,52 +627,67 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">GetViewport</span> {
+                        <span class="ident">id</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">map</span>.<span class="ident">get_new</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">surface</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>()
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-                <span class="ident">Request</span>::<span class="ident">GetViewport</span> { <span class="ident">surface</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>), <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">GetViewport</span> {
+                        <span class="ident">id</span>: {
+                            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">obj</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>);
+                            <span class="ident">me</span>.<span class="ident">make_child_for</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">WpViewport</span><span class="op">&gt;</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">n</span>)
+                                .<span class="ident">unwrap</span>()
+                        },
+                        <span class="ident">surface</span>: <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">o</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>)
+                            .<span class="ident">into</span>(),
+                    })
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">GetViewport</span> { <span class="ident">surface</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span> {}
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Event</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
@@ -681,44 +703,40 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpViewporter</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewporter</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpViewporter</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewporter</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewporter</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewporter</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">WpViewporter</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewporter</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">WpViewporter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -733,23 +751,7 @@
             <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="ident">wp_viewporter_interface</span> }
         }
     }
-    <span class="kw">impl</span> <span class="ident">WpViewporter</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unbind from the cropping and scaling interface\n\nInforms the server that the client will not be using this\nprotocol object anymore. This does not affect any other objects,\nwp_viewport objects included.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;extend surface interface for crop and scale\n\nInstantiate an interface extension for the given wl_surface to\ncrop and scale its content. If the given wl_surface already has\na wp_viewport object associated, the viewport_exists\nprotocol error is raised.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_viewport</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>,
-            <span class="ident">surface</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span>,
-        ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">WpViewport</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">GetViewport</span> {
-                <span class="ident">surface</span>: <span class="ident">surface</span>.<span class="ident">clone</span>(),
-            };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>()
-        }
-    }
+    <span class="kw">impl</span> <span class="ident">WpViewporter</span> {}
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">REQ_DESTROY_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
@@ -783,11 +785,11 @@
 }
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;crop and scale interface to a wl_surface\n\nAn additional interface to a wl_surface object, which allows the\nclient to specify the cropping and scaling of the surface\ncontents.\n\nThis interface works with two concepts: the source rectangle (src_x,\nsrc_y, src_width, src_height), and the destination size (dst_width,\ndst_height). The contents of the source rectangle are scaled to the\ndestination size, and content outside the source rectangle is ignored.\nThis state is double-buffered, and is applied on the next\nwl_surface.commit.\n\nThe two parts of crop and scale state are independent: the source\nrectangle, and the destination size. Initially both are unset, that\nis, no scaling is applied. The whole of the current wl_buffer is\nused as the source, and the surface size is as defined in\nwl_surface.attach.\n\nIf the destination size is set, it causes the surface size to become\ndst_width, dst_height. The source (rectangle) is scaled to exactly\nthis size. This overrides whatever the attached wl_buffer size is,\nunless the wl_buffer is NULL. If the wl_buffer is NULL, the surface\nhas no content and therefore no size. Otherwise, the size is always\nat least 1x1 in surface local coordinates.\n\nIf the source rectangle is set, it defines what area of the wl_buffer is\ntaken as the source. If the source rectangle is set and the destination\nsize is not set, then src_width and src_height must be integers, and the\nsurface size becomes the source rectangle size. This results in cropping\nwithout scaling. If src_width or src_height are not integers and\ndestination size is not set, the bad_size protocol error is raised when\nthe surface state is applied.\n\nThe coordinate transformations from buffer pixel coordinates up to\nthe surface-local coordinates happen in the following order:\n1. buffer_transform (wl_surface.set_buffer_transform)\n2. buffer_scale (wl_surface.set_buffer_scale)\n3. crop and scale (wp_viewport.set*)\nThis means, that the source rectangle coordinates of crop and scale\nare given in the coordinates after the buffer transform and scale,\ni.e. in the coordinates that would be the surface-local coordinates\nif the crop and scale was not applied.\n\nIf src_x or src_y are negative, the bad_value protocol error is raised.\nOtherwise, if the source rectangle is partially or completely outside of\nthe non-NULL wl_buffer, then the out_of_buffer protocol error is raised\nwhen the surface state is applied. A NULL wl_buffer does not raise the\nout_of_buffer error.\n\nThe x, y arguments of wl_surface.attach are applied as normal to\nthe surface. They indicate how many pixels to remove from the\nsurface size from the left and the top. In other words, they are\nstill in the surface-local coordinate system, just like dst_width\nand dst_height are.\n\nIf the wl_surface associated with the wp_viewport is destroyed,\nall wp_viewport requests except &#39;destroy&#39; raise the protocol error\nno_surface.\n\nIf the wp_viewport object is destroyed, the crop and scale\nstate is removed from the wl_surface. The change will be applied\non the next wl_surface.commit.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wp_viewport</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -819,7 +821,7 @@
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Request</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;remove scaling and cropping from the surface\n\nThe associated wl_surface&#39;s crop and scale state is removed.\nThe change is applied on the next wl_surface.commit.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;remove scaling and cropping from the surface\n\nThe associated wl_surface&#39;s crop and scale state is removed.\nThe change is applied on the next wl_surface.commit.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the source rectangle for cropping\n\nSet the source rectangle of the associated wl_surface. See\nwp_viewport for the description, and relation to the wl_buffer\nsize.\n\nIf all of x, y, width and height are -1.0, the source rectangle is\nunset instead. Any other set of values where width or height are zero\nor negative, or x or y are negative, raise the bad_value protocol\nerror.\n\nThe crop and scale state is double-buffered state, and will be\napplied on the next wl_surface.commit.&quot;</span>]</span>
         <span class="ident">SetSource</span> { <span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">y</span>: <span class="ident">f64</span>, <span class="ident">width</span>: <span class="ident">f64</span>, <span class="ident">height</span>: <span class="ident">f64</span> },
@@ -852,7 +854,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -879,70 +881,104 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">SetSource</span> {
+                        <span class="ident">x</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Fixed</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                (<span class="ident">val</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">y</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Fixed</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                (<span class="ident">val</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">width</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Fixed</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                (<span class="ident">val</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">height</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Fixed</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                (<span class="ident">val</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">SetDestination</span> {
+                        <span class="ident">width</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">height</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-                <span class="ident">Request</span>::<span class="ident">SetSource</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
-                        <span class="ident">Argument</span>::<span class="ident">Fixed</span>((<span class="ident">x</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Fixed</span>((<span class="ident">y</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Fixed</span>((<span class="ident">width</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>),
-                        <span class="ident">Argument</span>::<span class="ident">Fixed</span>((<span class="ident">height</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>),
-                    ],
-                },
-                <span class="ident">Request</span>::<span class="ident">SetDestination</span> { <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">2</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">width</span>), <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">height</span>),],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">4</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">SetSource</span> {
+                        <span class="ident">x</span>: (<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">f</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>,
+                        <span class="ident">y</span>: (<span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">f</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>,
+                        <span class="ident">width</span>: (<span class="ident">_args</span>[<span class="number">2</span>].<span class="ident">f</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>,
+                        <span class="ident">height</span>: (<span class="ident">_args</span>[<span class="number">3</span>].<span class="ident">f</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="number">256.</span>,
+                    })
+                }
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">SetDestination</span> {
+                        <span class="ident">width</span>: <span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">i</span>,
+                        <span class="ident">height</span>: <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">i</span>,
+                    })
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">SetSource</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">4</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">f</span> <span class="op">=</span> (<span class="ident">x</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">f</span> <span class="op">=</span> (<span class="ident">y</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-                    <span class="ident">_args_array</span>[<span class="number">2</span>].<span class="ident">f</span> <span class="op">=</span> (<span class="ident">width</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-                    <span class="ident">_args_array</span>[<span class="number">3</span>].<span class="ident">f</span> <span class="op">=</span> (<span class="ident">height</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">SetDestination</span> { <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">i</span> <span class="op">=</span> <span class="ident">width</span>;
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">i</span> <span class="op">=</span> <span class="ident">height</span>;
-                    <span class="ident">f</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span> {}
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Event</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
@@ -958,44 +994,40 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpViewport</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewport</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WpViewport</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewport</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewport</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WpViewport</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">WpViewport</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">WpViewport</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">WpViewport</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -1010,31 +1042,7 @@
             <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="ident">wp_viewport_interface</span> }
         }
     }
-    <span class="kw">impl</span> <span class="ident">WpViewport</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;remove scaling and cropping from the surface\n\nThe associated wl_surface&#39;s crop and scale state is removed.\nThe change is applied on the next wl_surface.commit.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the source rectangle for cropping\n\nSet the source rectangle of the associated wl_surface. See\nwp_viewport for the description, and relation to the wl_buffer\nsize.\n\nIf all of x, y, width and height are -1.0, the source rectangle is\nunset instead. Any other set of values where width or height are zero\nor negative, or x or y are negative, raise the bad_value protocol\nerror.\n\nThe crop and scale state is double-buffered state, and will be\napplied on the next wl_surface.commit.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">y</span>: <span class="ident">f64</span>, <span class="ident">width</span>: <span class="ident">f64</span>, <span class="ident">height</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetSource</span> {
-                <span class="ident">x</span>: <span class="ident">x</span>,
-                <span class="ident">y</span>: <span class="ident">y</span>,
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the surface size for scaling\n\nSet the destination size of the associated wl_surface. See\nwp_viewport for the description, and relation to the wl_buffer\nsize.\n\nIf width is -1 and height is -1, the destination size is unset\ninstead. Any other pair of values for width and height that\ncontains zero or negative values raises the bad_value protocol\nerror.\n\nThe crop and scale state is double-buffered state, and will be\napplied on the next wl_surface.commit.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_destination</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetDestination</span> {
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
-        }
-    }
+    <span class="kw">impl</span> <span class="ident">WpViewport</span> {}
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">REQ_DESTROY_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>

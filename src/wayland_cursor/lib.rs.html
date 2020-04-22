@@ -424,8 +424,6 @@
 <span id="424">424</span>
 <span id="425">425</span>
 <span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -708,19 +706,17 @@
         <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="ident">theme</span>.<span class="ident">file</span>.<span class="ident">seek</span>(<span class="ident">SeekFrom</span>::<span class="ident">End</span>(<span class="number">0</span>)).<span class="ident">unwrap</span>();
         <span class="ident">theme</span>.<span class="ident">grow</span>(<span class="ident">new_size</span> <span class="kw">as</span> <span class="ident">i32</span>);
 
-        <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">theme</span>
-            .<span class="ident">pool</span>
-            .<span class="ident">create_buffer</span>(
-                <span class="ident">offset</span> <span class="kw">as</span> <span class="ident">i32</span>,
-                <span class="ident">image</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>,
-                <span class="ident">image</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">i32</span>,
-                (<span class="ident">image</span>.<span class="ident">width</span> <span class="op">*</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">i32</span>,
-                <span class="ident">Format</span>::<span class="ident">Argb8888</span>,
-            )
-            .<span class="ident">detach</span>();
+        <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">theme</span>.<span class="ident">pool</span>.<span class="ident">create_buffer</span>(
+            <span class="ident">offset</span> <span class="kw">as</span> <span class="ident">i32</span>,
+            <span class="ident">image</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>,
+            <span class="ident">image</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">i32</span>,
+            (<span class="ident">image</span>.<span class="ident">width</span> <span class="op">*</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">i32</span>,
+            <span class="ident">Format</span>::<span class="ident">Argb8888</span>,
+        );
+        <span class="ident">buffer</span>.<span class="ident">quick_assign</span>(<span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> {});
 
         <span class="ident">CursorImageBuffer</span> {
-            <span class="ident">buffer</span>,
+            <span class="ident">buffer</span>: <span class="ident">buffer</span>.<span class="ident">detach</span>(),
             <span class="ident">delay</span>: <span class="ident">image</span>.<span class="ident">delay</span>,
             <span class="ident">xhot</span>: <span class="ident">image</span>.<span class="ident">xhot</span>,
             <span class="ident">yhot</span>: <span class="ident">image</span>.<span class="ident">yhot</span>,
