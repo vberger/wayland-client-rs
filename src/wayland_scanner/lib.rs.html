@@ -195,6 +195,14 @@
 <span id="195">195</span>
 <span id="196">196</span>
 <span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland scanner crate</span>
 <span class="doccomment">//!</span>
@@ -216,8 +224,7 @@
 <span class="doccomment">//! First, have the XML files you want to use in your project, somewhere the build script</span>
 <span class="doccomment">//! will be able to read them.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Then, you&#39;ll need to invoke both `generate_c_interfaces` *and* `generate_c_code` for</span>
-<span class="doccomment">//! each of these files.</span>
+<span class="doccomment">//! Then, you&#39;ll need to invoke `generate_code` for each of these files.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! A sample build script:</span>
 <span class="doccomment">//!</span>
@@ -243,13 +250,13 @@
 <span class="doccomment">//! );</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! The above example will output two `.rs` files in the `OUT_DIR` defined by</span>
-<span class="doccomment">//! cargo. Then, you&#39;ll need to include these two generated files (using the</span>
+<span class="doccomment">//! The above example will output a `.rs` file in the `OUT_DIR` defined by</span>
+<span class="doccomment">//! cargo. Then, you&#39;ll need to include this generated file (using the</span>
 <span class="doccomment">//! macro of the same name) to make this code available in your crate.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! // The generated code will import stuff from wayland_sys</span>
-<span class="doccomment">//! extern crate wayland_sys;</span>
+<span class="doccomment">//! // The generated code will import stuff from wayland_commons</span>
+<span class="doccomment">//! extern crate wayland_commons;</span>
 <span class="doccomment">//! extern crate wayland_client;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! // Re-export only the actual code, and then only use this re-export</span>
@@ -266,6 +273,14 @@
 <span class="doccomment">//!     #![allow(non_upper_case_globals,non_snake_case,unused_imports)]</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     pub mod client {</span>
+<span class="doccomment">//!         // These imports are used by the generated code</span>
+<span class="doccomment">//!         pub(crate) use wayland_client::{Main, Attached, Proxy, ProxyMap, AnonymousObject};</span>
+<span class="doccomment">//!         pub(crate) use wayland_commons::map::{Object, ObjectMetadata};</span>
+<span class="doccomment">//!         pub(crate) use wayland_commons::{Interface, MessageGroup};</span>
+<span class="doccomment">//!         pub(crate) use wayland_commons::wire::{Argument, MessageDesc, ArgumentType, Message};</span>
+<span class="doccomment">//!         pub(crate) use wayland_commons::smallvec;</span>
+<span class="doccomment">//!         pub(crate) use wayland_client::protocol::{$($import),*};</span>
+<span class="doccomment">//!         pub(crate) use wayland_client::sys;</span>
 <span class="doccomment">//!         // If you protocol interacts with objects from other protocols, you&#39;ll need to import</span>
 <span class="doccomment">//!         // their modules, like so:</span>
 <span class="doccomment">//!         pub(crate) use wayland_client::protocol::{wl_surface, wl_region};</span>
@@ -274,7 +289,6 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 
-<span class="attribute">#![<span class="ident">recursion_limit</span> <span class="op">=</span> <span class="string">&quot;128&quot;</span>]</span>
 <span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::{<span class="ident">File</span>, <span class="ident">OpenOptions</span>};
@@ -298,7 +312,7 @@
     <span class="ident">parse</span>::<span class="ident">parse_stream</span>(<span class="ident">pfile</span>)
 }
 
-<span class="doccomment">/// Generate the code for a protocol using the C system libs</span>
+<span class="doccomment">/// Generate the code for a protocol</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// See this crate toplevel documentation for details.</span>
 <span class="doccomment">///</span>
@@ -316,7 +330,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Same as `generate_code`, but allows you to additionnaly specify some events</span>
 <span class="doccomment">/// (in the format `(&quot;interface_name&quot;, &quot;event_name&quot;)`) as being destructor, as this</span>
-<span class="doccomment">/// information is not encoded in the protocol files.</span>
+<span class="doccomment">/// information is not encoded in the protocol files but instead written in the</span>
+<span class="doccomment">/// protocol documentation.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_code_with_destructor_events</span><span class="op">&lt;</span><span class="ident">P1</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>, <span class="ident">P2</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
     <span class="ident">prot</span>: <span class="ident">P1</span>,
     <span class="ident">target</span>: <span class="ident">P2</span>,
@@ -369,7 +384,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Same as `generate_code_streams`, but allows you to additionnaly specify some events</span>
 <span class="doccomment">/// (in the format `(&quot;interface_name&quot;, &quot;event_name&quot;)`) as being destructor, as this</span>
-<span class="doccomment">/// information is not encoded in the protocol files.</span>
+<span class="doccomment">/// information is not encoded in the protocol files but instead written in the documentation</span>
+<span class="doccomment">/// of the protocol.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_code_streams_with_destructor_events</span><span class="op">&lt;</span><span class="ident">P1</span>: <span class="ident">Read</span>, <span class="ident">P2</span>: <span class="ident">Write</span><span class="op">&gt;</span>(
     <span class="ident">protocol</span>: <span class="ident">P1</span>,
     <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P2</span>,
