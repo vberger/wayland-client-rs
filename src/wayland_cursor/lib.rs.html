@@ -731,7 +731,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">pixels</span>.<span class="ident">len</span>() <span class="op">*</span> <span class="number">4</span>);
 
         <span class="kw">for</span> <span class="ident">pixel</span> <span class="kw">in</span> <span class="ident">pixels</span> {
-            <span class="ident">buf</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">pixel</span>.<span class="ident">to_be_bytes</span>());
+            <span class="ident">buf</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">pixel</span>.<span class="ident">to_le_bytes</span>());
         }
 
         <span class="ident">buf</span>
@@ -845,7 +845,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_convert_pixels</span>() {
         <span class="kw">let</span> <span class="ident">pixels</span>: <span class="kw-2">&amp;</span>[<span class="ident">u32</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0x12345678</span>, <span class="number">0x87654321</span>];
-        <span class="kw">let</span> <span class="ident">parsed_pixels</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0x12</span>, <span class="number">0x34</span>, <span class="number">0x56</span>, <span class="number">0x78</span>, <span class="number">0x87</span>, <span class="number">0x65</span>, <span class="number">0x43</span>, <span class="number">0x21</span>];
+        <span class="kw">let</span> <span class="ident">parsed_pixels</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0x78</span>, <span class="number">0x56</span>, <span class="number">0x34</span>, <span class="number">0x12</span>, <span class="number">0x21</span>, <span class="number">0x43</span>, <span class="number">0x65</span>, <span class="number">0x87</span>];
 
         <span class="macro">assert_eq</span><span class="macro">!</span>(
             <span class="kw">super</span>::<span class="ident">CursorImageBuffer</span>::<span class="ident">convert_pixels</span>(<span class="kw-2">&amp;</span><span class="ident">pixels</span>),
