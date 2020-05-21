@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/work/wayland-rs/wayland-rs/target/debug/build/wayland-protocols-09802f8c627def0c/out/gtk-primary-selection_client_api.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gtk-primary-selection_client_api.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script src="../../../../../../../../../../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../../../../../../../../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../../../../../../../../wayland_protocols/index.html'><div class='logo-container'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../../../../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../../../../../../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../../../../../../../../../../settings.html"><img src="../../../../../../../../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/work/wayland-rs/wayland-rs/target/debug/build/wayland-protocols-0becfcded0726ad2/out/gtk-primary-selection_server_api.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gtk-primary-selection_server_api.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css" id="themeStyle"><script src="../../../../../../../../../../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../../../../../../../../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../../../../../../../../../../wayland_protocols/index.html'><div class='logo-container'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../../../../../../../../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../../../../../../../../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../../../../../../../../../../settings.html"><img src="../../../../../../../../../../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1129,26 +1129,6 @@
 <span id="1129">1129</span>
 <span id="1130">1130</span>
 <span id="1131">1131</span>
-<span id="1132">1132</span>
-<span id="1133">1133</span>
-<span id="1134">1134</span>
-<span id="1135">1135</span>
-<span id="1136">1136</span>
-<span id="1137">1137</span>
-<span id="1138">1138</span>
-<span id="1139">1139</span>
-<span id="1140">1140</span>
-<span id="1141">1141</span>
-<span id="1142">1142</span>
-<span id="1143">1143</span>
-<span id="1144">1144</span>
-<span id="1145">1145</span>
-<span id="1146">1146</span>
-<span id="1147">1147</span>
-<span id="1148">1148</span>
-<span id="1149">1149</span>
-<span id="1150">1150</span>
-<span id="1151">1151</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_void</span>};
 <span class="kw">const</span> <span class="ident">NULLPTR</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
@@ -1158,20 +1138,25 @@
 ];
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;X primary selection emulation\n\nThe primary selection device manager is a singleton global object that\nprovides access to the primary selection. It allows to create\nwp_primary_selection_source objects, as well as retrieving the per-seat\nwp_primary_selection_device objects.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">gtk_primary_selection_device_manager</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Request</span> {
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;create a new primary selection source\n\nCreate a new primary selection source.&quot;</span>]</span>
-        <span class="ident">CreateSource</span> {},
+        <span class="ident">CreateSource</span> {
+            <span class="ident">id</span>: <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_source</span>::<span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span>,
+        },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;create a new primary selection device\n\nCreate a new data device for a given seat.&quot;</span>]</span>
-        <span class="ident">GetDevice</span> { <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span> },
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection device manager\n\nDestroy the primary selection device manager.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
+        <span class="ident">GetDevice</span> {
+            <span class="ident">id</span>: <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_device</span>::<span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span>,
+            <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
+        },
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection device manager\n\nDestroy the primary selection device manager.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
@@ -1195,7 +1180,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">true</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -1228,62 +1213,86 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">CreateSource</span> {
+                        <span class="ident">id</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">map</span>.<span class="ident">get_new</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">GetDevice</span> {
+                        <span class="ident">id</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">map</span>.<span class="ident">get_new</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">seat</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>()
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">CreateSource</span> {} <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),],
-                },
-                <span class="ident">Request</span>::<span class="ident">GetDevice</span> { <span class="ident">seat</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>), <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">seat</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),],
-                },
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">2</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">CreateSource</span> {
+                        <span class="ident">id</span>: {
+                            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">obj</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>);
+                            <span class="ident">me</span> . <span class="ident">make_child_for</span> :: <span class="op">&lt;</span> <span class="kw">super</span> :: <span class="ident">gtk_primary_selection_source</span> :: <span class="ident">GtkPrimarySelectionSource</span> <span class="op">&gt;</span> ( <span class="ident">_args</span> [ <span class="number">0</span> ] . <span class="ident">n</span> ) . <span class="ident">unwrap</span> ( )
+                        },
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">GetDevice</span> {
+                        <span class="ident">id</span>: {
+                            <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">obj</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>);
+                            <span class="ident">me</span> . <span class="ident">make_child_for</span> :: <span class="op">&lt;</span> <span class="kw">super</span> :: <span class="ident">gtk_primary_selection_device</span> :: <span class="ident">GtkPrimarySelectionDevice</span> <span class="op">&gt;</span> ( <span class="ident">_args</span> [ <span class="number">0</span> ] . <span class="ident">n</span> ) . <span class="ident">unwrap</span> ( )
+                        },
+                        <span class="ident">seat</span>: <span class="ident">Resource</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(<span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">o</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>).<span class="ident">into</span>(),
+                    })
+                }
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">CreateSource</span> {} <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">GetDevice</span> { <span class="ident">seat</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">seat</span>.<span class="ident">as_ref</span>().<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">2</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span> {}
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Event</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
@@ -1299,44 +1308,40 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {}
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionDeviceManager</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDeviceManager</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionDeviceManager</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDeviceManager</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDeviceManager</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDeviceManager</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">GtkPrimarySelectionDeviceManager</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDeviceManager</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">GtkPrimarySelectionDeviceManager</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -1351,26 +1356,7 @@
             <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="ident">gtk_primary_selection_device_manager_interface</span> }
         }
     }
-    <span class="kw">impl</span> <span class="ident">GtkPrimarySelectionDeviceManager</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;create a new primary selection source\n\nCreate a new primary selection source.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_source</span>::<span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">CreateSource</span> {};
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>()
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;create a new primary selection device\n\nCreate a new data device for a given seat.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_device</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>,
-            <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
-        ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_device</span>::<span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">GetDevice</span> { <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>() };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>()
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection device manager\n\nDestroy the primary selection device manager.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
-        }
-    }
+    <span class="kw">impl</span> <span class="ident">GtkPrimarySelectionDeviceManager</span> {}
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">REQ_CREATE_SOURCE_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
@@ -1418,11 +1404,11 @@
     };
 }
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">gtk_primary_selection_device</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -1432,7 +1418,7 @@
             <span class="ident">source</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_source</span>::<span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span>,
             <span class="ident">serial</span>: <span class="ident">u32</span>,
         },
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection device\n\nDestroy the primary selection device.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection device\n\nDestroy the primary selection device.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
@@ -1450,7 +1436,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">true</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -1475,57 +1461,70 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">SetSelection</span> {
+                        <span class="ident">source</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="kw">if</span> <span class="ident">val</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+                                    <span class="prelude-val">None</span>
+                                } <span class="kw">else</span> {
+                                    <span class="prelude-val">Some</span>(<span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>())
+                                }
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">serial</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">SetSelection</span> { <span class="ident">source</span>, <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
-                        <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">source</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>)),
-                        <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),
-                    ],
-                },
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">SetSelection</span> {
+                        <span class="ident">source</span>: <span class="kw">if</span> <span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">o</span>.<span class="ident">is_null</span>() {
+                            <span class="prelude-val">None</span>
+                        } <span class="kw">else</span> {
+                            <span class="prelude-val">Some</span> ( <span class="ident">Resource</span> :: <span class="op">&lt;</span> <span class="kw">super</span> :: <span class="ident">gtk_primary_selection_source</span> :: <span class="ident">GtkPrimarySelectionSource</span> <span class="op">&gt;</span> :: <span class="ident">from_c_ptr</span> ( <span class="ident">_args</span> [ <span class="number">0</span> ] . <span class="ident">o</span> <span class="kw">as</span> <span class="op">*</span> <span class="kw-2">mut</span> <span class="kw">_</span> , ) . <span class="ident">into</span> ( ) )
+                        },
+                        <span class="ident">serial</span>: <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">u</span>,
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">SetSelection</span> { <span class="ident">source</span>, <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">source</span>
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">as_ref</span>().<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>)
-                        .<span class="ident">unwrap_or</span>(::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>());
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">serial</span>;
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span> {
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;introduce a new wp_primary_selection_offer\n\nIntroduces a new wp_primary_selection_offer object that may be used\nto receive the current primary selection. Immediately following this\nevent, the new wp_primary_selection_offer object will send\nwp_primary_selection_offer.offer events to describe the offered mime\ntypes.&quot;</span>]</span>
         <span class="ident">DataOffer</span> {
-            <span class="ident">offer</span>: <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_offer</span>::<span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span>,
+            <span class="ident">offer</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_offer</span>::<span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span>,
         },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;advertise a new primary selection\n\nThe wp_primary_selection_device.selection event is sent to notify the\nclient of a new primary selection. This event is sent after the\nwp_primary_selection.data_offer event introducing this object, and after\nthe offer has announced its mimetypes through\nwp_primary_selection_offer.offer.\n\nThe data_offer is valid until a new offer or NULL is received\nor until the client loses keyboard focus. The client must destroy the\nprevious selection data_offer, if any, upon receiving this event.&quot;</span>]</span>
         <span class="ident">Selection</span> {
@@ -1547,7 +1546,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -1574,91 +1573,64 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">DataOffer</span> {
-                        <span class="ident">offer</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="ident">map</span>.<span class="ident">get_new</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                    })
-                }
-                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Selection</span> {
-                        <span class="ident">id</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="kw">if</span> <span class="ident">val</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-                                    <span class="prelude-val">None</span>
-                                } <span class="kw">else</span> {
-                                    <span class="prelude-val">Some</span>(<span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>())
-                                }
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                    })
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Event</span>::<span class="ident">DataOffer</span> { <span class="ident">offer</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">0</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">offer</span>.<span class="ident">id</span>()),],
+                },
+                <span class="ident">Event</span>::<span class="ident">Selection</span> { <span class="ident">id</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">1</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">id</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>)),],
+                },
+            }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">DataOffer</span> {
-                        <span class="ident">offer</span>:
-                            <span class="ident">Main</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_offer</span>::<span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span>::<span class="ident">from_c_ptr</span>(
-                                <span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
-                            ),
-                    })
-                }
-                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Selection</span> {
-                        <span class="ident">id</span>: <span class="kw">if</span> <span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">o</span>.<span class="ident">is_null</span>() {
-                            <span class="prelude-val">None</span>
-                        } <span class="kw">else</span> {
-                            <span class="prelude-val">Some</span> ( <span class="ident">Proxy</span> :: <span class="op">&lt;</span> <span class="kw">super</span> :: <span class="ident">gtk_primary_selection_offer</span> :: <span class="ident">GtkPrimarySelectionOffer</span> <span class="op">&gt;</span> :: <span class="ident">from_c_ptr</span> ( <span class="ident">_args</span> [ <span class="number">0</span> ] . <span class="ident">o</span> <span class="kw">as</span> <span class="op">*</span> <span class="kw-2">mut</span> <span class="kw">_</span> , ) . <span class="ident">into</span> ( ) )
-                        },
-                    })
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Event</span>::<span class="ident">DataOffer</span> { <span class="ident">offer</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">offer</span>.<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
+                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+                <span class="ident">Event</span>::<span class="ident">Selection</span> { <span class="ident">id</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">o</span> <span class="op">=</span> <span class="ident">id</span>
+                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">as_ref</span>().<span class="ident">c_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>)
+                        .<span class="ident">unwrap_or</span>(::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null_mut</span>());
+                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+            }
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionDevice</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDevice</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionDevice</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDevice</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDevice</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionDevice</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">GtkPrimarySelectionDevice</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionDevice</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">GtkPrimarySelectionDevice</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -1674,22 +1646,22 @@
         }
     }
     <span class="kw">impl</span> <span class="ident">GtkPrimarySelectionDevice</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the primary selection\n\nReplaces the current selection. The previous owner of the primary selection\nwill receive a wp_primary_selection_source.cancelled event.\n\nTo unset the selection, set the source to NULL.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_selection</span>(
-            <span class="kw-2">&amp;</span><span class="self">self</span>,
-            <span class="ident">source</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_source</span>::<span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span>,
-            <span class="ident">serial</span>: <span class="ident">u32</span>,
-        ) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetSelection</span> {
-                <span class="ident">source</span>: <span class="ident">source</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">clone</span>()),
-                <span class="ident">serial</span>: <span class="ident">serial</span>,
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;introduce a new wp_primary_selection_offer\n\nIntroduces a new wp_primary_selection_offer object that may be used\nto receive the current primary selection. Immediately following this\nevent, the new wp_primary_selection_offer object will send\nwp_primary_selection_offer.offer events to describe the offered mime\ntypes.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">data_offer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">offer</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_offer</span>::<span class="ident">GtkPrimarySelectionOffer</span>) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">DataOffer</span> {
+                <span class="ident">offer</span>: <span class="ident">offer</span>.<span class="ident">as_ref</span>().<span class="ident">clone</span>(),
             };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
         }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection device\n\nDestroy the primary selection device.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;advertise a new primary selection\n\nThe wp_primary_selection_device.selection event is sent to notify the\nclient of a new primary selection. This event is sent after the\nwp_primary_selection.data_offer event introducing this object, and after\nthe offer has announced its mimetypes through\nwp_primary_selection_offer.offer.\n\nThe data_offer is valid until a new offer or NULL is received\nor until the client loses keyboard focus. The client must destroy the\nprevious selection data_offer, if any, upon receiving this event.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">selection</span>(
+            <span class="kw-2">&amp;</span><span class="self">self</span>,
+            <span class="ident">id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">gtk_primary_selection_offer</span>::<span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">Selection</span> {
+                <span class="ident">id</span>: <span class="ident">id</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">clone</span>()),
+            };
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
         }
     }
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
@@ -1751,11 +1723,11 @@
 }
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;offer to transfer primary selection contents\n\nA wp_primary_selection_offer represents an offer to transfer the contents\nof the primary selection clipboard to the client. Similar to\nwl_data_offer, the offer also describes the mime types that the source\nwill transferthat the\ndata can be converted to and provides the mechanisms for transferring the\ndata directly to the client.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">gtk_primary_selection_offer</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -1765,7 +1737,7 @@
             <span class="ident">mime_type</span>: <span class="ident">String</span>,
             <span class="ident">fd</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>,
         },
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection offer\n\nDestroy the primary selection offer.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection offer\n\nDestroy the primary selection offer.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
@@ -1783,7 +1755,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">true</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -1808,51 +1780,59 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Receive</span> {
+                        <span class="ident">mime_type</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8</span>(<span class="ident">val</span>.<span class="ident">into_bytes</span>())
+                                    .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">e</span>.<span class="ident">into_bytes</span>()).<span class="ident">into</span>());
+                                <span class="ident">s</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                        <span class="ident">fd</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Fd</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="ident">val</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Receive</span> { <span class="ident">mime_type</span>, <span class="ident">fd</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
-                        <span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">unsafe</span> {
-                            ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">from_vec_unchecked</span>(<span class="ident">mime_type</span>.<span class="ident">into</span>())
-                        })),
-                        <span class="ident">Argument</span>::<span class="ident">Fd</span>(<span class="ident">fd</span>),
-                    ],
-                },
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Receive</span> {
+                        <span class="ident">mime_type</span>: ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">s</span>)
+                            .<span class="ident">to_string_lossy</span>()
+                            .<span class="ident">into_owned</span>(),
+                        <span class="ident">fd</span>: <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">h</span>,
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Receive</span> { <span class="ident">mime_type</span>, <span class="ident">fd</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="kw">let</span> <span class="ident">_arg_0</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">mime_type</span>).<span class="ident">unwrap</span>();
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">s</span> <span class="op">=</span> <span class="ident">_arg_0</span>.<span class="ident">as_ptr</span>();
-                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">h</span> <span class="op">=</span> <span class="ident">fd</span>;
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -1867,7 +1847,7 @@
             <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[<span class="kw">super</span>::<span class="ident">ArgumentType</span>::<span class="ident">Str</span>],
             <span class="ident">destructor</span>: <span class="bool-val">false</span>,
         }];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -1889,66 +1869,55 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Offer</span> {
-                        <span class="ident">mime_type</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8</span>(<span class="ident">val</span>.<span class="ident">into_bytes</span>())
-                                    .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">e</span>.<span class="ident">into_bytes</span>()).<span class="ident">into</span>());
-                                <span class="ident">s</span>
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                    })
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Event</span>::<span class="ident">Offer</span> { <span class="ident">mime_type</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">0</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">unsafe</span> {
+                        ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">from_vec_unchecked</span>(<span class="ident">mime_type</span>.<span class="ident">into</span>())
+                    })),],
+                },
+            }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Offer</span> {
-                        <span class="ident">mime_type</span>: ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">s</span>)
-                            .<span class="ident">to_string_lossy</span>()
-                            .<span class="ident">into_owned</span>(),
-                    })
-                }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Event</span>::<span class="ident">Offer</span> { <span class="ident">mime_type</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="kw">let</span> <span class="ident">_arg_0</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">mime_type</span>).<span class="ident">unwrap</span>();
+                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">s</span> <span class="op">=</span> <span class="ident">_arg_0</span>.<span class="ident">as_ptr</span>();
+                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+            }
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionOffer</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionOffer</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionOffer</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionOffer</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionOffer</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionOffer</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">GtkPrimarySelectionOffer</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionOffer</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">GtkPrimarySelectionOffer</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -1964,18 +1933,10 @@
         }
     }
     <span class="kw">impl</span> <span class="ident">GtkPrimarySelectionOffer</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;request that the data is transferred\n\nTo transfer the contents of the primary selection clipboard, the client\nissues this request and indicates the mime type that it wants to\nreceive. The transfer happens through the passed file descriptor\n(typically created with the pipe system call). The source client writes\nthe data in the mime type representation requested and then closes the\nfile descriptor.\n\nThe receiving client reads from the read end of the pipe until EOF and\ncloses its end, at which point the transfer is complete.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">receive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mime_type</span>: <span class="ident">String</span>, <span class="ident">fd</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Receive</span> {
-                <span class="ident">mime_type</span>: <span class="ident">mime_type</span>,
-                <span class="ident">fd</span>: <span class="ident">fd</span>,
-            };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
-        }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection offer\n\nDestroy the primary selection offer.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;advertise offered mime type\n\nSent immediately after creating announcing the wp_primary_selection_offer\nthrough wp_primary_selection_device.data_offer. One event is sent per\noffered mime type.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">offer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mime_type</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">Offer</span> { <span class="ident">mime_type</span>: <span class="ident">mime_type</span> };
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
         }
     }
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
@@ -2015,18 +1976,18 @@
 }
 <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;offer to replace the contents of the primary selection\n\nThe source side of a wp_primary_selection_offer, it provides a way to\ndescribe the offered data and respond to requests to transfer the\nrequested contents of the primary selection clipboard.&quot;</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">gtk_primary_selection_source</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">server</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::{
         <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Resource</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Request</span> {
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;add an offered mime type\n\nThis request adds a mime type to the set of mime types advertised to\ntargets. Can be called several times to offer multiple types.&quot;</span>]</span>
         <span class="ident">Offer</span> { <span class="ident">mime_type</span>: <span class="ident">String</span> },
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection source\n\nDestroy the primary selection source.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection source\n\nDestroy the primary selection source.\n\nThis is a destructor, once received this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
@@ -2044,7 +2005,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">true</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
@@ -2069,47 +2030,51 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Offer</span> {
+                        <span class="ident">mime_type</span>: {
+                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
+                                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8</span>(<span class="ident">val</span>.<span class="ident">into_bytes</span>())
+                                    .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">e</span>.<span class="ident">into_bytes</span>()).<span class="ident">into</span>());
+                                <span class="ident">s</span>
+                            } <span class="kw">else</span> {
+                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
+                            }
+                        },
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Offer</span> { <span class="ident">mime_type</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">unsafe</span> {
-                        ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">from_vec_unchecked</span>(<span class="ident">mime_type</span>.<span class="ident">into</span>())
-                    })),],
-                },
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::into_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, ()<span class="op">&gt;</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::from_raw_c can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="ident">opcode</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">1</span>);
+                    <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Offer</span> {
+                        <span class="ident">mime_type</span>: ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">s</span>)
+                            .<span class="ident">to_string_lossy</span>()
+                            .<span class="ident">into_owned</span>(),
+                    })
+                }
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">Destroy</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
+            }
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Offer</span> { <span class="ident">mime_type</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="kw">let</span> <span class="ident">_arg_0</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">mime_type</span>).<span class="ident">unwrap</span>();
-                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">s</span> <span class="op">=</span> <span class="ident">_arg_0</span>.<span class="ident">as_ptr</span>();
-                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
-                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
-                }
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Request::as_raw_c_in can not be used Server-side.&quot;</span>)
         }
     }
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
@@ -2137,7 +2102,7 @@
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
         ];
-        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
+        <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
@@ -2161,76 +2126,68 @@
             }
         }
         <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">msg</span>.<span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">args</span>.<span class="ident">into_iter</span>();
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Send</span> {
-                        <span class="ident">mime_type</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8</span>(<span class="ident">val</span>.<span class="ident">into_bytes</span>())
-                                    .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="ident">e</span>.<span class="ident">into_bytes</span>()).<span class="ident">into</span>());
-                                <span class="ident">s</span>
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                        <span class="ident">fd</span>: {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">Argument</span>::<span class="ident">Fd</span>(<span class="ident">val</span>)) <span class="op">=</span> <span class="ident">args</span>.<span class="ident">next</span>() {
-                                <span class="ident">val</span>
-                            } <span class="kw">else</span> {
-                                <span class="kw">return</span> <span class="prelude-val">Err</span>(());
-                            }
-                        },
-                    })
-                }
-                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Cancelled</span>),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::into_raw can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Event</span>::<span class="ident">Send</span> { <span class="ident">mime_type</span>, <span class="ident">fd</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">0</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
+                        <span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">unsafe</span> {
+                            ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">from_vec_unchecked</span>(<span class="ident">mime_type</span>.<span class="ident">into</span>())
+                        })),
+                        <span class="ident">Argument</span>::<span class="ident">Fd</span>(<span class="ident">fd</span>),
+                    ],
+                },
+                <span class="ident">Event</span>::<span class="ident">Cancelled</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">opcode</span>: <span class="number">1</span>,
+                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
+                },
+            }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
             <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
             <span class="ident">opcode</span>: <span class="ident">u32</span>,
             <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Event</span>, ()<span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="ident">opcode</span> {
-                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">_args</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="number">2</span>);
-                    <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Send</span> {
-                        <span class="ident">mime_type</span>: ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">_args</span>[<span class="number">0</span>].<span class="ident">s</span>)
-                            .<span class="ident">to_string_lossy</span>()
-                            .<span class="ident">into_owned</span>(),
-                        <span class="ident">fd</span>: <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">h</span>,
-                    })
-                }
-                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Event</span>::<span class="ident">Cancelled</span>),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(()),
-            }
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::from_raw_c can not be used Server-side.&quot;</span>)
         }
         <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
         <span class="kw">where</span>
             <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
         {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Event::as_raw_c_in can not be used Client-side.&quot;</span>)
+            <span class="kw">match</span> <span class="self">self</span> {
+                <span class="ident">Event</span>::<span class="ident">Send</span> { <span class="ident">mime_type</span>, <span class="ident">fd</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">2</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="kw">let</span> <span class="ident">_arg_0</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">mime_type</span>).<span class="ident">unwrap</span>();
+                    <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">s</span> <span class="op">=</span> <span class="ident">_arg_0</span>.<span class="ident">as_ptr</span>();
+                    <span class="ident">_args_array</span>[<span class="number">1</span>].<span class="ident">h</span> <span class="op">=</span> <span class="ident">fd</span>;
+                    <span class="ident">f</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+                <span class="ident">Event</span>::<span class="ident">Cancelled</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">0</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
+                    <span class="ident">f</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
+                }
+            }
         }
     }
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionSource</span>(<span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span>);
-    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionSource</span> {
+    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GtkPrimarySelectionSource</span>(<span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span>);
+    <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionSource</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionSource</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GtkPrimarySelectionSource</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Proxy</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Resource</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">GtkPrimarySelectionSource</span>(<span class="ident">value</span>)
         }
     }
-    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span> {
+    <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">GtkPrimarySelectionSource</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">GtkPrimarySelectionSource</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">value</span>.<span class="number">0</span>
@@ -2246,15 +2203,18 @@
         }
     }
     <span class="kw">impl</span> <span class="ident">GtkPrimarySelectionSource</span> {
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;add an offered mime type\n\nThis request adds a mime type to the set of mime types advertised to\ntargets. Can be called several times to offer multiple types.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">offer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mime_type</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Offer</span> { <span class="ident">mime_type</span>: <span class="ident">mime_type</span> };
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;send the primary selection contents\n\nRequest for the current primary selection contents from the client.\nSend the specified mime type over the passed file descriptor, then\nclose it.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">mime_type</span>: <span class="ident">String</span>, <span class="ident">fd</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">Send</span> {
+                <span class="ident">mime_type</span>: <span class="ident">mime_type</span>,
+                <span class="ident">fd</span>: <span class="ident">fd</span>,
+            };
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
         }
-        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the primary selection source\n\nDestroy the primary selection source.\n\nThis is a destructor, you cannot send requests to this object any longer once this method is called.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">destroy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Destroy</span>;
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
+        <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;request for primary selection contents was canceled\n\nThis primary selection source is no longer valid. The client should\nclean up and destroy this primary selection source.&quot;</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cancelled</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Event</span>::<span class="ident">Cancelled</span>;
+            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>);
         }
     }
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
