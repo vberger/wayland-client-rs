@@ -392,39 +392,6 @@
 <span id="392">392</span>
 <span id="393">393</span>
 <span id="394">394</span>
-<span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
-<span id="409">409</span>
-<span id="410">410</span>
-<span id="411">411</span>
-<span id="412">412</span>
-<span id="413">413</span>
-<span id="414">414</span>
-<span id="415">415</span>
-<span id="416">416</span>
-<span id="417">417</span>
-<span id="418">418</span>
-<span id="419">419</span>
-<span id="420">420</span>
-<span id="421">421</span>
-<span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -482,8 +449,8 @@
     },
     <span class="ident">Attached</span>, <span class="ident">Main</span>,
 };
-<span class="kw">use</span> <span class="ident">xcur</span>::<span class="ident">parser</span>::<span class="ident">File</span> <span class="kw">as</span> <span class="ident">XCurFile</span>;
-<span class="kw">use</span> <span class="ident">xcursor</span>::{<span class="ident">theme_search_paths</span>, <span class="ident">XCursorTheme</span>};
+<span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">parser</span> <span class="kw">as</span> <span class="ident">xparser</span>;
+<span class="kw">use</span> <span class="ident">xcursor</span>::{<span class="ident">theme_search_paths</span>, <span class="ident">CursorTheme</span> <span class="kw">as</span> <span class="ident">XCursorTheme</span>};
 
 <span class="doccomment">/// Represents a cursor theme loaded from the system.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CursorTheme</span> {
@@ -525,7 +492,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_from_name</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">shm</span>: <span class="kw-2">&amp;</span><span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">WlShm</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>);
         <span class="kw">let</span> <span class="ident">pool_size</span> <span class="op">=</span> (<span class="ident">size</span> <span class="op">*</span> <span class="ident">size</span> <span class="op">*</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="ident">mem_fd</span> <span class="op">=</span> <span class="ident">create_shm_fd</span>().<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">mem_fd</span> <span class="op">=</span> <span class="ident">create_shm_fd</span>().<span class="ident">expect</span>(<span class="string">&quot;Shm fd allocation failed&quot;</span>);
         <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">File</span>::<span class="ident">from_raw_fd</span>(<span class="ident">mem_fd</span>) };
         <span class="kw">let</span> <span class="ident">pool</span> <span class="op">=</span> <span class="ident">shm</span>.<span class="ident">create_pool</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">pool_size</span>);
 
@@ -565,19 +532,12 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">icon_file</span> <span class="op">=</span> <span class="ident">File</span>::<span class="ident">open</span>(<span class="ident">icon_path</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
-        <span class="kw">let</span> <span class="ident">xcur</span> <span class="op">=</span> {
+        <span class="kw">let</span> <span class="ident">images</span> <span class="op">=</span> {
             <span class="ident">icon_file</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
-            <span class="ident">XCurFile</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)
+            <span class="ident">xparser</span>::<span class="ident">parse_xcursor</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)<span class="question-mark">?</span>
         };
 
-        <span class="comment">// Terminate if cursor can&#39;t be parsed</span>
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">xcur</span>.<span class="ident">is_done</span>() {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-
-        <span class="kw">let</span> <span class="ident">file_images</span> <span class="op">=</span> <span class="ident">xcur</span>.<span class="ident">unwrap</span>().<span class="number">1</span>.<span class="ident">images</span>;
-        <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">file_images</span>, <span class="ident">size</span>);
-
+        <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">images</span>, <span class="ident">size</span>);
         <span class="prelude-val">Some</span>(<span class="ident">cursor</span>)
     }
 
@@ -605,14 +565,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Each of the provided images will be written into `theme`.</span>
     <span class="doccomment">/// This will also grow `theme.pool` if necessary.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xcur</span>::<span class="ident">parser</span>::<span class="ident">Image</span>], <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xparser</span>::<span class="ident">Image</span>], <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffers</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">images</span>.<span class="ident">len</span>());
         <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">nearest_size</span>(<span class="ident">size</span>, <span class="ident">images</span>);
-        <span class="kw">let</span> <span class="ident">iter</span> <span class="op">=</span> <span class="ident">images</span>.<span class="ident">iter</span>().<span class="ident">filter</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">el</span>.<span class="ident">width</span> <span class="op">=</span><span class="op">=</span> <span class="ident">size</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">el</span>.<span class="ident">height</span> <span class="op">=</span><span class="op">=</span> <span class="ident">size</span>);
 
-        <span class="kw">for</span> <span class="ident">img</span> <span class="kw">in</span> <span class="ident">iter</span> {
-            <span class="ident">buffers</span>.<span class="ident">push</span>(<span class="ident">CursorImageBuffer</span>::<span class="ident">new</span>(<span class="ident">theme</span>, <span class="ident">img</span>));
-        }
+        <span class="ident">images</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">el</span>.<span class="ident">width</span> <span class="op">=</span><span class="op">=</span> <span class="ident">size</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">el</span>.<span class="ident">height</span> <span class="op">=</span><span class="op">=</span> <span class="ident">size</span>)
+            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">buffers</span>.<span class="ident">push</span>(<span class="ident">CursorImageBuffer</span>::<span class="ident">new</span>(<span class="ident">theme</span>, <span class="ident">el</span>)));
 
         <span class="kw">let</span> <span class="ident">total_duration</span> <span class="op">=</span> <span class="ident">buffers</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">el</span>.<span class="ident">delay</span>).<span class="ident">sum</span>();
 
@@ -623,7 +583,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">nearest_size</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xcur</span>::<span class="ident">parser</span>::<span class="ident">Image</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">nearest_size</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xparser</span>::<span class="ident">Image</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
         <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">size</span> <span class="kw">as</span> <span class="ident">i32</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_sizes</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
 
@@ -699,8 +659,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function appends the pixels of the image to the provided file,</span>
     <span class="doccomment">/// and constructs a wl_buffer on that data.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">image</span>: <span class="kw-2">&amp;</span><span class="ident">xcur</span>::<span class="ident">parser</span>::<span class="ident">Image</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">CursorImageBuffer</span>::<span class="ident">convert_pixels</span>(<span class="kw-2">&amp;</span><span class="ident">image</span>.<span class="ident">pixels</span>);
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">image</span>: <span class="kw-2">&amp;</span><span class="ident">xparser</span>::<span class="ident">Image</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">image</span>.<span class="ident">pixels_rgba</span>;
         <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">theme</span>.<span class="ident">file</span>.<span class="ident">seek</span>(<span class="ident">SeekFrom</span>::<span class="ident">End</span>(<span class="number">0</span>)).<span class="ident">unwrap</span>();
         <span class="ident">theme</span>.<span class="ident">file</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>).<span class="ident">unwrap</span>();
 
@@ -724,17 +684,6 @@
             <span class="ident">width</span>: <span class="ident">image</span>.<span class="ident">width</span>,
             <span class="ident">height</span>: <span class="ident">image</span>.<span class="ident">height</span>,
         }
-    }
-
-    <span class="doccomment">/// Convert the pixels saved in `u32`s into `u8`s.</span>
-    <span class="kw">fn</span> <span class="ident">convert_pixels</span>(<span class="ident">pixels</span>: <span class="kw-2">&amp;</span>[<span class="ident">u32</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">pixels</span>.<span class="ident">len</span>() <span class="op">*</span> <span class="number">4</span>);
-
-        <span class="kw">for</span> <span class="ident">pixel</span> <span class="kw">in</span> <span class="ident">pixels</span> {
-            <span class="ident">buf</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">pixel</span>.<span class="ident">to_le_bytes</span>());
-        }
-
-        <span class="ident">buf</span>
     }
 
     <span class="doccomment">/// Dimensions of this image</span>
@@ -836,21 +785,6 @@
             <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io</span>::<span class="ident">Error</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(<span class="ident">err</span>),
         }
-    }
-}
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span> {
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_convert_pixels</span>() {
-        <span class="kw">let</span> <span class="ident">pixels</span>: <span class="kw-2">&amp;</span>[<span class="ident">u32</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0x12345678</span>, <span class="number">0x87654321</span>];
-        <span class="kw">let</span> <span class="ident">parsed_pixels</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="number">0x78</span>, <span class="number">0x56</span>, <span class="number">0x34</span>, <span class="number">0x12</span>, <span class="number">0x21</span>, <span class="number">0x43</span>, <span class="number">0x65</span>, <span class="number">0x87</span>];
-
-        <span class="macro">assert_eq</span><span class="macro">!</span>(
-            <span class="kw">super</span>::<span class="ident">CursorImageBuffer</span>::<span class="ident">convert_pixels</span>(<span class="kw-2">&amp;</span><span class="ident">pixels</span>),
-            <span class="ident">Vec</span>::<span class="ident">from</span>(<span class="ident">parsed_pixels</span>)
-        );
     }
 }
 </pre></div>
