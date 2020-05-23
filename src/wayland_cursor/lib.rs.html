@@ -450,7 +450,7 @@
     <span class="ident">Attached</span>, <span class="ident">Main</span>,
 };
 <span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">parser</span> <span class="kw">as</span> <span class="ident">xparser</span>;
-<span class="kw">use</span> <span class="ident">xcursor</span>::{<span class="ident">theme_search_paths</span>, <span class="ident">CursorTheme</span> <span class="kw">as</span> <span class="ident">XCursorTheme</span>};
+<span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">CursorTheme</span> <span class="kw">as</span> <span class="ident">XCursorTheme</span>;
 
 <span class="doccomment">/// Represents a cursor theme loaded from the system.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CursorTheme</span> {
@@ -528,7 +528,7 @@
     <span class="doccomment">/// Keep in mind that if the cursor is already loaded,</span>
     <span class="doccomment">/// the function will make a duplicate.</span>
     <span class="kw">fn</span> <span class="ident">load_cursor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">XCursorTheme</span>::<span class="ident">load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>, <span class="kw-2">&amp;</span><span class="ident">theme_search_paths</span>()).<span class="ident">load_icon</span>(<span class="ident">name</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">XCursorTheme</span>::<span class="ident">load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>).<span class="ident">load_icon</span>(<span class="ident">name</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">icon_file</span> <span class="op">=</span> <span class="ident">File</span>::<span class="ident">open</span>(<span class="ident">icon_path</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
