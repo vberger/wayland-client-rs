@@ -187,6 +187,12 @@
 <span id="187">187</span>
 <span id="188">188</span>
 <span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">atomic</span>::<span class="ident">Ordering</span>, <span class="ident">Arc</span>, <span class="ident">Mutex</span>};
@@ -222,7 +228,10 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ResourceMap</span> {
-    <span class="kw">fn</span> <span class="ident">make</span>(<span class="ident">map</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ObjectMap</span><span class="op">&lt;</span><span class="self">self</span>::<span class="ident">resources</span>::<span class="ident">ObjectMeta</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">client</span>: <span class="ident">ClientInner</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ResourceMap</span> {
+    <span class="kw">fn</span> <span class="ident">make</span>(
+        <span class="ident">map</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">ObjectMap</span><span class="op">&lt;</span><span class="self">self</span>::<span class="ident">resources</span>::<span class="ident">ObjectMeta</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">client</span>: <span class="ident">ClientInner</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ResourceMap</span> {
         <span class="ident">ResourceMap</span> { <span class="ident">map</span>, <span class="ident">client</span> }
     }
 
@@ -305,7 +314,10 @@
         <span class="kw">if</span> ::<span class="ident">std</span>::<span class="ident">env</span>::<span class="ident">var_os</span>(<span class="string">&quot;WAYLAND_DEBUG&quot;</span>).<span class="ident">is_some</span>() {
             <span class="macro">eprintln</span><span class="macro">!</span>(
                 <span class="string">&quot; &lt;- {}@{}: {} {:?}&quot;</span>,
-                <span class="ident">resource</span>.<span class="ident">object</span>.<span class="ident">interface</span>, <span class="ident">resource</span>.<span class="ident">id</span>, <span class="ident">resource</span>.<span class="ident">object</span>.<span class="ident">requests</span>[<span class="ident">opcode</span>].<span class="ident">name</span>, <span class="ident">msg</span>.<span class="ident">args</span>
+                <span class="ident">resource</span>.<span class="ident">object</span>.<span class="ident">interface</span>,
+                <span class="ident">resource</span>.<span class="ident">id</span>,
+                <span class="ident">resource</span>.<span class="ident">object</span>.<span class="ident">requests</span>[<span class="ident">opcode</span>].<span class="ident">name</span>,
+                <span class="ident">msg</span>.<span class="ident">args</span>
             );
         }
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">I</span>::<span class="ident">Request</span>::<span class="ident">from_raw</span>(<span class="ident">msg</span>, <span class="ident">map</span>) {
@@ -373,9 +385,9 @@
     <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
 {
-    <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadGuard</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(
-        <span class="kw">move</span> <span class="op">|</span><span class="ident">res</span>, <span class="ident">data</span>: <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">|</span> <span class="ident">filter</span>.<span class="ident">send</span>(<span class="ident">Resource</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>::<span class="ident">wrap</span>(<span class="ident">res</span>).<span class="ident">into</span>(), <span class="ident">data</span>),
-    )))
+    <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadGuard</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">res</span>, <span class="ident">data</span>: <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">|</span> {
+        <span class="ident">filter</span>.<span class="ident">send</span>(<span class="ident">Resource</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>::<span class="ident">wrap</span>(<span class="ident">res</span>).<span class="ident">into</span>(), <span class="ident">data</span>)
+    })))
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "wayland_server";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

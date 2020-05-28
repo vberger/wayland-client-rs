@@ -91,11 +91,6 @@
 <span id="91">91</span>
 <span id="92">92</span>
 <span id="93">93</span>
-<span id="94">94</span>
-<span id="95">95</span>
-<span id="96">96</span>
-<span id="97">97</span>
-<span id="98">98</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>;
@@ -118,10 +113,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">nix</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FdManager</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">epoll_create1</span>(<span class="ident">EpollCreateFlags</span>::<span class="ident">EPOLL_CLOEXEC</span>)<span class="question-mark">?</span>;
 
-        <span class="prelude-val">Ok</span>(<span class="ident">FdManager</span> {
-            <span class="ident">epoll_fd</span>: <span class="ident">fd</span>,
-            <span class="ident">callbacks</span>: <span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Vec</span>::<span class="ident">new</span>()),
-        })
+        <span class="prelude-val">Ok</span>(<span class="ident">FdManager</span> { <span class="ident">epoll_fd</span>: <span class="ident">fd</span>, <span class="ident">callbacks</span>: <span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Vec</span>::<span class="ident">new</span>()) })
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">register</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(
@@ -167,9 +159,7 @@
         <span class="kw">for</span> <span class="ident">event</span> <span class="kw">in</span> <span class="ident">events</span>.<span class="ident">iter</span>().<span class="ident">take</span>(<span class="ident">n</span>) {
             <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">event</span>.<span class="ident">data</span>() <span class="kw">as</span> <span class="ident">usize</span>;
             <span class="comment">// remove the cb while we call it, to gracefully handle reentrancy</span>
-            <span class="kw">let</span> <span class="ident">cb</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">callbacks</span>.<span class="ident">borrow_mut</span>()[<span class="ident">id</span>]
-                .<span class="ident">as_mut</span>()
-                .<span class="ident">and_then</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">cb</span>)<span class="op">|</span> <span class="ident">cb</span>.<span class="ident">take</span>());
+            <span class="kw">let</span> <span class="ident">cb</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">callbacks</span>.<span class="ident">borrow_mut</span>()[<span class="ident">id</span>].<span class="ident">as_mut</span>().<span class="ident">and_then</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">cb</span>)<span class="op">|</span> <span class="ident">cb</span>.<span class="ident">take</span>());
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">cb</span>) <span class="op">=</span> <span class="ident">cb</span> {
                 <span class="ident">cb</span>(<span class="ident">data</span>.<span class="ident">reborrow</span>());
                 <span class="comment">// now, put it back in place</span>

@@ -98,9 +98,6 @@
 <span id="98"> 98</span>
 <span id="99"> 99</span>
 <span id="100">100</span>
-<span id="101">101</span>
-<span id="102">102</span>
-<span id="103">103</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
 
@@ -127,9 +124,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The provided pointer must be a valid pointer from `libwayland-server`.</span>
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_ptr</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_client</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Client</span> {
-        <span class="ident">Client</span> {
-            <span class="ident">inner</span>: <span class="ident">ClientInner</span>::<span class="ident">from_ptr</span>(<span class="ident">ptr</span>),
-        }
+        <span class="ident">Client</span> { <span class="ident">inner</span>: <span class="ident">ClientInner</span>::<span class="ident">from_ptr</span>(<span class="ident">ptr</span>) }
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_system_lib&quot;</span>)]</span>
@@ -185,8 +180,7 @@
     <span class="doccomment">/// **Panics**: This function will panic if called from an other thread than the one</span>
     <span class="doccomment">/// hosting the Display.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">destructor</span>: <span class="kw">crate</span>::<span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">UserDataMap</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>
-            .<span class="ident">add_destructor</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">ud</span>, <span class="ident">data</span><span class="op">|</span> <span class="ident">destructor</span>.<span class="ident">send</span>(<span class="ident">ud</span>, <span class="ident">data</span>));
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">add_destructor</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">ud</span>, <span class="ident">data</span><span class="op">|</span> <span class="ident">destructor</span>.<span class="ident">send</span>(<span class="ident">ud</span>, <span class="ident">data</span>));
     }
 
     <span class="doccomment">/// Creates a new resource for this client</span>

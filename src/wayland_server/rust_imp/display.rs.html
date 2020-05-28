@@ -196,7 +196,6 @@
 <span id="196">196</span>
 <span id="197">197</span>
 <span id="198">198</span>
-<span id="199">199</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
@@ -232,17 +231,10 @@
         <span class="kw">let</span> <span class="ident">global_mgr</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">GlobalManager</span>::<span class="ident">new</span>()));
         <span class="kw">let</span> <span class="ident">epoll_mgr</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">FdManager</span>::<span class="ident">new</span>().<span class="ident">unwrap</span>());
 
-        <span class="kw">let</span> <span class="ident">clients_mgr</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">ClientManager</span>::<span class="ident">new</span>(
-            <span class="ident">epoll_mgr</span>.<span class="ident">clone</span>(),
-            <span class="ident">global_mgr</span>.<span class="ident">clone</span>(),
-        )));
+        <span class="kw">let</span> <span class="ident">clients_mgr</span> <span class="op">=</span>
+            <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">ClientManager</span>::<span class="ident">new</span>(<span class="ident">epoll_mgr</span>.<span class="ident">clone</span>(), <span class="ident">global_mgr</span>.<span class="ident">clone</span>())));
 
-        <span class="ident">DisplayInner</span> {
-            <span class="ident">epoll_mgr</span>,
-            <span class="ident">clients_mgr</span>,
-            <span class="ident">global_mgr</span>,
-            <span class="ident">listeners</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-        }
+        <span class="ident">DisplayInner</span> { <span class="ident">epoll_mgr</span>, <span class="ident">clients_mgr</span>, <span class="ident">global_mgr</span>, <span class="ident">listeners</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">create_global</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">F1</span>, <span class="ident">F2</span><span class="op">&gt;</span>(
@@ -256,9 +248,7 @@
         <span class="ident">F1</span>: <span class="ident">FnMut</span>(<span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">u32</span>, <span class="kw">crate</span>::<span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
         <span class="ident">F2</span>: <span class="ident">FnMut</span>(<span class="ident">ClientInner</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.<span class="ident">global_mgr</span>
-            .<span class="ident">borrow_mut</span>()
-            .<span class="ident">add_global</span>(<span class="ident">version</span>, <span class="ident">implementation</span>, <span class="ident">filter</span>)
+        <span class="self">self</span>.<span class="ident">global_mgr</span>.<span class="ident">borrow_mut</span>().<span class="ident">add_global</span>(<span class="ident">version</span>, <span class="ident">implementation</span>, <span class="ident">filter</span>)
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">flush_clients</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>) {
@@ -343,11 +333,19 @@
         <span class="self">self</span>.<span class="ident">add_unix_listener</span>(<span class="ident">FromRawFd</span>::<span class="ident">from_raw_fd</span>(<span class="ident">fd</span>))
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">create_client</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>, <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientInner</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">create_client</span>(
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">fd</span>: <span class="ident">RawFd</span>,
+        <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientInner</span> {
         <span class="self">self</span>.<span class="ident">clients_mgr</span>.<span class="ident">borrow_mut</span>().<span class="ident">init_client</span>(<span class="ident">fd</span>, <span class="ident">data</span>)
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">dispatch</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout</span>: <span class="ident">i32</span>, <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">dispatch</span>(
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">timeout</span>: <span class="ident">i32</span>,
+        <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">epoll_mgr</span>
             .<span class="ident">poll</span>(<span class="ident">timeout</span>, <span class="ident">data</span>)
             .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">From</span>::<span class="ident">from</span>(<span class="ident">e</span>.<span class="ident">as_errno</span>().<span class="ident">unwrap_or</span>(<span class="ident">nix</span>::<span class="ident">errno</span>::<span class="ident">Errno</span>::<span class="ident">EINVAL</span>)))

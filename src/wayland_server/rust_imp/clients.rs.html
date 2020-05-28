@@ -680,20 +680,6 @@
 <span id="680">680</span>
 <span id="681">681</span>
 <span id="682">682</span>
-<span id="683">683</span>
-<span id="684">684</span>
-<span id="685">685</span>
-<span id="686">686</span>
-<span id="687">687</span>
-<span id="688">688</span>
-<span id="689">689</span>
-<span id="690">690</span>
-<span id="691">691</span>
-<span id="692">692</span>
-<span id="693">693</span>
-<span id="694">694</span>
-<span id="695">695</span>
-<span id="696">696</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>;
@@ -802,9 +788,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
         <span class="comment">// read messages</span>
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">socket</span>.<span class="ident">read_one_message</span>(<span class="op">|</span><span class="ident">id</span>, <span class="ident">opcode</span><span class="op">|</span> {
-            <span class="ident">map</span>.<span class="ident">find</span>(<span class="ident">id</span>)
-                .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">requests</span>.<span class="ident">get</span>(<span class="ident">opcode</span> <span class="kw">as</span> <span class="ident">usize</span>))
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">desc</span><span class="op">|</span> <span class="ident">desc</span>.<span class="ident">signature</span>)
+            <span class="ident">map</span>.<span class="ident">find</span>(<span class="ident">id</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">requests</span>.<span class="ident">get</span>(<span class="ident">opcode</span> <span class="kw">as</span> <span class="ident">usize</span>)).<span class="ident">map</span>(<span class="op">|</span><span class="ident">desc</span><span class="op">|</span> <span class="ident">desc</span>.<span class="ident">signature</span>)
         });
         <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ret</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">msg</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">msg</span>,
@@ -856,13 +840,7 @@
             <span class="kw">let</span> <span class="ident">new_id</span> <span class="op">=</span> <span class="ident">msg</span>
                 .<span class="ident">args</span>
                 .<span class="ident">iter</span>()
-                .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">nid</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">a</span> {
-                        <span class="prelude-val">Some</span>(<span class="ident">nid</span>)
-                    } <span class="kw">else</span> {
-                        <span class="prelude-val">None</span>
-                    }
-                })
+                .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="ident">nid</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">a</span> { <span class="prelude-val">Some</span>(<span class="ident">nid</span>) } <span class="kw">else</span> { <span class="prelude-val">None</span> })
                 .<span class="ident">next</span>()
                 .<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">child_interface</span> <span class="op">=</span> <span class="ident">child</span>.<span class="ident">interface</span>;
@@ -895,11 +873,7 @@
             <span class="ident">loop_thread</span>: <span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>(),
         };
         <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">with_all</span>(<span class="op">|</span><span class="ident">id</span>, <span class="ident">obj</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">resource</span> <span class="op">=</span> <span class="ident">ResourceInner</span> {
-                <span class="ident">id</span>,
-                <span class="ident">object</span>: <span class="ident">obj</span>.<span class="ident">clone</span>(),
-                <span class="ident">client</span>: <span class="ident">dummy_client</span>.<span class="ident">clone</span>(),
-            };
+            <span class="kw">let</span> <span class="ident">resource</span> <span class="op">=</span> <span class="ident">ResourceInner</span> { <span class="ident">id</span>, <span class="ident">object</span>: <span class="ident">obj</span>.<span class="ident">clone</span>(), <span class="ident">client</span>: <span class="ident">dummy_client</span>.<span class="ident">clone</span>() };
             <span class="ident">obj</span>.<span class="ident">meta</span>.<span class="ident">alive</span>.<span class="ident">store</span>(<span class="bool-val">false</span>, <span class="ident">Ordering</span>::<span class="ident">Release</span>);
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">dest</span>) <span class="op">=</span> <span class="ident">obj</span>.<span class="ident">meta</span>.<span class="ident">destructor</span> {
                 (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">dest</span>.<span class="ident">get</span>().<span class="ident">borrow_mut</span>())(<span class="ident">resource</span>, <span class="ident">data</span>.<span class="ident">reborrow</span>());
@@ -958,14 +932,11 @@
             <span class="comment">// Wrap the FnOnce in an FnMut because Box&lt;FnOnce()&gt; does not work</span>
             <span class="comment">// currently =(</span>
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opt_dest</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">destructor</span>);
-            <span class="ident">client_data</span>
-                .<span class="ident">destructors</span>
-                .<span class="ident">get_mut</span>()
-                .<span class="ident">push</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">data_map</span>, <span class="ident">data</span><span class="op">|</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">dest</span>) <span class="op">=</span> <span class="ident">opt_dest</span>.<span class="ident">take</span>() {
-                        <span class="ident">dest</span>(<span class="ident">data_map</span>, <span class="ident">data</span>);
-                    }
-                }));
+            <span class="ident">client_data</span>.<span class="ident">destructors</span>.<span class="ident">get_mut</span>().<span class="ident">push</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">data_map</span>, <span class="ident">data</span><span class="op">|</span> {
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">dest</span>) <span class="op">=</span> <span class="ident">opt_dest</span>.<span class="ident">take</span>() {
+                    <span class="ident">dest</span>(<span class="ident">data_map</span>, <span class="ident">data</span>);
+                }
+            }));
         }
     }
 
@@ -1017,7 +988,11 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_destructor_for</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">u32</span>, <span class="ident">destructor</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">ResourceDestructor</span><span class="op">&gt;</span><span class="op">&gt;</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">set_destructor_for</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">id</span>: <span class="ident">u32</span>,
+        <span class="ident">destructor</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">ResourceDestructor</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    ) {
         <span class="kw">let</span> <span class="ident">guard</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">cx</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">guard</span> {
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">cx</span>.<span class="ident">map</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">with</span>(<span class="ident">id</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">obj</span><span class="op">|</span> {
@@ -1035,7 +1010,10 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ClientManager</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">epoll_mgr</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">FdManager</span><span class="op">&gt;</span>, <span class="ident">global_mgr</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">GlobalManager</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientManager</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(
+        <span class="ident">epoll_mgr</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">FdManager</span><span class="op">&gt;</span>,
+        <span class="ident">global_mgr</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">GlobalManager</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientManager</span> {
         <span class="ident">ClientManager</span> {
             <span class="ident">epoll_mgr</span>,
             <span class="ident">clients</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
@@ -1044,7 +1022,11 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">init_client</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>, <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientInner</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">init_client</span>(
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">fd</span>: <span class="ident">RawFd</span>,
+        <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientInner</span> {
         <span class="kw">let</span> <span class="ident">display_object</span> <span class="op">=</span> <span class="ident">Object</span> {
             <span class="ident">interface</span>: <span class="string">&quot;wl_display&quot;</span>,
             <span class="ident">version</span>: <span class="number">1</span>,
@@ -1067,10 +1049,7 @@
             <span class="ident">loop_thread</span>: <span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>(), <span class="comment">// init_client is only called by the display, which does not change threads</span>
         };
 
-        <span class="kw">let</span> <span class="ident">implementation</span> <span class="op">=</span> <span class="ident">ClientImplementation</span> {
-            <span class="ident">inner</span>: <span class="ident">client</span>.<span class="ident">clone</span>(),
-            <span class="ident">map</span>,
-        };
+        <span class="kw">let</span> <span class="ident">implementation</span> <span class="op">=</span> <span class="ident">ClientImplementation</span> { <span class="ident">inner</span>: <span class="ident">client</span>.<span class="ident">clone</span>(), <span class="ident">map</span> };
 
         <span class="comment">// process any pending messages before inserting it into the event loop</span>
         <span class="ident">implementation</span>.<span class="ident">process_messages</span>(<span class="ident">data</span>);
@@ -1081,20 +1060,15 @@
             <span class="kw">return</span> <span class="ident">client</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>
-            .<span class="ident">epoll_mgr</span>
-            .<span class="ident">register</span>(<span class="ident">fd</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">data</span><span class="op">|</span> <span class="ident">implementation</span>.<span class="ident">process_messages</span>(<span class="ident">data</span>))
-        {
-            <span class="prelude-val">Ok</span>(<span class="ident">source</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">source</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">eprintln</span><span class="macro">!</span>(
-                    <span class="string">&quot;[wayland-server] Failed to insert client into event loop: {:?}&quot;</span>,
-                    <span class="ident">e</span>
-                );
-                <span class="ident">client</span>.<span class="ident">kill</span>();
-                <span class="prelude-val">None</span>
-            }
-        };
+        <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span>
+            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">epoll_mgr</span>.<span class="ident">register</span>(<span class="ident">fd</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">data</span><span class="op">|</span> <span class="ident">implementation</span>.<span class="ident">process_messages</span>(<span class="ident">data</span>)) {
+                <span class="prelude-val">Ok</span>(<span class="ident">source</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">source</span>),
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="macro">eprintln</span><span class="macro">!</span>(<span class="string">&quot;[wayland-server] Failed to insert client into event loop: {:?}&quot;</span>, <span class="ident">e</span>);
+                    <span class="ident">client</span>.<span class="ident">kill</span>();
+                    <span class="prelude-val">None</span>
+                }
+            };
 
         <span class="kw">if</span> <span class="ident">source</span>.<span class="ident">is_some</span>() {
             <span class="self">self</span>.<span class="ident">clients</span>.<span class="ident">push</span>((<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">source</span>), <span class="ident">client</span>.<span class="ident">clone</span>()));
@@ -1135,12 +1109,7 @@
 }
 
 <span class="kw">const</span> <span class="ident">DISPLAY_REQUESTS</span>: <span class="kw-2">&amp;</span>[<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-    <span class="ident">MessageDesc</span> {
-        <span class="ident">name</span>: <span class="string">&quot;sync&quot;</span>,
-        <span class="ident">since</span>: <span class="number">1</span>,
-        <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[<span class="ident">ArgumentType</span>::<span class="ident">NewId</span>],
-        <span class="ident">destructor</span>: <span class="bool-val">false</span>,
-    },
+    <span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;sync&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[<span class="ident">ArgumentType</span>::<span class="ident">NewId</span>], <span class="ident">destructor</span>: <span class="bool-val">false</span> },
     <span class="ident">MessageDesc</span> {
         <span class="ident">name</span>: <span class="string">&quot;get_registry&quot;</span>,
         <span class="ident">since</span>: <span class="number">1</span>,
@@ -1167,12 +1136,7 @@
 <span class="kw">const</span> <span class="ident">REGISTRY_REQUESTS</span>: <span class="kw-2">&amp;</span>[<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="ident">MessageDesc</span> {
     <span class="ident">name</span>: <span class="string">&quot;bind&quot;</span>,
     <span class="ident">since</span>: <span class="number">1</span>,
-    <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[
-        <span class="ident">ArgumentType</span>::<span class="ident">Uint</span>,
-        <span class="ident">ArgumentType</span>::<span class="ident">Str</span>,
-        <span class="ident">ArgumentType</span>::<span class="ident">Uint</span>,
-        <span class="ident">ArgumentType</span>::<span class="ident">NewId</span>,
-    ],
+    <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[<span class="ident">ArgumentType</span>::<span class="ident">Uint</span>, <span class="ident">ArgumentType</span>::<span class="ident">Str</span>, <span class="ident">ArgumentType</span>::<span class="ident">Uint</span>, <span class="ident">ArgumentType</span>::<span class="ident">NewId</span>],
     <span class="ident">destructor</span>: <span class="bool-val">false</span>,
 }];
 
@@ -1194,7 +1158,10 @@
 <span class="kw">fn</span> <span class="ident">display_req_child</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="kw">_</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">ObjectMeta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">ObjectMeta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">opcode</span> {
         <span class="comment">// sync</span>
-        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">protocol</span>::<span class="ident">wl_callback</span>::<span class="ident">WlCallback</span><span class="op">&gt;</span>(<span class="number">1</span>, <span class="ident">meta</span>.<span class="ident">child</span>())),
+        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">protocol</span>::<span class="ident">wl_callback</span>::<span class="ident">WlCallback</span><span class="op">&gt;</span>(
+            <span class="number">1</span>,
+            <span class="ident">meta</span>.<span class="ident">child</span>(),
+        )),
         <span class="comment">// registry</span>
         <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Object</span> {
             <span class="ident">interface</span>: <span class="string">&quot;wl_registry&quot;</span>,
@@ -1237,10 +1204,13 @@
                 }
                 <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">msg</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="comment">// there is a message to dispatch</span>
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resourcemap</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span>::<span class="ident">make</span>(<span class="self">self</span>.<span class="ident">map</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>());
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resourcemap</span> <span class="op">=</span>
+                        <span class="kw">super</span>::<span class="ident">ResourceMap</span>::<span class="ident">make</span>(<span class="self">self</span>.<span class="ident">map</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>());
                     <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">sender_id</span>;
                     <span class="kw">let</span> <span class="ident">opcode</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">opcode</span>;
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">res</span>) <span class="op">=</span> <span class="ident">ResourceInner</span>::<span class="ident">from_id</span>(<span class="ident">id</span>, <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>()) {
+                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">res</span>) <span class="op">=</span>
+                        <span class="ident">ResourceInner</span>::<span class="ident">from_id</span>(<span class="ident">id</span>, <span class="self">self</span>.<span class="ident">map</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>())
+                    {
                         <span class="kw">let</span> <span class="ident">object</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">object</span>.<span class="ident">clone</span>();
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dispatcher</span> <span class="op">=</span> <span class="ident">object</span>.<span class="ident">meta</span>.<span class="ident">dispatcher</span>.<span class="ident">get</span>().<span class="ident">borrow_mut</span>();
                         <span class="kw">match</span> <span class="ident">dispatcher</span>.<span class="ident">dispatch</span>(<span class="ident">msg</span>, <span class="ident">res</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">resourcemap</span>, <span class="ident">data</span>.<span class="ident">reborrow</span>()) {
@@ -1257,7 +1227,10 @@
                                 <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">post_error</span>(
                                     <span class="number">1</span>,
                                     <span class="kw">super</span>::<span class="ident">display</span>::<span class="ident">DISPLAY_ERROR_INVALID_METHOD</span>,
-                                    <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;invalid method {}, object {}@{}&quot;</span>, <span class="ident">opcode</span>, <span class="ident">object</span>.<span class="ident">interface</span>, <span class="ident">id</span>),
+                                    <span class="macro">format</span><span class="macro">!</span>(
+                                        <span class="string">&quot;invalid method {}, object {}@{}&quot;</span>,
+                                        <span class="ident">opcode</span>, <span class="ident">object</span>.<span class="ident">interface</span>, <span class="ident">id</span>
+                                    ),
                                 );
                                 <span class="kw">return</span>;
                             }
@@ -1322,15 +1295,14 @@
                     <span class="comment">// we don&#39;t have a regular object for the registry, rather we insert the</span>
                     <span class="comment">// dispatcher by hand</span>
                     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(()) <span class="op">=</span> <span class="ident">map</span>.<span class="ident">map</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">with</span>(<span class="ident">new_id</span>, <span class="op">|</span><span class="ident">obj</span><span class="op">|</span> {
-                        <span class="ident">obj</span>.<span class="ident">meta</span>.<span class="ident">dispatcher</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadGuard</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">RegistryDispatcher</span> {
-                            <span class="ident">global_mgr</span>: <span class="self">self</span>.<span class="ident">global_mgr</span>.<span class="ident">clone</span>(),
-                        })));
+                        <span class="ident">obj</span>.<span class="ident">meta</span>.<span class="ident">dispatcher</span> <span class="op">=</span>
+                            <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ThreadGuard</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">RegistryDispatcher</span> {
+                                <span class="ident">global_mgr</span>: <span class="self">self</span>.<span class="ident">global_mgr</span>.<span class="ident">clone</span>(),
+                            })));
                     }) {
                         <span class="kw">return</span> <span class="ident">Dispatched</span>::<span class="ident">BadMsg</span>;
                     }
-                    <span class="self">self</span>.<span class="ident">global_mgr</span>
-                        .<span class="ident">borrow_mut</span>()
-                        .<span class="ident">new_registry</span>(<span class="ident">new_id</span>, <span class="ident">map</span>.<span class="ident">client</span>.<span class="ident">clone</span>());
+                    <span class="self">self</span>.<span class="ident">global_mgr</span>.<span class="ident">borrow_mut</span>().<span class="ident">new_registry</span>(<span class="ident">new_id</span>, <span class="ident">map</span>.<span class="ident">client</span>.<span class="ident">clone</span>());
                 } <span class="kw">else</span> {
                     <span class="kw">return</span> <span class="ident">Dispatched</span>::<span class="ident">BadMsg</span>;
                 }

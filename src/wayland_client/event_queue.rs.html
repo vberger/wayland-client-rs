@@ -380,10 +380,7 @@
 
 <span class="kw">impl</span> <span class="ident">EventQueue</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">EventQueueInner</span>, <span class="ident">display</span>: <span class="ident">Display</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EventQueue</span> {
-        <span class="ident">EventQueue</span> {
-            <span class="ident">inner</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">inner</span>),
-            <span class="ident">display</span>,
-        }
+        <span class="ident">EventQueue</span> { <span class="ident">inner</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">inner</span>), <span class="ident">display</span> }
     }
     <span class="doccomment">/// Dispatches events from the internal buffer.</span>
     <span class="doccomment">///</span>
@@ -419,7 +416,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If an error is returned, your connection with the wayland compositor is probably lost.</span>
     <span class="doccomment">/// You may want to check `Display::protocol_error()` to see if it was caused by a protocol error.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch_pending</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">fallback</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch_pending</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
+        <span class="ident">fallback</span>: <span class="ident">F</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">RawEvent</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>, <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>),
     {
@@ -442,7 +443,11 @@
     <span class="doccomment">/// On success returns the number of dispatched events.</span>
     <span class="doccomment">/// If an error is returned, your connection with the wayland compositor is probably lost.</span>
     <span class="doccomment">/// You may want to check `Display::protocol_error()` to see if it was caused by a protocol error.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sync_roundtrip</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">fallback</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sync_roundtrip</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
+        <span class="ident">fallback</span>: <span class="ident">F</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">RawEvent</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>, <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>),
     {
@@ -454,9 +459,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// See `QueueToken` documentation for its use.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">token</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QueueToken</span> {
-        <span class="ident">QueueToken</span> {
-            <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>(),
-        }
+        <span class="ident">QueueToken</span> { <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>() }
     }
 
     <span class="doccomment">/// Prepare an concurrent read</span>
@@ -478,10 +481,7 @@
     <span class="doccomment">/// an io error `WouldBlock` in such cases.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prepare_read</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadEventsGuard</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">prepare_read</span>() {
-            <span class="prelude-val">Ok</span>(()) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">ReadEventsGuard</span> {
-                <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>(),
-                <span class="ident">done</span>: <span class="bool-val">false</span>,
-            }),
+            <span class="prelude-val">Ok</span>(()) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">ReadEventsGuard</span> { <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>(), <span class="ident">done</span>: <span class="bool-val">false</span> }),
             <span class="prelude-val">Err</span>(()) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
         }
     }

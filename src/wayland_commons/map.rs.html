@@ -344,10 +344,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span> <span class="ident">ObjectMap</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Create a new empty object map</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ObjectMap</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
-        <span class="ident">ObjectMap</span> {
-            <span class="ident">client_objects</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-            <span class="ident">server_objects</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-        }
+        <span class="ident">ObjectMap</span> { <span class="ident">client_objects</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(), <span class="ident">server_objects</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
     }
 
     <span class="doccomment">/// Find an object in the store</span>
@@ -355,9 +352,7 @@
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">id</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">SERVER_ID_LIMIT</span> {
-            <span class="self">self</span>.<span class="ident">server_objects</span>
-                .<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="ident">SERVER_ID_LIMIT</span>) <span class="kw">as</span> <span class="ident">usize</span>)
-                .<span class="ident">and_then</span>(<span class="ident">Clone</span>::<span class="ident">clone</span>)
+            <span class="self">self</span>.<span class="ident">server_objects</span>.<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="ident">SERVER_ID_LIMIT</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">and_then</span>(<span class="ident">Clone</span>::<span class="ident">clone</span>)
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">client_objects</span>.<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">and_then</span>(<span class="ident">Clone</span>::<span class="ident">clone</span>)
         }
@@ -407,13 +402,15 @@
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Err</span>(())
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">id</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">SERVER_ID_LIMIT</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">obj</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">server_objects</span>.<span class="ident">get_mut</span>((<span class="ident">id</span> <span class="op">-</span> <span class="ident">SERVER_ID_LIMIT</span>) <span class="kw">as</span> <span class="ident">usize</span>)
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">obj</span>)) <span class="op">=</span>
+                <span class="self">self</span>.<span class="ident">server_objects</span>.<span class="ident">get_mut</span>((<span class="ident">id</span> <span class="op">-</span> <span class="ident">SERVER_ID_LIMIT</span>) <span class="kw">as</span> <span class="ident">usize</span>)
             {
                 <span class="prelude-val">Ok</span>(<span class="ident">f</span>(<span class="ident">obj</span>))
             } <span class="kw">else</span> {
                 <span class="prelude-val">Err</span>(())
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">obj</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">client_objects</span>.<span class="ident">get_mut</span>((<span class="ident">id</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>) {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">obj</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">client_objects</span>.<span class="ident">get_mut</span>((<span class="ident">id</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>)
+        {
             <span class="prelude-val">Ok</span>(<span class="ident">f</span>(<span class="ident">obj</span>))
         } <span class="kw">else</span> {
             <span class="prelude-val">Err</span>(())
@@ -436,7 +433,10 @@
 }
 
 <span class="comment">// insert a new object in a store at the first free place</span>
-<span class="kw">fn</span> <span class="ident">insert_in</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">object</span>: <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+<span class="kw">fn</span> <span class="ident">insert_in</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+    <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">object</span>: <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>,
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
     <span class="kw">match</span> <span class="ident">store</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="prelude-ty">Option</span>::<span class="ident">is_none</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">store</span>[<span class="ident">id</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">object</span>);

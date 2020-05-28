@@ -521,18 +521,6 @@
 <span id="521">521</span>
 <span id="522">522</span>
 <span id="523">523</span>
-<span id="524">524</span>
-<span id="525">525</span>
-<span id="526">526</span>
-<span id="527">527</span>
-<span id="528">528</span>
-<span id="529">529</span>
-<span id="530">530</span>
-<span id="531">531</span>
-<span id="532">532</span>
-<span id="533">533</span>
-<span id="534">534</span>
-<span id="535">535</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_void</span>};
 <span class="kw">const</span> <span class="ident">NULLPTR</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
@@ -547,8 +535,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -578,12 +566,7 @@
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;get_viewport&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -610,7 +593,11 @@
                 <span class="ident">Request</span>::<span class="ident">GetViewport</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">WpViewport</span><span class="op">&gt;</span>(
                     <span class="ident">version</span>,
@@ -624,13 +611,9 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
                 <span class="ident">Request</span>::<span class="ident">GetViewport</span> { <span class="ident">surface</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">1</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>), <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),],
                 },
@@ -675,7 +658,11 @@
         <span class="kw">fn</span> <span class="ident">since</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -744,9 +731,7 @@
             <span class="kw-2">&amp;</span><span class="self">self</span>,
             <span class="ident">surface</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">WpViewport</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">GetViewport</span> {
-                <span class="ident">surface</span>: <span class="ident">surface</span>.<span class="ident">clone</span>(),
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">GetViewport</span> { <span class="ident">surface</span>: <span class="ident">surface</span>.<span class="ident">clone</span>() };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>()
         }
     }
@@ -754,10 +739,10 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">REQ_DESTROY_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; The minimal object version supporting this request&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">REQ_GET_VIEWPORT_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
-    <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">wp_viewporter_requests_get_viewport_types</span>: [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>; <span class="number">2</span>] <span class="op">=</span> [
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">wp_viewport_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> },
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">wl_surface_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> },
-    ];
+    <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">wp_viewporter_requests_get_viewport_types</span>: [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>; <span class="number">2</span>] <span class="op">=</span>
+        [<span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wp_viewport</span>::<span class="ident">wp_viewport_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> }, <span class="kw">unsafe</span> {
+            <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">wl_surface_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>
+        }];
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; C-representation of the messages of this interface, for interop&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">wp_viewporter_requests</span>: [<span class="ident">wl_message</span>; <span class="number">2</span>] <span class="op">=</span> [
         <span class="ident">wl_message</span> {
@@ -786,8 +771,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -828,12 +813,7 @@
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;set_source&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -873,7 +853,11 @@
                 <span class="ident">Request</span>::<span class="ident">SetDestination</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -883,13 +867,9 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
                 <span class="ident">Request</span>::<span class="ident">SetSource</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">1</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
                         <span class="ident">Argument</span>::<span class="ident">Fixed</span>((<span class="ident">x</span> <span class="op">*</span> <span class="number">256.</span>) <span class="kw">as</span> <span class="ident">i32</span>),
@@ -899,7 +879,7 @@
                     ],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetDestination</span> { <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">2</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">width</span>), <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">height</span>),],
                 },
@@ -952,7 +932,11 @@
         <span class="kw">fn</span> <span class="ident">since</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -1018,20 +1002,12 @@
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the source rectangle for cropping\n\nSet the source rectangle of the associated wl_surface. See\nwp_viewport for the description, and relation to the wl_buffer\nsize.\n\nIf all of x, y, width and height are -1.0, the source rectangle is\nunset instead. Any other set of values where width or height are zero\nor negative, or x or y are negative, raise the bad_value protocol\nerror.\n\nThe crop and scale state is double-buffered state, and will be\napplied on the next wl_surface.commit.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">y</span>: <span class="ident">f64</span>, <span class="ident">width</span>: <span class="ident">f64</span>, <span class="ident">height</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetSource</span> {
-                <span class="ident">x</span>: <span class="ident">x</span>,
-                <span class="ident">y</span>: <span class="ident">y</span>,
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetSource</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the surface size for scaling\n\nSet the destination size of the associated wl_surface. See\nwp_viewport for the description, and relation to the wl_buffer\nsize.\n\nIf width is -1 and height is -1, the destination size is unset\ninstead. Any other pair of values for width and height that\ncontains zero or negative values raises the bad_value protocol\nerror.\n\nThe crop and scale state is double-buffered state, and will be\napplied on the next wl_surface.commit.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_destination</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetDestination</span> {
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetDestination</span> { <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
     }

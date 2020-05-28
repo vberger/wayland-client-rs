@@ -339,7 +339,6 @@
 <span id="339">339</span>
 <span id="340">340</span>
 <span id="341">341</span>
-<span id="342">342</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
 
@@ -378,7 +377,9 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">GlobalError</span>::<span class="ident">Missing</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;The requested global was missing.&quot;</span>),
-            <span class="ident">GlobalError</span>::<span class="ident">VersionTooLow</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;The requested global&#39;s version is too low.&quot;</span>),
+            <span class="ident">GlobalError</span>::<span class="ident">VersionTooLow</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;The requested global&#39;s version is too low.&quot;</span>)
+            }
         }
     }
 }
@@ -419,11 +420,7 @@
         <span class="ident">registry</span>.<span class="ident">quick_assign</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">_proxy</span>, <span class="ident">msg</span>, <span class="ident">_data</span><span class="op">|</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>();
             <span class="kw">match</span> <span class="ident">msg</span> {
-                <span class="ident">wl_registry</span>::<span class="ident">Event</span>::<span class="ident">Global</span> {
-                    <span class="ident">name</span>,
-                    <span class="ident">interface</span>,
-                    <span class="ident">version</span>,
-                } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">wl_registry</span>::<span class="ident">Event</span>::<span class="ident">Global</span> { <span class="ident">name</span>, <span class="ident">interface</span>, <span class="ident">version</span> } <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">inner</span>.<span class="ident">list</span>.<span class="ident">push</span>((<span class="ident">name</span>, <span class="ident">interface</span>, <span class="ident">version</span>));
                 }
                 <span class="ident">wl_registry</span>::<span class="ident">Event</span>::<span class="ident">GlobalRemove</span> { <span class="ident">name</span> } <span class="op">=</span><span class="op">&gt;</span> {
@@ -432,10 +429,7 @@
             }
         });
 
-        <span class="ident">GlobalManager</span> {
-            <span class="ident">inner</span>: <span class="ident">inner_clone</span>,
-            <span class="ident">registry</span>,
-        }
+        <span class="ident">GlobalManager</span> { <span class="ident">inner</span>: <span class="ident">inner_clone</span>, <span class="ident">registry</span> }
     }
 
     <span class="doccomment">/// Create a global manager handling a registry with a callback</span>
@@ -448,7 +442,10 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// You need to provide an attached handle of the Waland display, and the</span>
     <span class="doccomment">/// global manager will be managed by the associated event queue.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_cb</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">display</span>: <span class="kw-2">&amp;</span><span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">wl_display</span>::<span class="ident">WlDisplay</span><span class="op">&gt;</span>, <span class="kw-2">mut</span> <span class="ident">callback</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GlobalManager</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_cb</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
+        <span class="ident">display</span>: <span class="kw-2">&amp;</span><span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">wl_display</span>::<span class="ident">WlDisplay</span><span class="op">&gt;</span>,
+        <span class="kw-2">mut</span> <span class="ident">callback</span>: <span class="ident">F</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GlobalManager</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">GlobalEvent</span>, <span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">wl_registry</span>::<span class="ident">WlRegistry</span><span class="op">&gt;</span>, <span class="ident">DispatchData</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
@@ -493,10 +490,7 @@
             }
         });
 
-        <span class="ident">GlobalManager</span> {
-            <span class="ident">inner</span>: <span class="ident">inner_clone</span>,
-            <span class="ident">registry</span>,
-        }
+        <span class="ident">GlobalManager</span> { <span class="ident">inner</span>: <span class="ident">inner_clone</span>, <span class="ident">registry</span> }
     }
 
     <span class="doccomment">/// Instantiate a global with a specific version</span>
@@ -540,7 +534,11 @@
     <span class="doccomment">/// actually been used on any object using the `Proxy::version()` method.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// As `instantiate_exact`, it should only be used for singleton globals, for the same reasons.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instantiate_range</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">min_version</span>: <span class="ident">u32</span>, <span class="ident">max_version</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">GlobalError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">instantiate_range</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">min_version</span>: <span class="ident">u32</span>,
+        <span class="ident">max_version</span>: <span class="ident">u32</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">GlobalError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {

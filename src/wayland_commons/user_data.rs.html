@@ -319,6 +319,7 @@
 <span id="319">319</span>
 <span id="320">320</span>
 <span id="321">321</span>
+<span id="322">322</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Various utilities used for other implementations</span>
 
@@ -349,9 +350,7 @@
 <span class="kw">impl</span> <span class="ident">UserData</span> {
     <span class="doccomment">/// Create a new UserData instance</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UserData</span> {
-        <span class="ident">UserData</span> {
-            <span class="ident">inner</span>: <span class="ident">OnceCell</span>::<span class="ident">new</span>(),
-        }
+        <span class="ident">UserData</span> { <span class="ident">inner</span>: <span class="ident">OnceCell</span>::<span class="ident">new</span>() }
     }
 
     <span class="doccomment">/// Sets the UserData to a given value</span>
@@ -369,8 +368,7 @@
     <span class="doccomment">/// The provided closure is called to init the UserData,</span>
     <span class="doccomment">/// does nothing is the UserData had already been set.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_threadsafe</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Any</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>
-            .<span class="ident">get_or_init</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">UserDataInner</span>::<span class="ident">ThreadSafe</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">f</span>())));
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_or_init</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">UserDataInner</span>::<span class="ident">ThreadSafe</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">f</span>())));
     }
 
     <span class="doccomment">/// Attempt to access the wrapped user data</span>
@@ -399,7 +397,8 @@
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">UserData</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="comment">// only drop non-Send user data if we are on the right thread, leak it otherwise</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">UserDataInner</span>::<span class="ident">NonThreadSafe</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">val</span>, <span class="ident">threadid</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>() {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">UserDataInner</span>::<span class="ident">NonThreadSafe</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">val</span>, <span class="ident">threadid</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>()
+        {
             <span class="kw">if</span> <span class="ident">threadid</span> <span class="op">=</span><span class="op">=</span> <span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() {
                 <span class="kw">unsafe</span> {
                     <span class="ident">ManuallyDrop</span>::<span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">val</span>);
@@ -418,9 +417,7 @@
 <span class="kw">impl</span> <span class="ident">UserDataMap</span> {
     <span class="doccomment">/// Create a new map</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UserDataMap</span> {
-        <span class="ident">UserDataMap</span> {
-            <span class="ident">list</span>: <span class="ident">AppendList</span>::<span class="ident">new</span>(),
-        }
+        <span class="ident">UserDataMap</span> { <span class="ident">list</span>: <span class="ident">AppendList</span>::<span class="ident">new</span>() }
     }
 
     <span class="doccomment">/// Attempt to access the wrapped user data of a given type</span>
@@ -463,7 +460,10 @@
     <span class="doccomment">/// If the value does not already exists, the closure is called to create it and</span>
     <span class="doccomment">/// this function returns `true`. If the value already exists, the closure is not</span>
     <span class="doccomment">/// called, and this function returns `false`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_if_missing_threadsafe</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">init</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_if_missing_threadsafe</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">F</span>: <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span><span class="op">&gt;</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">init</span>: <span class="ident">F</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">get</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>().<span class="ident">is_some</span>() {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
@@ -535,10 +535,12 @@
 
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">append_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
             <span class="kw">loop</span> {
-                <span class="kw">match</span> <span class="self">self</span>
-                    .<span class="number">0</span>
-                    .<span class="ident">compare_exchange_weak</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>(), <span class="ident">p</span>, <span class="ident">Ordering</span>::<span class="ident">AcqRel</span>, <span class="ident">Ordering</span>::<span class="ident">Acquire</span>)
-                {
+                <span class="kw">match</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">compare_exchange_weak</span>(
+                    <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
+                    <span class="ident">p</span>,
+                    <span class="ident">Ordering</span>::<span class="ident">AcqRel</span>,
+                    <span class="ident">Ordering</span>::<span class="ident">Acquire</span>,
+                ) {
                     <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span>,
                     <span class="prelude-val">Err</span>(<span class="ident">head</span>) <span class="op">=</span><span class="op">&gt;</span> {
                         <span class="kw">if</span> <span class="op">!</span><span class="ident">head</span>.<span class="ident">is_null</span>() {

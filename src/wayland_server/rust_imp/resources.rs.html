@@ -148,12 +148,6 @@
 <span id="148">148</span>
 <span id="149">149</span>
 <span id="150">150</span>
-<span id="151">151</span>
-<span id="152">152</span>
-<span id="153">153</span>
-<span id="154">154</span>
-<span id="155">155</span>
-<span id="156">156</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">atomic</span>::{<span class="ident">AtomicBool</span>, <span class="ident">Ordering</span>};
@@ -217,11 +211,7 @@
         <span class="ident">client</span>: <span class="ident">ClientInner</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ResourceInner</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">me</span> <span class="op">=</span> <span class="ident">map</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">find</span>(<span class="ident">id</span>);
-        <span class="ident">me</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">obj</span><span class="op">|</span> <span class="ident">ResourceInner</span> {
-            <span class="ident">id</span>,
-            <span class="ident">object</span>: <span class="ident">obj</span>,
-            <span class="ident">client</span>,
-        })
+        <span class="ident">me</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">obj</span><span class="op">|</span> <span class="ident">ResourceInner</span> { <span class="ident">id</span>, <span class="ident">object</span>: <span class="ident">obj</span>, <span class="ident">client</span> })
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_interface</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -298,8 +288,7 @@
         <span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">I</span>::<span class="ident">Request</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
         <span class="ident">I</span>::<span class="ident">Request</span>: <span class="ident">MessageGroup</span><span class="op">&lt;</span><span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ResourceMap</span><span class="op">&gt;</span>,
     {
-        <span class="self">self</span>.<span class="ident">client</span>
-            .<span class="ident">set_dispatcher_for</span>(<span class="self">self</span>.<span class="ident">id</span>, <span class="kw">super</span>::<span class="ident">make_dispatcher</span>(<span class="ident">filter</span>));
+        <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">set_dispatcher_for</span>(<span class="self">self</span>.<span class="ident">id</span>, <span class="kw">super</span>::<span class="ident">make_dispatcher</span>(<span class="ident">filter</span>));
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assign_destructor</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw">crate</span>::<span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>)
@@ -307,8 +296,7 @@
         <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
         <span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
-        <span class="self">self</span>.<span class="ident">client</span>
-            .<span class="ident">set_destructor_for</span>(<span class="self">self</span>.<span class="ident">id</span>, <span class="kw">super</span>::<span class="ident">make_destructor</span>(<span class="ident">filter</span>));
+        <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">set_destructor_for</span>(<span class="self">self</span>.<span class="ident">id</span>, <span class="kw">super</span>::<span class="ident">make_destructor</span>(<span class="ident">filter</span>));
     }
 }
 </pre></div>

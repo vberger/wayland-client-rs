@@ -2345,107 +2345,6 @@
 <span id="2345">2345</span>
 <span id="2346">2346</span>
 <span id="2347">2347</span>
-<span id="2348">2348</span>
-<span id="2349">2349</span>
-<span id="2350">2350</span>
-<span id="2351">2351</span>
-<span id="2352">2352</span>
-<span id="2353">2353</span>
-<span id="2354">2354</span>
-<span id="2355">2355</span>
-<span id="2356">2356</span>
-<span id="2357">2357</span>
-<span id="2358">2358</span>
-<span id="2359">2359</span>
-<span id="2360">2360</span>
-<span id="2361">2361</span>
-<span id="2362">2362</span>
-<span id="2363">2363</span>
-<span id="2364">2364</span>
-<span id="2365">2365</span>
-<span id="2366">2366</span>
-<span id="2367">2367</span>
-<span id="2368">2368</span>
-<span id="2369">2369</span>
-<span id="2370">2370</span>
-<span id="2371">2371</span>
-<span id="2372">2372</span>
-<span id="2373">2373</span>
-<span id="2374">2374</span>
-<span id="2375">2375</span>
-<span id="2376">2376</span>
-<span id="2377">2377</span>
-<span id="2378">2378</span>
-<span id="2379">2379</span>
-<span id="2380">2380</span>
-<span id="2381">2381</span>
-<span id="2382">2382</span>
-<span id="2383">2383</span>
-<span id="2384">2384</span>
-<span id="2385">2385</span>
-<span id="2386">2386</span>
-<span id="2387">2387</span>
-<span id="2388">2388</span>
-<span id="2389">2389</span>
-<span id="2390">2390</span>
-<span id="2391">2391</span>
-<span id="2392">2392</span>
-<span id="2393">2393</span>
-<span id="2394">2394</span>
-<span id="2395">2395</span>
-<span id="2396">2396</span>
-<span id="2397">2397</span>
-<span id="2398">2398</span>
-<span id="2399">2399</span>
-<span id="2400">2400</span>
-<span id="2401">2401</span>
-<span id="2402">2402</span>
-<span id="2403">2403</span>
-<span id="2404">2404</span>
-<span id="2405">2405</span>
-<span id="2406">2406</span>
-<span id="2407">2407</span>
-<span id="2408">2408</span>
-<span id="2409">2409</span>
-<span id="2410">2410</span>
-<span id="2411">2411</span>
-<span id="2412">2412</span>
-<span id="2413">2413</span>
-<span id="2414">2414</span>
-<span id="2415">2415</span>
-<span id="2416">2416</span>
-<span id="2417">2417</span>
-<span id="2418">2418</span>
-<span id="2419">2419</span>
-<span id="2420">2420</span>
-<span id="2421">2421</span>
-<span id="2422">2422</span>
-<span id="2423">2423</span>
-<span id="2424">2424</span>
-<span id="2425">2425</span>
-<span id="2426">2426</span>
-<span id="2427">2427</span>
-<span id="2428">2428</span>
-<span id="2429">2429</span>
-<span id="2430">2430</span>
-<span id="2431">2431</span>
-<span id="2432">2432</span>
-<span id="2433">2433</span>
-<span id="2434">2434</span>
-<span id="2435">2435</span>
-<span id="2436">2436</span>
-<span id="2437">2437</span>
-<span id="2438">2438</span>
-<span id="2439">2439</span>
-<span id="2440">2440</span>
-<span id="2441">2441</span>
-<span id="2442">2442</span>
-<span id="2443">2443</span>
-<span id="2444">2444</span>
-<span id="2445">2445</span>
-<span id="2446">2446</span>
-<span id="2447">2447</span>
-<span id="2448">2448</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::{<span class="ident">c_char</span>, <span class="ident">c_void</span>};
 <span class="kw">const</span> <span class="ident">NULLPTR</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span> <span class="op">=</span> <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
@@ -2460,8 +2359,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -2510,12 +2409,7 @@
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;create_positioner&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -2558,7 +2452,11 @@
                 <span class="ident">Request</span>::<span class="ident">Pong</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">xdg_positioner</span>::<span class="ident">XdgPositioner</span><span class="op">&gt;</span>(
                     <span class="ident">version</span>,
@@ -2576,26 +2474,18 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-                <span class="ident">Request</span>::<span class="ident">CreatePositioner</span> {} <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
+                <span class="ident">Request</span>::<span class="ident">CreatePositioner</span> {} <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">1</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),] }
+                }
                 <span class="ident">Request</span>::<span class="ident">GetXdgSurface</span> { <span class="ident">surface</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">2</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>), <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">surface</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),],
                 },
-                <span class="ident">Request</span>::<span class="ident">Pong</span> { <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">3</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),],
-                },
+                <span class="ident">Request</span>::<span class="ident">Pong</span> { <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">3</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),] }
+                }
             }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
@@ -2661,7 +2551,11 @@
                 <span class="ident">Event</span>::<span class="ident">Ping</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -2751,14 +2645,12 @@
             <span class="kw-2">&amp;</span><span class="self">self</span>,
             <span class="ident">surface</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">WlSurface</span>,
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Main</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">xdg_surface</span>::<span class="ident">XdgSurface</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">GetXdgSurface</span> {
-                <span class="ident">surface</span>: <span class="ident">surface</span>.<span class="ident">clone</span>(),
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">GetXdgSurface</span> { <span class="ident">surface</span>: <span class="ident">surface</span>.<span class="ident">clone</span>() };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>()
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;respond to a ping event\n\nA client must respond to a ping event with a pong request or\nthe client may be deemed unresponsive. See xdg_wm_base.ping.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pong</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serial</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Pong</span> { <span class="ident">serial</span>: <span class="ident">serial</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Pong</span> { <span class="ident">serial</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
     }
@@ -2774,10 +2666,10 @@
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EVT_PING_SINCE</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">1u32</span>;
     <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">xdg_wm_base_requests_create_positioner_types</span>: [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>; <span class="number">1</span>] <span class="op">=</span>
         [<span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">xdg_positioner</span>::<span class="ident">xdg_positioner_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> }];
-    <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">xdg_wm_base_requests_get_xdg_surface_types</span>: [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>; <span class="number">2</span>] <span class="op">=</span> [
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">xdg_surface</span>::<span class="ident">xdg_surface_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> },
-        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">wl_surface_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> },
-    ];
+    <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">xdg_wm_base_requests_get_xdg_surface_types</span>: [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>; <span class="number">2</span>] <span class="op">=</span>
+        [<span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">xdg_surface</span>::<span class="ident">xdg_surface_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span> }, <span class="kw">unsafe</span> {
+            <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_surface</span>::<span class="ident">wl_surface_interface</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>
+        }];
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">r&quot; C-representation of the messages of this interface, for interop&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">xdg_wm_base_requests</span>: [<span class="ident">wl_message</span>; <span class="number">4</span>] <span class="op">=</span> [
         <span class="ident">wl_message</span> {
@@ -2822,8 +2714,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -2938,12 +2830,7 @@
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;set_size&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -3015,7 +2902,11 @@
                 <span class="ident">Request</span>::<span class="ident">SetOffset</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -3025,18 +2916,14 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
                 <span class="ident">Request</span>::<span class="ident">SetSize</span> { <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">1</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">width</span>), <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">height</span>),],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetAnchorRect</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">2</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
                         <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">x</span>),
@@ -3046,24 +2933,22 @@
                     ],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetAnchor</span> { <span class="ident">anchor</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">3</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">anchor</span>.<span class="ident">to_raw</span>()),],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetGravity</span> { <span class="ident">gravity</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">4</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">gravity</span>.<span class="ident">to_raw</span>()),],
                 },
-                <span class="ident">Request</span>::<span class="ident">SetConstraintAdjustment</span> {
-                    <span class="ident">constraint_adjustment</span>,
-                } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                <span class="ident">Request</span>::<span class="ident">SetConstraintAdjustment</span> { <span class="ident">constraint_adjustment</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">5</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">constraint_adjustment</span>),],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetOffset</span> { <span class="ident">x</span>, <span class="ident">y</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">6</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">x</span>), <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">y</span>),],
                 },
@@ -3109,9 +2994,7 @@
                     <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">gravity</span>.<span class="ident">to_raw</span>();
                     <span class="ident">f</span>(<span class="number">4</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
                 }
-                <span class="ident">Request</span>::<span class="ident">SetConstraintAdjustment</span> {
-                    <span class="ident">constraint_adjustment</span>,
-                } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Request</span>::<span class="ident">SetConstraintAdjustment</span> { <span class="ident">constraint_adjustment</span> } <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_args_array</span>: [<span class="ident">wl_argument</span>; <span class="number">1</span>] <span class="op">=</span> <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">zeroed</span>() };
                     <span class="ident">_args_array</span>[<span class="number">0</span>].<span class="ident">u</span> <span class="op">=</span> <span class="ident">constraint_adjustment</span>;
                     <span class="ident">f</span>(<span class="number">5</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">_args_array</span>)
@@ -3139,7 +3022,11 @@
         <span class="kw">fn</span> <span class="ident">since</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -3205,42 +3092,32 @@
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the size of the to-be positioned rectangle\n\nSet the size of the surface that is to be positioned with the positioner\nobject. The size is in surface-local coordinates and corresponds to the\nwindow geometry. See xdg_surface.set_window_geometry.\n\nIf a zero or negative size is set the invalid_input error is raised.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetSize</span> {
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetSize</span> { <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the anchor rectangle within the parent surface\n\nSpecify the anchor rectangle within the parent surface that the child\nsurface will be placed relative to. The rectangle is relative to the\nwindow geometry as defined by xdg_surface.set_window_geometry of the\nparent surface.\n\nWhen the xdg_positioner object is used to position a child surface, the\nanchor rectangle may not extend outside the window geometry of the\npositioned child&#39;s parent surface.\n\nIf a negative size is set the invalid_input error is raised.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_anchor_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetAnchorRect</span> {
-                <span class="ident">x</span>: <span class="ident">x</span>,
-                <span class="ident">y</span>: <span class="ident">y</span>,
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetAnchorRect</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set anchor rectangle anchor\n\nDefines the anchor point for the anchor rectangle. The specified anchor\nis used derive an anchor point that the child surface will be\npositioned relative to. If a corner anchor is set (e.g. &#39;top_left&#39; or\n&#39;bottom_right&#39;), the anchor point will be at the specified corner;\notherwise, the derived anchor point will be centered on the specified\nedge, or in the center of the anchor rectangle if no edge is specified.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_anchor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">anchor</span>: <span class="ident">Anchor</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetAnchor</span> { <span class="ident">anchor</span>: <span class="ident">anchor</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetAnchor</span> { <span class="ident">anchor</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set child surface gravity\n\nDefines in what direction a surface should be positioned, relative to\nthe anchor point of the parent surface. If a corner gravity is\nspecified (e.g. &#39;bottom_right&#39; or &#39;top_left&#39;), then the child surface\nwill be placed towards the specified gravity; otherwise, the child\nsurface will be centered over the anchor point on any axis that had no\ngravity specified.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_gravity</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">gravity</span>: <span class="ident">Gravity</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetGravity</span> { <span class="ident">gravity</span>: <span class="ident">gravity</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetGravity</span> { <span class="ident">gravity</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the adjustment to be done when constrained\n\nSpecify how the window should be positioned if the originally intended\nposition caused the surface to be constrained, meaning at least\npartially outside positioning boundaries set by the compositor. The\nadjustment is set by constructing a bitmask describing the adjustment to\nbe made when the surface is constrained on that axis.\n\nIf no bit for one axis is set, the compositor will assume that the child\nsurface should not change its position on that axis when constrained.\n\nIf more than one bit for one axis is set, the order of how adjustments\nare applied is specified in the corresponding adjustment descriptions.\n\nThe default adjustment is none.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_constraint_adjustment</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">constraint_adjustment</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetConstraintAdjustment</span> {
-                <span class="ident">constraint_adjustment</span>: <span class="ident">constraint_adjustment</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetConstraintAdjustment</span> { <span class="ident">constraint_adjustment</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set surface position offset\n\nSpecify the surface position offset relative to the position of the\nanchor on the anchor rectangle and the anchor on the surface. For\nexample if the anchor of the anchor rectangle is at (x, y), the surface\nhas the gravity bottom|right, and the offset is (ox, oy), the calculated\nsurface position will be (x + ox, y + oy). The offset position of the\nsurface is the one used for constraint testing. See\nset_constraint_adjustment.\n\nAn example use case is placing a popup menu on top of a user interface\nelement, while aligning the user interface element of the parent surface\nwith some user interface element placed somewhere in the popup surface.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_offset</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetOffset</span> { <span class="ident">x</span>: <span class="ident">x</span>, <span class="ident">y</span>: <span class="ident">y</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetOffset</span> { <span class="ident">x</span>, <span class="ident">y</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
     }
@@ -3311,8 +3188,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -3354,12 +3231,7 @@
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;get_toplevel&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -3419,7 +3291,11 @@
                 <span class="ident">Request</span>::<span class="ident">AckConfigure</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">xdg_toplevel</span>::<span class="ident">XdgToplevel</span><span class="op">&gt;</span>(
                     <span class="ident">version</span>,
@@ -3437,18 +3313,12 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-                <span class="ident">Request</span>::<span class="ident">GetToplevel</span> {} <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">1</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
+                <span class="ident">Request</span>::<span class="ident">GetToplevel</span> {} <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">1</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),] }
+                }
                 <span class="ident">Request</span>::<span class="ident">GetPopup</span> { <span class="ident">parent</span>, <span class="ident">positioner</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">2</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
                         <span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="number">0</span>),
@@ -3457,7 +3327,7 @@
                     ],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetWindowGeometry</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">3</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
                         <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">x</span>),
@@ -3466,11 +3336,9 @@
                         <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">height</span>),
                     ],
                 },
-                <span class="ident">Request</span>::<span class="ident">AckConfigure</span> { <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">4</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),],
-                },
+                <span class="ident">Request</span>::<span class="ident">AckConfigure</span> { <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">4</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),] }
+                }
             }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
@@ -3547,7 +3415,11 @@
                 <span class="ident">Event</span>::<span class="ident">Configure</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -3646,17 +3518,12 @@
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the new window geometry\n\nThe window geometry of a surface is its \&quot;visible bounds\&quot; from the\nuser&#39;s perspective. Client-side decorations often have invisible\nportions like drop-shadows which should be ignored for the\npurposes of aligning, placing and constraining windows.\n\nThe window geometry is double buffered, and will be applied at the\ntime wl_surface.commit of the corresponding wl_surface is called.\n\nWhen maintaining a position, the compositor should treat the (x, y)\ncoordinate of the window geometry as the top left corner of the window.\nA client changing the (x, y) window geometry coordinate should in\ngeneral not alter the position of the window.\n\nOnce the window geometry of the surface is set, it is not possible to\nunset it, and it will remain the same until set_window_geometry is\ncalled again, even if a new subsurface or buffer is attached.\n\nIf never set, the value is the full bounds of the surface,\nincluding any subsurfaces. This updates dynamically on every\ncommit. This unset is meant for extremely simple clients.\n\nThe arguments are given in the surface-local coordinate space of\nthe wl_surface associated with this xdg_surface.\n\nThe width and height must be greater than zero. Setting an invalid size\nwill raise an error. When applied, the effective window geometry will be\nthe set window geometry clamped to the bounding rectangle of the\ncombined geometry of the surface of the xdg_surface and the associated\nsubsurfaces.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_window_geometry</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetWindowGeometry</span> {
-                <span class="ident">x</span>: <span class="ident">x</span>,
-                <span class="ident">y</span>: <span class="ident">y</span>,
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetWindowGeometry</span> { <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;ack a configure event\n\nWhen a configure event is received, if a client commits the\nsurface in response to the configure event, then the client\nmust make an ack_configure request sometime before the commit\nrequest, passing along the serial of the configure event.\n\nFor instance, for toplevel surfaces the compositor might use this\ninformation to move a surface to the top left only when the client has\ndrawn itself for the maximized or fullscreen state.\n\nIf the client receives multiple configure events before it\ncan respond to one, it only has to ack the last configure event.\n\nA client is not required to commit immediately after sending\nan ack_configure request - it may even ack_configure several times\nbefore its next surface commit.\n\nA client may send multiple ack_configure requests before committing, but\nonly the last request sent before a commit indicates which configure\nevent the client really is responding to.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ack_configure</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">serial</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">AckConfigure</span> { <span class="ident">serial</span>: <span class="ident">serial</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">AckConfigure</span> { <span class="ident">serial</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
     }
@@ -3728,8 +3595,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;edge values for resizing\n\nThese values are used to indicate which edge of a surface\nis being dragged in a resize operation.&quot;</span>]</span>
@@ -3811,31 +3678,17 @@
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;destroy the xdg_toplevel\n\nThis request destroys the role surface and unmaps the surface;\nsee \&quot;Unmapping\&quot; behavior in interface section for details.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the parent of this surface\n\nSet the \&quot;parent\&quot; of this surface. This surface should be stacked\nabove the parent surface and all other ancestor surfaces.\n\nParent windows should be set on dialogs, toolboxes, or other\n\&quot;auxiliary\&quot; surfaces, so that the parent is raised when the dialog\nis raised.\n\nSetting a null parent for a child window removes any parent-child\nrelationship for the child. Setting a null parent for a window which\ncurrently has no parent is a no-op.\n\nIf the parent is unmapped then its children are managed as\nthough the parent of the now-unmapped parent has become the\nparent of this surface. If no parent exists for the now-unmapped\nparent then the children are managed as though they have no\nparent surface.&quot;</span>]</span>
-        <span class="ident">SetParent</span> {
-            <span class="ident">parent</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">xdg_toplevel</span>::<span class="ident">XdgToplevel</span><span class="op">&gt;</span>,
-        },
+        <span class="ident">SetParent</span> { <span class="ident">parent</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">xdg_toplevel</span>::<span class="ident">XdgToplevel</span><span class="op">&gt;</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set surface title\n\nSet a short title for the surface.\n\nThis string may be used to identify the surface in a task bar,\nwindow list, or other user interface elements provided by the\ncompositor.\n\nThe string must be encoded in UTF-8.&quot;</span>]</span>
         <span class="ident">SetTitle</span> { <span class="ident">title</span>: <span class="ident">String</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set application ID\n\nSet an application identifier for the surface.\n\nThe app ID identifies the general class of applications to which\nthe surface belongs. The compositor can use this to group multiple\nsurfaces together, or to determine how to launch a new application.\n\nFor D-Bus activatable applications, the app ID is used as the D-Bus\nservice name.\n\nThe compositor shell will try to group application surfaces together\nby their app ID. As a best practice, it is suggested to select app\nID&#39;s that match the basename of the application&#39;s .desktop file.\nFor example, \&quot;org.freedesktop.FooViewer\&quot; where the .desktop file is\n\&quot;org.freedesktop.FooViewer.desktop\&quot;.\n\nLike other properties, a set_app_id request can be sent after the\nxdg_toplevel has been mapped to update the property.\n\nSee the desktop-entry specification [0] for more details on\napplication identifiers and how they relate to well-known D-Bus\nnames and .desktop files.\n\n[0] http://standards.freedesktop.org/desktop-entry-spec/&quot;</span>]</span>
         <span class="ident">SetAppId</span> { <span class="ident">app_id</span>: <span class="ident">String</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;show the window menu\n\nClients implementing client-side decorations might want to show\na context menu when right-clicking on the decorations, giving the\nuser a menu that they can use to maximize or minimize the window.\n\nThis request asks the compositor to pop up such a window menu at\nthe given position, relative to the local surface coordinates of\nthe parent surface. There are no guarantees as to what menu items\nthe window menu contains.\n\nThis request must be used in response to some sort of user action\nlike a button press, key press, or touch down event.&quot;</span>]</span>
-        <span class="ident">ShowWindowMenu</span> {
-            <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
-            <span class="ident">serial</span>: <span class="ident">u32</span>,
-            <span class="ident">x</span>: <span class="ident">i32</span>,
-            <span class="ident">y</span>: <span class="ident">i32</span>,
-        },
+        <span class="ident">ShowWindowMenu</span> { <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;start an interactive move\n\nStart an interactive, user-driven move of the surface.\n\nThis request must be used in response to some sort of user action\nlike a button press, key press, or touch down event. The passed\nserial is used to determine the type of interactive move (touch,\npointer, etc).\n\nThe server may ignore move requests depending on the state of\nthe surface (e.g. fullscreen or maximized), or if the passed serial\nis no longer valid.\n\nIf triggered, the surface will lose the focus of the device\n(wl_pointer, wl_touch, etc) used for the move. It is up to the\ncompositor to visually indicate that the move is taking place, such as\nupdating a pointer cursor, during the move. There is no guarantee\nthat the device focus will return when the move is completed.&quot;</span>]</span>
-        <span class="ident">Move</span> {
-            <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
-            <span class="ident">serial</span>: <span class="ident">u32</span>,
-        },
+        <span class="ident">Move</span> { <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;start an interactive resize\n\nStart a user-driven, interactive resize of the surface.\n\nThis request must be used in response to some sort of user action\nlike a button press, key press, or touch down event. The passed\nserial is used to determine the type of interactive resize (touch,\npointer, etc).\n\nThe server may ignore resize requests depending on the state of\nthe surface (e.g. fullscreen or maximized).\n\nIf triggered, the client will receive configure events with the\n\&quot;resize\&quot; state enum value and the expected sizes. See the \&quot;resize\&quot;\nenum value for more details about what is required. The client\nmust also acknowledge configure events using \&quot;ack_configure\&quot;. After\nthe resize is completed, the client will receive another \&quot;configure\&quot;\nevent without the resize state.\n\nIf triggered, the surface also will lose the focus of the device\n(wl_pointer, wl_touch, etc) used for the resize. It is up to the\ncompositor to visually indicate that the resize is taking place,\nsuch as updating a pointer cursor, during the resize. There is no\nguarantee that the device focus will return when the resize is\ncompleted.\n\nThe edges parameter specifies how the surface should be resized,\nand is one of the values of the resize_edge enum. The compositor\nmay use this information to update the surface position for\nexample when dragging the top left corner. The compositor may also\nuse this information to adapt its behavior, e.g. choose an\nappropriate cursor image.&quot;</span>]</span>
-        <span class="ident">Resize</span> {
-            <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
-            <span class="ident">serial</span>: <span class="ident">u32</span>,
-            <span class="ident">edges</span>: <span class="ident">ResizeEdge</span>,
-        },
+        <span class="ident">Resize</span> { <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span>, <span class="ident">edges</span>: <span class="ident">ResizeEdge</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the maximum size\n\nSet a maximum size for the window.\n\nThe client can specify a maximum size so that the compositor does\nnot try to configure the window beyond this size.\n\nThe width and height arguments are in window geometry coordinates.\nSee xdg_surface.set_window_geometry.\n\nValues set in this way are double-buffered. They will get applied\non the next commit.\n\nThe compositor can use this information to allow or disallow\ndifferent states like maximize or fullscreen and draw accurate\nanimations.\n\nSimilarly, a tiling window manager may use this information to\nplace and resize client windows in a more effective way.\n\nThe client should not rely on the compositor to obey the maximum\nsize. The compositor may decide to ignore the values set by the\nclient and request a larger size.\n\nIf never set, or a value of zero in the request, means that the\nclient has no expected maximum size in the given dimension.\nAs a result, a client wishing to reset the maximum size\nto an unspecified state can use zero for width and height in the\nrequest.\n\nRequesting a maximum size to be smaller than the minimum size of\na surface is illegal and will result in a protocol error.\n\nThe width and height must be greater than or equal to zero. Using\nstrictly negative values for width and height will result in a\nprotocol error.&quot;</span>]</span>
         <span class="ident">SetMaxSize</span> { <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the minimum size\n\nSet a minimum size for the window.\n\nThe client can specify a minimum size so that the compositor does\nnot try to configure the window below this size.\n\nThe width and height arguments are in window geometry coordinates.\nSee xdg_surface.set_window_geometry.\n\nValues set in this way are double-buffered. They will get applied\non the next commit.\n\nThe compositor can use this information to allow or disallow\ndifferent states like maximize or fullscreen and draw accurate\nanimations.\n\nSimilarly, a tiling window manager may use this information to\nplace and resize client windows in a more effective way.\n\nThe client should not rely on the compositor to obey the minimum\nsize. The compositor may decide to ignore the values set by the\nclient and request a smaller size.\n\nIf never set, or a value of zero in the request, means that the\nclient has no expected minimum size in the given dimension.\nAs a result, a client wishing to reset the minimum size\nto an unspecified state can use zero for width and height in the\nrequest.\n\nRequesting a minimum size to be larger than the maximum size of\na surface is illegal and will result in a protocol error.\n\nThe width and height must be greater than or equal to zero. Using\nstrictly negative values for width and height will result in a\nprotocol error.&quot;</span>]</span>
@@ -3845,9 +3698,7 @@
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unmaximize the window\n\nUnmaximize the surface.\n\nAfter requesting that the surface should be unmaximized, the compositor\nwill respond by emitting a configure event. Whether this actually\nun-maximizes the window is subject to compositor policies.\nIf available and applicable, the compositor will include the window\ngeometry dimensions the window had prior to being maximized in the\nconfigure event. The client must then update its content, drawing it in\nthe configured state. The client must also acknowledge the configure\nwhen committing the new content (see ack_configure).\n\nIt is up to the compositor to position the surface after it was\nunmaximized; usually the position the surface had before maximizing, if\napplicable.\n\nIf the surface was already not maximized, the compositor will still\nemit a configure event without the \&quot;maximized\&quot; state.\n\nIf the surface is in a fullscreen state, this request has no direct\neffect. It may alter the state the surface is returned to when\nunmaximized unless overridden by the compositor.&quot;</span>]</span>
         <span class="ident">UnsetMaximized</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the window as fullscreen on an output\n\nMake the surface fullscreen.\n\nAfter requesting that the surface should be fullscreened, the\ncompositor will respond by emitting a configure event. Whether the\nclient is actually put into a fullscreen state is subject to compositor\npolicies. The client must also acknowledge the configure when\ncommitting the new content (see ack_configure).\n\nThe output passed by the request indicates the client&#39;s preference as\nto which display it should be set fullscreen on. If this value is NULL,\nit&#39;s up to the compositor to choose which display will be used to map\nthis surface.\n\nIf the surface doesn&#39;t cover the whole output, the compositor will\nposition the surface in the center of the output and compensate with\nwith border fill covering the rest of the output. The content of the\nborder fill is undefined, but should be assumed to be in some way that\nattempts to blend into the surrounding area (e.g. solid black).\n\nIf the fullscreened surface is not opaque, the compositor must make\nsure that other screen content not part of the same surface tree (made\nup of subsurfaces, popups or similarly coupled surfaces) are not\nvisible below the fullscreened surface.&quot;</span>]</span>
-        <span class="ident">SetFullscreen</span> {
-            <span class="ident">output</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wl_output</span>::<span class="ident">WlOutput</span><span class="op">&gt;</span>,
-        },
+        <span class="ident">SetFullscreen</span> { <span class="ident">output</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">wl_output</span>::<span class="ident">WlOutput</span><span class="op">&gt;</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unset the window as fullscreen\n\nMake the surface no longer fullscreen.\n\nAfter requesting that the surface should be unfullscreened, the\ncompositor will respond by emitting a configure event.\nWhether this actually removes the fullscreen state of the client is\nsubject to compositor policies.\n\nMaking a surface unfullscreen sets states for the surface based on the following:\n* the state(s) it may have had before becoming fullscreen\n* any state(s) decided by the compositor\n* any state(s) requested by the client while the surface was fullscreen\n\nThe compositor may include the previous window geometry dimensions in\nthe configure event, if applicable.\n\nThe client must also acknowledge the configure when committing the new\ncontent (see ack_configure).&quot;</span>]</span>
         <span class="ident">UnsetFullscreen</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the window as minimized\n\nRequest that the compositor minimize your surface. There is no\nway to know if the surface is currently minimized, nor is there\nany way to unset minimization on this surface.\n\nIf you are looking to throttle redrawing when minimized, please\ninstead use the wl_surface.frame event for this, as this will\nalso work with live previews on windows in Alt-Tab, Expose or\nsimilar compositor features.&quot;</span>]</span>
@@ -3855,12 +3706,7 @@
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;set_parent&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -3992,7 +3838,11 @@
                 <span class="ident">Request</span>::<span class="ident">SetMinimized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -4002,32 +3852,28 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
                 <span class="ident">Request</span>::<span class="ident">SetParent</span> { <span class="ident">parent</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">1</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">parent</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>)),],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetTitle</span> { <span class="ident">title</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">2</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">unsafe</span> {
                         ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">from_vec_unchecked</span>(<span class="ident">title</span>.<span class="ident">into</span>())
                     })),],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetAppId</span> { <span class="ident">app_id</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">3</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="kw">unsafe</span> {
                         ::<span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>::<span class="ident">from_vec_unchecked</span>(<span class="ident">app_id</span>.<span class="ident">into</span>())
                     })),],
                 },
                 <span class="ident">Request</span>::<span class="ident">ShowWindowMenu</span> { <span class="ident">seat</span>, <span class="ident">serial</span>, <span class="ident">x</span>, <span class="ident">y</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">4</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
                         <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">seat</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),
@@ -4037,12 +3883,12 @@
                     ],
                 },
                 <span class="ident">Request</span>::<span class="ident">Move</span> { <span class="ident">seat</span>, <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">5</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">seat</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()), <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),],
                 },
                 <span class="ident">Request</span>::<span class="ident">Resize</span> { <span class="ident">seat</span>, <span class="ident">serial</span>, <span class="ident">edges</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">6</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[
                         <span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">seat</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()),
@@ -4051,40 +3897,24 @@
                     ],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetMaxSize</span> { <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">7</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">width</span>), <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">height</span>),],
                 },
                 <span class="ident">Request</span>::<span class="ident">SetMinSize</span> { <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">8</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">width</span>), <span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">height</span>),],
                 },
-                <span class="ident">Request</span>::<span class="ident">SetMaximized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">9</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-                <span class="ident">Request</span>::<span class="ident">UnsetMaximized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">10</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">SetMaximized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">9</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
+                <span class="ident">Request</span>::<span class="ident">UnsetMaximized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">10</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
                 <span class="ident">Request</span>::<span class="ident">SetFullscreen</span> { <span class="ident">output</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">11</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">output</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>)),],
                 },
-                <span class="ident">Request</span>::<span class="ident">UnsetFullscreen</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">12</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
-                <span class="ident">Request</span>::<span class="ident">SetMinimized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">13</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">UnsetFullscreen</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">12</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
+                <span class="ident">Request</span>::<span class="ident">SetMinimized</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">13</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
             }
         }
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
@@ -4184,11 +4014,7 @@
     <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span> {
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;suggest a surface change\n\nThis configure event asks the client to resize its toplevel surface or\nto change its state. The configured state should not be applied\nimmediately. See xdg_surface.configure for details.\n\nThe width and height arguments specify a hint to the window\nabout how its surface should be resized in window geometry\ncoordinates. See set_window_geometry.\n\nIf the width or height arguments are zero, it means the client\nshould decide its own window dimension. This may happen when the\ncompositor needs to configure the state of the surface but doesn&#39;t\nhave any information about any previous or expected dimension.\n\nThe states listed in the event specify how the width/height\narguments should be interpreted, and possibly how it should be\ndrawn.\n\nClients must send an ack_configure in response to this event. See\nxdg_surface.configure and xdg_surface.ack_configure for details.&quot;</span>]</span>
-        <span class="ident">Configure</span> {
-            <span class="ident">width</span>: <span class="ident">i32</span>,
-            <span class="ident">height</span>: <span class="ident">i32</span>,
-            <span class="ident">states</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-        },
+        <span class="ident">Configure</span> { <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>, <span class="ident">states</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> },
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;surface wants to be closed\n\nThe close event is sent by the compositor when the user\nwants the surface to be closed. This should be equivalent to\nthe user clicking the close button in client-side decorations,\nif your application has any.\n\nThis is only a request that the user intends to close the\nwindow. The client may choose to ignore this request, or show\na dialog to ask the user to save their data, etc.&quot;</span>]</span>
         <span class="ident">Close</span>,
     }
@@ -4204,12 +4030,7 @@
                 ],
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;close&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">false</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;close&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">false</span> },
         ];
         <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -4229,7 +4050,11 @@
                 <span class="ident">Event</span>::<span class="ident">Close</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -4282,7 +4107,8 @@
                         <span class="ident">height</span>: <span class="ident">_args</span>[<span class="number">1</span>].<span class="ident">i</span>,
                         <span class="ident">states</span>: {
                             <span class="kw">let</span> <span class="ident">array</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">_args</span>[<span class="number">2</span>].<span class="ident">a</span>;
-                            ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">array</span>.<span class="ident">data</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">array</span>.<span class="ident">size</span>).<span class="ident">to_owned</span>()
+                            ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">array</span>.<span class="ident">data</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">array</span>.<span class="ident">size</span>)
+                                .<span class="ident">to_owned</span>()
                         },
                     })
                 }
@@ -4334,62 +4160,48 @@
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the parent of this surface\n\nSet the \&quot;parent\&quot; of this surface. This surface should be stacked\nabove the parent surface and all other ancestor surfaces.\n\nParent windows should be set on dialogs, toolboxes, or other\n\&quot;auxiliary\&quot; surfaces, so that the parent is raised when the dialog\nis raised.\n\nSetting a null parent for a child window removes any parent-child\nrelationship for the child. Setting a null parent for a window which\ncurrently has no parent is a no-op.\n\nIf the parent is unmapped then its children are managed as\nthough the parent of the now-unmapped parent has become the\nparent of this surface. If no parent exists for the now-unmapped\nparent then the children are managed as though they have no\nparent surface.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_parent</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">parent</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">xdg_toplevel</span>::<span class="ident">XdgToplevel</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetParent</span> {
-                <span class="ident">parent</span>: <span class="ident">parent</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">clone</span>()),
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetParent</span> { <span class="ident">parent</span>: <span class="ident">parent</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">clone</span>()) };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set surface title\n\nSet a short title for the surface.\n\nThis string may be used to identify the surface in a task bar,\nwindow list, or other user interface elements provided by the\ncompositor.\n\nThe string must be encoded in UTF-8.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_title</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">title</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetTitle</span> { <span class="ident">title</span>: <span class="ident">title</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetTitle</span> { <span class="ident">title</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set application ID\n\nSet an application identifier for the surface.\n\nThe app ID identifies the general class of applications to which\nthe surface belongs. The compositor can use this to group multiple\nsurfaces together, or to determine how to launch a new application.\n\nFor D-Bus activatable applications, the app ID is used as the D-Bus\nservice name.\n\nThe compositor shell will try to group application surfaces together\nby their app ID. As a best practice, it is suggested to select app\nID&#39;s that match the basename of the application&#39;s .desktop file.\nFor example, \&quot;org.freedesktop.FooViewer\&quot; where the .desktop file is\n\&quot;org.freedesktop.FooViewer.desktop\&quot;.\n\nLike other properties, a set_app_id request can be sent after the\nxdg_toplevel has been mapped to update the property.\n\nSee the desktop-entry specification [0] for more details on\napplication identifiers and how they relate to well-known D-Bus\nnames and .desktop files.\n\n[0] http://standards.freedesktop.org/desktop-entry-spec/&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_app_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">app_id</span>: <span class="ident">String</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetAppId</span> { <span class="ident">app_id</span>: <span class="ident">app_id</span> };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetAppId</span> { <span class="ident">app_id</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;show the window menu\n\nClients implementing client-side decorations might want to show\na context menu when right-clicking on the decorations, giving the\nuser a menu that they can use to maximize or minimize the window.\n\nThis request asks the compositor to pop up such a window menu at\nthe given position, relative to the local surface coordinates of\nthe parent surface. There are no guarantees as to what menu items\nthe window menu contains.\n\nThis request must be used in response to some sort of user action\nlike a button press, key press, or touch down event.&quot;</span>]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">show_window_menu</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span>, <span class="ident">x</span>: <span class="ident">i32</span>, <span class="ident">y</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">ShowWindowMenu</span> {
-                <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(),
-                <span class="ident">serial</span>: <span class="ident">serial</span>,
-                <span class="ident">x</span>: <span class="ident">x</span>,
-                <span class="ident">y</span>: <span class="ident">y</span>,
-            };
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">show_window_menu</span>(
+            <span class="kw-2">&amp;</span><span class="self">self</span>,
+            <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
+            <span class="ident">serial</span>: <span class="ident">u32</span>,
+            <span class="ident">x</span>: <span class="ident">i32</span>,
+            <span class="ident">y</span>: <span class="ident">i32</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> () {
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">ShowWindowMenu</span> { <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(), <span class="ident">serial</span>, <span class="ident">x</span>, <span class="ident">y</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;start an interactive move\n\nStart an interactive, user-driven move of the surface.\n\nThis request must be used in response to some sort of user action\nlike a button press, key press, or touch down event. The passed\nserial is used to determine the type of interactive move (touch,\npointer, etc).\n\nThe server may ignore move requests depending on the state of\nthe surface (e.g. fullscreen or maximized), or if the passed serial\nis no longer valid.\n\nIf triggered, the surface will lose the focus of the device\n(wl_pointer, wl_touch, etc) used for the move. It is up to the\ncompositor to visually indicate that the move is taking place, such as\nupdating a pointer cursor, during the move. There is no guarantee\nthat the device focus will return when the move is completed.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Move</span> {
-                <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(),
-                <span class="ident">serial</span>: <span class="ident">serial</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Move</span> { <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(), <span class="ident">serial</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;start an interactive resize\n\nStart a user-driven, interactive resize of the surface.\n\nThis request must be used in response to some sort of user action\nlike a button press, key press, or touch down event. The passed\nserial is used to determine the type of interactive resize (touch,\npointer, etc).\n\nThe server may ignore resize requests depending on the state of\nthe surface (e.g. fullscreen or maximized).\n\nIf triggered, the client will receive configure events with the\n\&quot;resize\&quot; state enum value and the expected sizes. See the \&quot;resize\&quot;\nenum value for more details about what is required. The client\nmust also acknowledge configure events using \&quot;ack_configure\&quot;. After\nthe resize is completed, the client will receive another \&quot;configure\&quot;\nevent without the resize state.\n\nIf triggered, the surface also will lose the focus of the device\n(wl_pointer, wl_touch, etc) used for the resize. It is up to the\ncompositor to visually indicate that the resize is taking place,\nsuch as updating a pointer cursor, during the resize. There is no\nguarantee that the device focus will return when the resize is\ncompleted.\n\nThe edges parameter specifies how the surface should be resized,\nand is one of the values of the resize_edge enum. The compositor\nmay use this information to update the surface position for\nexample when dragging the top left corner. The compositor may also\nuse this information to adapt its behavior, e.g. choose an\nappropriate cursor image.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span>, <span class="ident">edges</span>: <span class="ident">ResizeEdge</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Resize</span> {
-                <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(),
-                <span class="ident">serial</span>: <span class="ident">serial</span>,
-                <span class="ident">edges</span>: <span class="ident">edges</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Resize</span> { <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(), <span class="ident">serial</span>, <span class="ident">edges</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the maximum size\n\nSet a maximum size for the window.\n\nThe client can specify a maximum size so that the compositor does\nnot try to configure the window beyond this size.\n\nThe width and height arguments are in window geometry coordinates.\nSee xdg_surface.set_window_geometry.\n\nValues set in this way are double-buffered. They will get applied\non the next commit.\n\nThe compositor can use this information to allow or disallow\ndifferent states like maximize or fullscreen and draw accurate\nanimations.\n\nSimilarly, a tiling window manager may use this information to\nplace and resize client windows in a more effective way.\n\nThe client should not rely on the compositor to obey the maximum\nsize. The compositor may decide to ignore the values set by the\nclient and request a larger size.\n\nIf never set, or a value of zero in the request, means that the\nclient has no expected maximum size in the given dimension.\nAs a result, a client wishing to reset the maximum size\nto an unspecified state can use zero for width and height in the\nrequest.\n\nRequesting a maximum size to be smaller than the minimum size of\na surface is illegal and will result in a protocol error.\n\nThe width and height must be greater than or equal to zero. Using\nstrictly negative values for width and height will result in a\nprotocol error.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_max_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetMaxSize</span> {
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetMaxSize</span> { <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the minimum size\n\nSet a minimum size for the window.\n\nThe client can specify a minimum size so that the compositor does\nnot try to configure the window below this size.\n\nThe width and height arguments are in window geometry coordinates.\nSee xdg_surface.set_window_geometry.\n\nValues set in this way are double-buffered. They will get applied\non the next commit.\n\nThe compositor can use this information to allow or disallow\ndifferent states like maximize or fullscreen and draw accurate\nanimations.\n\nSimilarly, a tiling window manager may use this information to\nplace and resize client windows in a more effective way.\n\nThe client should not rely on the compositor to obey the minimum\nsize. The compositor may decide to ignore the values set by the\nclient and request a smaller size.\n\nIf never set, or a value of zero in the request, means that the\nclient has no expected minimum size in the given dimension.\nAs a result, a client wishing to reset the minimum size\nto an unspecified state can use zero for width and height in the\nrequest.\n\nRequesting a minimum size to be larger than the maximum size of\na surface is illegal and will result in a protocol error.\n\nThe width and height must be greater than or equal to zero. Using\nstrictly negative values for width and height will result in a\nprotocol error.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_min_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">i32</span>, <span class="ident">height</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetMinSize</span> {
-                <span class="ident">width</span>: <span class="ident">width</span>,
-                <span class="ident">height</span>: <span class="ident">height</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetMinSize</span> { <span class="ident">width</span>, <span class="ident">height</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;maximize the window\n\nMaximize the surface.\n\nAfter requesting that the surface should be maximized, the compositor\nwill respond by emitting a configure event. Whether this configure\nactually sets the window maximized is subject to compositor policies.\nThe client must then update its content, drawing in the configured\nstate. The client must also acknowledge the configure when committing\nthe new content (see ack_configure).\n\nIt is up to the compositor to decide how and where to maximize the\nsurface, for example which output and what region of the screen should\nbe used.\n\nIf the surface was already maximized, the compositor will still emit\na configure event with the \&quot;maximized\&quot; state.\n\nIf the surface is in a fullscreen state, this request has no direct\neffect. It may alter the state the surface is returned to when\nunmaximized unless overridden by the compositor.&quot;</span>]</span>
@@ -4404,9 +4216,7 @@
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;set the window as fullscreen on an output\n\nMake the surface fullscreen.\n\nAfter requesting that the surface should be fullscreened, the\ncompositor will respond by emitting a configure event. Whether the\nclient is actually put into a fullscreen state is subject to compositor\npolicies. The client must also acknowledge the configure when\ncommitting the new content (see ack_configure).\n\nThe output passed by the request indicates the client&#39;s preference as\nto which display it should be set fullscreen on. If this value is NULL,\nit&#39;s up to the compositor to choose which display will be used to map\nthis surface.\n\nIf the surface doesn&#39;t cover the whole output, the compositor will\nposition the surface in the center of the output and compensate with\nwith border fill covering the rest of the output. The content of the\nborder fill is undefined, but should be assumed to be in some way that\nattempts to blend into the surrounding area (e.g. solid black).\n\nIf the fullscreened surface is not opaque, the compositor must make\nsure that other screen content not part of the same surface tree (made\nup of subsurfaces, popups or similarly coupled surfaces) are not\nvisible below the fullscreened surface.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_fullscreen</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">output</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_output</span>::<span class="ident">WlOutput</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetFullscreen</span> {
-                <span class="ident">output</span>: <span class="ident">output</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">clone</span>()),
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">SetFullscreen</span> { <span class="ident">output</span>: <span class="ident">output</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">o</span><span class="op">|</span> <span class="ident">o</span>.<span class="ident">clone</span>()) };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;unset the window as fullscreen\n\nMake the surface no longer fullscreen.\n\nAfter requesting that the surface should be unfullscreened, the\ncompositor will respond by emitting a configure event.\nWhether this actually removes the fullscreen state of the client is\nsubject to compositor policies.\n\nMaking a surface unfullscreen sets states for the surface based on the following:\n* the state(s) it may have had before becoming fullscreen\n* any state(s) decided by the compositor\n* any state(s) requested by the client while the surface was fullscreen\n\nThe compositor may include the previous window geometry dimensions in\nthe configure event, if applicable.\n\nThe client must also acknowledge the configure when committing the new\ncontent (see ack_configure).&quot;</span>]</span>
@@ -4572,8 +4382,8 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">client</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">sys</span>::<span class="ident">common</span>::{<span class="ident">wl_argument</span>, <span class="ident">wl_array</span>, <span class="ident">wl_interface</span>, <span class="ident">wl_message</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{
-        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>,
-        <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
+        <span class="ident">smallvec</span>, <span class="ident">types_null</span>, <span class="ident">AnonymousObject</span>, <span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Message</span>,
+        <span class="ident">MessageDesc</span>, <span class="ident">MessageGroup</span>, <span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>, <span class="ident">Proxy</span>, <span class="ident">NULLPTR</span>,
     };
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u32</span>)]</span>
@@ -4599,19 +4409,11 @@
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;remove xdg_popup interface\n\nThis destroys the popup. Explicitly destroying the xdg_popup\nobject will also dismiss the popup, and unmap the surface.\n\nIf this xdg_popup is not the \&quot;topmost\&quot; popup, a protocol error\nwill be sent.\n\nThis is a destructor, once sent this object cannot be used any longer.&quot;</span>]</span>
         <span class="ident">Destroy</span>,
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;make the popup take an explicit grab\n\nThis request makes the created popup take an explicit grab. An explicit\ngrab will be dismissed when the user dismisses the popup, or when the\nclient destroys the xdg_popup. This can be done by the user clicking\noutside the surface, using the keyboard, or even locking the screen\nthrough closing the lid or a timeout.\n\nIf the compositor denies the grab, the popup will be immediately\ndismissed.\n\nThis request must be used in response to some sort of user action like a\nbutton press, key press, or touch down event. The serial number of the\nevent should be passed as &#39;serial&#39;.\n\nThe parent of a grabbing popup must either be an xdg_toplevel surface or\nanother xdg_popup with an explicit grab. If the parent is another\nxdg_popup it means that the popups are nested, with this popup now being\nthe topmost popup.\n\nNested popups must be destroyed in the reverse order they were created\nin, e.g. the only popup you are allowed to destroy at all times is the\ntopmost one.\n\nWhen compositors choose to dismiss a popup, they may dismiss every\nnested grabbing popup as well. When a compositor dismisses popups, it\nwill follow the same dismissing order as required from the client.\n\nThe parent of a grabbing popup must either be another xdg_popup with an\nactive explicit grab, or an xdg_popup or xdg_toplevel, if there are no\nexplicit grabs already taken.\n\nIf the topmost grabbing popup is destroyed, the grab will be returned to\nthe parent of the popup, if that parent previously had an explicit grab.\n\nIf the parent is a grabbing popup which has already been dismissed, this\npopup will be immediately dismissed. If the parent is a popup that did\nnot take an explicit grab, an error will be raised.\n\nDuring a popup grab, the client owning the grab will receive pointer\nand touch events for all their surfaces as normal (similar to an\n\&quot;owner-events\&quot; grab in X11 parlance), while the top most grabbing popup\nwill always have keyboard focus.&quot;</span>]</span>
-        <span class="ident">Grab</span> {
-            <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>,
-            <span class="ident">serial</span>: <span class="ident">u32</span>,
-        },
+        <span class="ident">Grab</span> { <span class="ident">seat</span>: <span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span> },
     }
     <span class="kw">impl</span> <span class="kw">super</span>::<span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">Request</span> {
         <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">super</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">true</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;destroy&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">true</span> },
             <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
                 <span class="ident">name</span>: <span class="string">&quot;grab&quot;</span>,
                 <span class="ident">since</span>: <span class="number">1</span>,
@@ -4638,7 +4440,11 @@
                 <span class="ident">Request</span>::<span class="ident">Grab</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -4648,13 +4454,9 @@
         }
         <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">sender_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Message</span> {
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
-                    <span class="ident">opcode</span>: <span class="number">0</span>,
-                    <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[],
-                },
+                <span class="ident">Request</span>::<span class="ident">Destroy</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> { <span class="ident">sender_id</span>, <span class="ident">opcode</span>: <span class="number">0</span>, <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[] },
                 <span class="ident">Request</span>::<span class="ident">Grab</span> { <span class="ident">seat</span>, <span class="ident">serial</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Message</span> {
-                    <span class="ident">sender_id</span>: <span class="ident">sender_id</span>,
+                    <span class="ident">sender_id</span>,
                     <span class="ident">opcode</span>: <span class="number">1</span>,
                     <span class="ident">args</span>: <span class="macro">smallvec</span><span class="macro">!</span>[<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="ident">seat</span>.<span class="ident">as_ref</span>().<span class="ident">id</span>()), <span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">serial</span>),],
                 },
@@ -4705,12 +4507,7 @@
                 ],
                 <span class="ident">destructor</span>: <span class="bool-val">false</span>,
             },
-            <span class="kw">super</span>::<span class="ident">MessageDesc</span> {
-                <span class="ident">name</span>: <span class="string">&quot;popup_done&quot;</span>,
-                <span class="ident">since</span>: <span class="number">1</span>,
-                <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[],
-                <span class="ident">destructor</span>: <span class="bool-val">false</span>,
-            },
+            <span class="kw">super</span>::<span class="ident">MessageDesc</span> { <span class="ident">name</span>: <span class="string">&quot;popup_done&quot;</span>, <span class="ident">since</span>: <span class="number">1</span>, <span class="ident">signature</span>: <span class="kw-2">&amp;</span>[], <span class="ident">destructor</span>: <span class="bool-val">false</span> },
         ];
         <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span>;
         <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -4730,7 +4527,11 @@
                 <span class="ident">Event</span>::<span class="ident">PopupDone</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
             }
         }
-        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u16</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+            <span class="ident">opcode</span>: <span class="ident">u16</span>,
+            <span class="ident">version</span>: <span class="ident">u32</span>,
+            <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
+        ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">opcode</span> {
                 <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
             }
@@ -4840,10 +4641,7 @@
         }
         <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;make the popup take an explicit grab\n\nThis request makes the created popup take an explicit grab. An explicit\ngrab will be dismissed when the user dismisses the popup, or when the\nclient destroys the xdg_popup. This can be done by the user clicking\noutside the surface, using the keyboard, or even locking the screen\nthrough closing the lid or a timeout.\n\nIf the compositor denies the grab, the popup will be immediately\ndismissed.\n\nThis request must be used in response to some sort of user action like a\nbutton press, key press, or touch down event. The serial number of the\nevent should be passed as &#39;serial&#39;.\n\nThe parent of a grabbing popup must either be an xdg_toplevel surface or\nanother xdg_popup with an explicit grab. If the parent is another\nxdg_popup it means that the popups are nested, with this popup now being\nthe topmost popup.\n\nNested popups must be destroyed in the reverse order they were created\nin, e.g. the only popup you are allowed to destroy at all times is the\ntopmost one.\n\nWhen compositors choose to dismiss a popup, they may dismiss every\nnested grabbing popup as well. When a compositor dismisses popups, it\nwill follow the same dismissing order as required from the client.\n\nThe parent of a grabbing popup must either be another xdg_popup with an\nactive explicit grab, or an xdg_popup or xdg_toplevel, if there are no\nexplicit grabs already taken.\n\nIf the topmost grabbing popup is destroyed, the grab will be returned to\nthe parent of the popup, if that parent previously had an explicit grab.\n\nIf the parent is a grabbing popup which has already been dismissed, this\npopup will be immediately dismissed. If the parent is a popup that did\nnot take an explicit grab, an error will be raised.\n\nDuring a popup grab, the client owning the grab will receive pointer\nand touch events for all their surfaces as normal (similar to an\n\&quot;owner-events\&quot; grab in X11 parlance), while the top most grabbing popup\nwill always have keyboard focus.&quot;</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">grab</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">seat</span>: <span class="kw-2">&amp;</span><span class="kw">super</span>::<span class="ident">wl_seat</span>::<span class="ident">WlSeat</span>, <span class="ident">serial</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> () {
-            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Grab</span> {
-                <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(),
-                <span class="ident">serial</span>: <span class="ident">serial</span>,
-            };
+            <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">Grab</span> { <span class="ident">seat</span>: <span class="ident">seat</span>.<span class="ident">clone</span>(), <span class="ident">serial</span> };
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">send</span>::<span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>(<span class="ident">msg</span>, <span class="prelude-val">None</span>);
         }
     }

@@ -277,12 +277,6 @@
 <span id="277">277</span>
 <span id="278">278</span>
 <span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::{<span class="ident">Cell</span>, <span class="ident">RefCell</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CString</span>;
@@ -335,10 +329,7 @@
 
 <span class="kw">impl</span> <span class="ident">GlobalManager</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GlobalManager</span> {
-        <span class="ident">GlobalManager</span> {
-            <span class="ident">registries</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Vec</span>::<span class="ident">new</span>())),
-            <span class="ident">globals</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-        }
+        <span class="ident">GlobalManager</span> { <span class="ident">registries</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="ident">Vec</span>::<span class="ident">new</span>())), <span class="ident">globals</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">add_global</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">F1</span>, <span class="ident">F2</span><span class="op">&gt;</span>(
@@ -362,11 +353,10 @@
                 <span class="comment">// This is done in two times to ensure the client lock is not locked during</span>
                 <span class="comment">// the callback</span>
                 <span class="kw">let</span> <span class="ident">map</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">clientconn</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="ident">client</span>.<span class="ident">data</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>() {
-                    <span class="ident">clientconn</span>
-                        .<span class="ident">map</span>
-                        .<span class="ident">lock</span>()
-                        .<span class="ident">unwrap</span>()
-                        .<span class="ident">insert_at</span>(<span class="ident">newid</span>, <span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">version</span>, <span class="ident">ObjectMeta</span>::<span class="ident">new</span>()))<span class="question-mark">?</span>;
+                    <span class="ident">clientconn</span>.<span class="ident">map</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">insert_at</span>(
+                        <span class="ident">newid</span>,
+                        <span class="ident">Object</span>::<span class="ident">from_interface</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">version</span>, <span class="ident">ObjectMeta</span>::<span class="ident">new</span>()),
+                    )<span class="question-mark">?</span>;
                     <span class="prelude-val">Some</span>(<span class="ident">clientconn</span>.<span class="ident">map</span>.<span class="ident">clone</span>())
                 } <span class="kw">else</span> {
                     <span class="prelude-val">None</span>
@@ -495,9 +485,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">self_cleanup</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">registries</span>
-            .<span class="ident">borrow_mut</span>()
-            .<span class="ident">retain</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="ident">client</span>)<span class="op">|</span> <span class="ident">client</span>.<span class="ident">alive</span>());
+        <span class="self">self</span>.<span class="ident">registries</span>.<span class="ident">borrow_mut</span>().<span class="ident">retain</span>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="ident">client</span>)<span class="op">|</span> <span class="ident">client</span>.<span class="ident">alive</span>());
     }
 }
 

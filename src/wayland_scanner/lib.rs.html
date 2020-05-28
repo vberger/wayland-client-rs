@@ -199,10 +199,6 @@
 <span id="199">199</span>
 <span id="200">200</span>
 <span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland scanner crate</span>
 <span class="doccomment">//!</span>
@@ -349,12 +345,8 @@
     }
 
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">OpenOptions</span>::<span class="ident">new</span>()
-            .<span class="ident">write</span>(<span class="bool-val">true</span>)
-            .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
-            .<span class="ident">create</span>(<span class="bool-val">true</span>)
-            .<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">target</span>)
-            .<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span>
+            <span class="ident">OpenOptions</span>::<span class="ident">new</span>().<span class="ident">write</span>(<span class="bool-val">true</span>).<span class="ident">truncate</span>(<span class="bool-val">true</span>).<span class="ident">create</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">target</span>).<span class="ident">unwrap</span>();
 
         <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">side</span> {
             <span class="ident">Side</span>::<span class="ident">Client</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">c_code_gen</span>::<span class="ident">generate_protocol_client</span>(<span class="ident">protocol</span>),

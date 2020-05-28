@@ -394,18 +394,6 @@
 <span id="394">394</span>
 <span id="395">395</span>
 <span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -514,8 +502,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">File</span>::<span class="ident">from_raw_fd</span>(<span class="ident">mem_fd</span>) };
 
         <span class="comment">// Ensure that we have the same we requested.</span>
-        <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span>[<span class="number">0</span>; <span class="ident">INITIAL_POOL_SIZE</span> <span class="kw">as</span> <span class="ident">usize</span>])
-            .<span class="ident">expect</span>(<span class="string">&quot;Write to shm fd failed&quot;</span>);
+        <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span>[<span class="number">0</span>; <span class="ident">INITIAL_POOL_SIZE</span> <span class="kw">as</span> <span class="ident">usize</span>]).<span class="ident">expect</span>(<span class="string">&quot;Write to shm fd failed&quot;</span>);
         <span class="comment">// Flush to ensure the compositor has access to the buffer when it tries to map it.</span>
         <span class="ident">file</span>.<span class="ident">flush</span>().<span class="ident">expect</span>(<span class="string">&quot;Flush on shm fd failed&quot;</span>);
 
@@ -523,14 +510,7 @@
 
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>);
 
-        <span class="ident">CursorTheme</span> {
-            <span class="ident">name</span>,
-            <span class="ident">file</span>,
-            <span class="ident">size</span>,
-            <span class="ident">pool</span>,
-            <span class="ident">pool_size</span>: <span class="ident">INITIAL_POOL_SIZE</span>,
-            <span class="ident">cursors</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
-        }
+        <span class="ident">CursorTheme</span> { <span class="ident">name</span>, <span class="ident">file</span>, <span class="ident">size</span>, <span class="ident">pool</span>, <span class="ident">pool_size</span>: <span class="ident">INITIAL_POOL_SIZE</span>, <span class="ident">cursors</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
     }
 
     <span class="doccomment">/// Retrieve a cursor from the theme.</span>
@@ -603,11 +583,7 @@
 
         <span class="kw">let</span> <span class="ident">total_duration</span> <span class="op">=</span> <span class="ident">buffers</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">el</span>.<span class="ident">delay</span>).<span class="ident">sum</span>();
 
-        <span class="ident">Cursor</span> {
-            <span class="ident">total_duration</span>,
-            <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>),
-            <span class="ident">images</span>: <span class="ident">buffers</span>,
-        }
+        <span class="ident">Cursor</span> { <span class="ident">total_duration</span>, <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>), <span class="ident">images</span>: <span class="ident">buffers</span> }
     }
 
     <span class="kw">fn</span> <span class="ident">nearest_size</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xparser</span>::<span class="ident">Image</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
@@ -645,10 +621,7 @@
             <span class="ident">millis</span> <span class="op">-</span><span class="op">=</span> <span class="ident">img</span>.<span class="ident">delay</span>;
         }
 
-        <span class="ident">FrameAndDuration</span> {
-            <span class="ident">frame_index</span>: <span class="ident">res</span>,
-            <span class="ident">frame_duration</span>: <span class="ident">millis</span>,
-        }
+        <span class="ident">FrameAndDuration</span> { <span class="ident">frame_index</span>: <span class="ident">res</span>, <span class="ident">frame_duration</span>: <span class="ident">millis</span> }
     }
 
     <span class="doccomment">/// Total number of images forming this cursor animation</span>
@@ -789,7 +762,10 @@
     <span class="kw">loop</span> {
         <span class="kw">match</span> <span class="ident">mman</span>::<span class="ident">shm_open</span>(
             <span class="ident">mem_file_handle</span>.<span class="ident">as_str</span>(),
-            <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_CREAT</span> <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_EXCL</span> <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_RDWR</span> <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_CLOEXEC</span>,
+            <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_CREAT</span>
+                <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_EXCL</span>
+                <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_RDWR</span>
+                <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_CLOEXEC</span>,
             <span class="ident">stat</span>::<span class="ident">Mode</span>::<span class="ident">S_IRUSR</span> <span class="op">|</span> <span class="ident">stat</span>::<span class="ident">Mode</span>::<span class="ident">S_IWUSR</span>,
         ) {
             <span class="prelude-val">Ok</span>(<span class="ident">fd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">mman</span>::<span class="ident">shm_unlink</span>(<span class="ident">mem_file_handle</span>.<span class="ident">as_str</span>()) {
