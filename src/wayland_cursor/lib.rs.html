@@ -392,6 +392,20 @@
 <span id="392">392</span>
 <span id="393">393</span>
 <span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -490,18 +504,31 @@
 
     <span class="doccomment">/// Create a new cursor theme, ignoring the system defaults.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_from_name</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">shm</span>: <span class="kw-2">&amp;</span><span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">WlShm</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>);
-        <span class="kw">let</span> <span class="ident">pool_size</span> <span class="op">=</span> (<span class="ident">size</span> <span class="op">*</span> <span class="ident">size</span> <span class="op">*</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">i32</span>;
+        <span class="comment">// Set some minimal cursor size to hold it. We&#39;re not using `size` argument for that,</span>
+        <span class="comment">// because the actual size that we&#39;ll use depends on theme sizes available on a system.</span>
+        <span class="comment">// The minimal size covers most common minimal theme size, which is 16.</span>
+        <span class="kw">const</span> <span class="ident">INITIAL_POOL_SIZE</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">16</span> <span class="op">*</span> <span class="number">16</span> <span class="op">*</span> <span class="number">4</span>;
+
+        <span class="comment">//  Create shm.</span>
         <span class="kw">let</span> <span class="ident">mem_fd</span> <span class="op">=</span> <span class="ident">create_shm_fd</span>().<span class="ident">expect</span>(<span class="string">&quot;Shm fd allocation failed&quot;</span>);
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">File</span>::<span class="ident">from_raw_fd</span>(<span class="ident">mem_fd</span>) };
-        <span class="kw">let</span> <span class="ident">pool</span> <span class="op">=</span> <span class="ident">shm</span>.<span class="ident">create_pool</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">pool_size</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">File</span>::<span class="ident">from_raw_fd</span>(<span class="ident">mem_fd</span>) };
+
+        <span class="comment">// Ensure that we have the same we requested.</span>
+        <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span>[<span class="number">0</span>; <span class="ident">INITIAL_POOL_SIZE</span> <span class="kw">as</span> <span class="ident">usize</span>])
+            .<span class="ident">expect</span>(<span class="string">&quot;Write to shm fd failed&quot;</span>);
+        <span class="comment">// Flush to ensure the compositor has access to the buffer when it tries to map it.</span>
+        <span class="ident">file</span>.<span class="ident">flush</span>().<span class="ident">expect</span>(<span class="string">&quot;Flush on shm fd failed&quot;</span>);
+
+        <span class="kw">let</span> <span class="ident">pool</span> <span class="op">=</span> <span class="ident">shm</span>.<span class="ident">create_pool</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">INITIAL_POOL_SIZE</span>);
+
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>);
 
         <span class="ident">CursorTheme</span> {
             <span class="ident">name</span>,
             <span class="ident">file</span>,
             <span class="ident">size</span>,
             <span class="ident">pool</span>,
-            <span class="ident">pool_size</span>,
+            <span class="ident">pool_size</span>: <span class="ident">INITIAL_POOL_SIZE</span>,
             <span class="ident">cursors</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
         }
     }
@@ -704,6 +731,7 @@
 
 <span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">CursorImageBuffer</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">WlBuffer</span>;
+
     <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">WlBuffer</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>
     }
