@@ -290,22 +290,6 @@
 <span id="290">290</span>
 <span id="291">291</span>
 <span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Bindings to the client library `libwayland-server.so`</span>
 <span class="doccomment">//!</span>
@@ -335,7 +319,8 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">wl_global_bind_func_t</span> <span class="op">=</span> <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_client</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> ();
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">wl_notify_func_t</span> <span class="op">=</span> <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_listener</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> ();
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">wl_resource_destroy_func_t</span> <span class="op">=</span> <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>) <span class="op">-</span><span class="op">&gt;</span> ();
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">wl_display_global_filter_func_t</span> <span class="op">=</span> <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_client</span>, <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_global</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">wl_display_global_filter_func_t</span> <span class="op">=</span>
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_client</span>, <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_global</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">wl_listener</span> {
@@ -493,12 +478,12 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;server&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">signal</span> {
-    <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_ptr_alignment</span>,<span class="ident">clippy</span>::<span class="ident">missing_safety_doc</span>)]</span>
+    <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">cast_ptr_alignment</span>, <span class="ident">clippy</span>::<span class="ident">missing_safety_doc</span>)]</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dlopen&quot;</span>)]</span>
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">WAYLAND_SERVER_HANDLE</span> <span class="kw">as</span> <span class="ident">WSH</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dlopen&quot;</span>))]</span>
     <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">wl_list_init</span>, <span class="ident">wl_list_insert</span>};
     <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">wl_listener</span>, <span class="ident">wl_notify_func_t</span>, <span class="ident">wl_signal</span>};
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dlopen&quot;</span>)]</span>
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">WAYLAND_SERVER_HANDLE</span> <span class="kw">as</span> <span class="ident">WSH</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">common</span>::<span class="ident">wl_list</span>;
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>;
@@ -543,58 +528,41 @@
     }
 
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">wl_signal_add</span>(<span class="ident">signal</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_signal</span>, <span class="ident">listener</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_listener</span>) {
-        <span class="macro">ffi_dispatch</span><span class="macro">!</span>(
-            <span class="ident">WSH</span>,
-            <span class="ident">wl_list_insert</span>,
-            (<span class="kw-2">*</span><span class="ident">signal</span>).<span class="ident">listener_list</span>.<span class="ident">prev</span>,
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">listener</span>).<span class="ident">link</span>
-        )
+        <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WSH</span>, <span class="ident">wl_list_insert</span>, (<span class="kw-2">*</span><span class="ident">signal</span>).<span class="ident">listener_list</span>.<span class="ident">prev</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">listener</span>).<span class="ident">link</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">wl_signal_get</span>(<span class="ident">signal</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_signal</span>, <span class="ident">notify</span>: <span class="ident">wl_notify_func_t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_listener</span> {
-        <span class="macro">list_for_each</span><span class="macro">!</span>(
-            <span class="ident">l</span>,
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">signal</span>).<span class="ident">listener_list</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_list</span>,
-            <span class="ident">wl_listener</span>,
-            <span class="ident">link</span>,
-            {
-                <span class="kw">if</span> (<span class="kw-2">*</span><span class="ident">l</span>).<span class="ident">notify</span> <span class="op">=</span><span class="op">=</span> <span class="ident">notify</span> {
-                    <span class="kw">return</span> <span class="ident">l</span>;
-                }
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">wl_signal_get</span>(
+        <span class="ident">signal</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_signal</span>,
+        <span class="ident">notify</span>: <span class="ident">wl_notify_func_t</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_listener</span> {
+        <span class="macro">list_for_each</span><span class="macro">!</span>(<span class="ident">l</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">signal</span>).<span class="ident">listener_list</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_list</span>, <span class="ident">wl_listener</span>, <span class="ident">link</span>, {
+            <span class="kw">if</span> (<span class="kw-2">*</span><span class="ident">l</span>).<span class="ident">notify</span> <span class="op">=</span><span class="op">=</span> <span class="ident">notify</span> {
+                <span class="kw">return</span> <span class="ident">l</span>;
             }
-        );
+        });
 
         <span class="ident">ptr</span>::<span class="ident">null_mut</span>()
     }
 
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">wl_signal_emit</span>(<span class="ident">signal</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_signal</span>, <span class="ident">data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) {
-        <span class="macro">list_for_each_safe</span><span class="macro">!</span>(
-            <span class="ident">l</span>,
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">signal</span>).<span class="ident">listener_list</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_list</span>,
-            <span class="ident">wl_listener</span>,
-            <span class="ident">link</span>,
-            {
-                ((<span class="kw-2">*</span><span class="ident">l</span>).<span class="ident">notify</span>)(<span class="ident">l</span>, <span class="ident">data</span>);
-            }
-        );
+        <span class="macro">list_for_each_safe</span><span class="macro">!</span>(<span class="ident">l</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">signal</span>).<span class="ident">listener_list</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_list</span>, <span class="ident">wl_listener</span>, <span class="ident">link</span>, {
+            ((<span class="kw-2">*</span><span class="ident">l</span>).<span class="ident">notify</span>)(<span class="ident">l</span>, <span class="ident">data</span>);
+        });
     }
 
     <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
     <span class="kw">struct</span> <span class="ident">ListenerWithUserData</span> {
         <span class="ident">listener</span>: <span class="ident">wl_listener</span>,
-        <span class="ident">user_data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>
+        <span class="ident">user_data</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rust_listener_create</span>(<span class="ident">notify</span>: <span class="ident">wl_notify_func_t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_listener</span> {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">into_raw</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ListenerWithUserData</span> {
             <span class="ident">listener</span>: <span class="ident">wl_listener</span> {
-                <span class="ident">link</span>: <span class="ident">wl_list</span> {
-                    <span class="ident">prev</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
-                    <span class="ident">next</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>()
-                },
-                <span class="ident">notify</span>
+                <span class="ident">link</span>: <span class="ident">wl_list</span> { <span class="ident">prev</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>(), <span class="ident">next</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>() },
+                <span class="ident">notify</span>,
             },
-            <span class="ident">user_data</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>()
+            <span class="ident">user_data</span>: <span class="ident">ptr</span>::<span class="ident">null_mut</span>(),
         }));
 
         <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> (<span class="kw-2">*</span><span class="ident">data</span>).<span class="ident">listener</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_listener</span> }
@@ -616,4 +584,4 @@
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "wayland_sys";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "wayland_sys";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>

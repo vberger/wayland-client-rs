@@ -310,6 +310,14 @@
 <span id="310">310</span>
 <span id="311">311</span>
 <span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Client-side Wayland connector</span>
 <span class="doccomment">//!</span>
@@ -461,6 +469,7 @@
 
 <span class="kw">mod</span> <span class="ident">anonymous_object</span> {
     <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Interface</span>, <span class="ident">NoMessage</span>, <span class="ident">Proxy</span>};
+    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
 
     <span class="doccomment">/// Anonymous interface</span>
     <span class="doccomment">///</span>
@@ -475,7 +484,7 @@
         <span class="kw">const</span> <span class="ident">NAME</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;&lt;anonymous&gt;&quot;</span>;
         <span class="kw">const</span> <span class="ident">VERSION</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">fn</span> <span class="ident">c_interface</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">crate</span>::<span class="ident">sys</span>::<span class="ident">common</span>::<span class="ident">wl_interface</span> {
-            ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null</span>()
+            <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null</span>()
         }
     }
 
@@ -497,9 +506,15 @@
             <span class="ident">value</span>.<span class="number">0</span>
         }
     }
+    <span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">AnonymousObject</span> {
+        <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+            <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>))
+        }
+    }
 }
 
 <span class="doccomment">/// Enum of possible argument in an event</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Argument</span> {
     <span class="doccomment">/// i32</span>
     <span class="ident">Int</span>(<span class="ident">i32</span>),
@@ -520,6 +535,7 @@
 }
 
 <span class="doccomment">/// An generic event</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RawEvent</span> {
     <span class="doccomment">/// Interface of the associated object</span>
     <span class="kw">pub</span> <span class="ident">interface</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
@@ -624,4 +640,4 @@
     };
 );
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "wayland_client";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "wayland_client";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>

@@ -884,6 +884,17 @@
 <span id="884">884</span>
 <span id="885">885</span>
 <span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
+<span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
@@ -1309,7 +1320,11 @@
                             }
                             <span class="ident">Type</span>::<span class="ident">Fd</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">val</span>),
                             <span class="ident">Type</span>::<span class="ident">Object</span> <span class="op">=</span><span class="op">&gt;</span> {
-                                <span class="kw">let</span> <span class="ident">map_lookup</span> <span class="op">=</span> <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>());
+                                <span class="kw">let</span> <span class="ident">map_lookup</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">side</span> <span class="op">=</span><span class="op">=</span> <span class="ident">Side</span>::<span class="ident">Client</span> {
+                                    <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">map</span>.<span class="ident">get_or_dead</span>(<span class="ident">val</span>).<span class="ident">into</span>())
+                                } <span class="kw">else</span> {
+                                    <span class="macro">quote</span><span class="macro">!</span>(<span class="ident">map</span>.<span class="ident">get</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(())<span class="question-mark">?</span>.<span class="ident">into</span>())
+                                };
                                 <span class="kw">if</span> <span class="ident">arg</span>.<span class="ident">allow_null</span> {
                                     <span class="macro">quote</span><span class="macro">!</span>(<span class="kw">if</span> <span class="ident">val</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(#<span class="ident">map_lookup</span>) })
                                 } <span class="kw">else</span> {
@@ -1488,6 +1503,7 @@
     };
 
     <span class="macro">quote</span><span class="macro">!</span> {
+        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
         <span class="attribute">#[<span class="ident">non_exhaustive</span>]</span>
         <span class="kw">pub</span> <span class="kw">enum</span> #<span class="ident">name</span> {
             #(#<span class="ident">variants</span>,)<span class="op">*</span>
@@ -1569,6 +1585,12 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: #<span class="ident">name</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
                 <span class="ident">value</span>.<span class="number">0</span>
+            }
+        }
+
+        <span class="kw">impl</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> #<span class="ident">name</span> {
+            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>))
             }
         }
 
@@ -1772,4 +1794,4 @@
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "wayland_scanner";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "wayland_scanner";</script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
