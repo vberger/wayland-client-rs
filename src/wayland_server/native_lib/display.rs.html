@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `wayland-server/src/native_lib/display.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>display.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../wayland_server/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `wayland-server/src/native_lib/display.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>display.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../wayland_server/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -231,7 +232,7 @@
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">DisplayInner</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_display</span>,
-    <span class="ident">rust_globals</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_global</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">rust_globals</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_global</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">DisplayInner</span> {
@@ -247,7 +248,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">DisplayInner</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DisplayInner</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">DisplayInner</span> {
         <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_display_create</span>,);
@@ -266,14 +267,14 @@
                 <span class="ident">wl_display_set_global_filter</span>,
                 <span class="ident">ptr</span>,
                 <span class="kw">super</span>::<span class="ident">globals</span>::<span class="ident">global_filter</span>,
-                <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">rust_globals</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_global</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>
+                <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">rust_globals</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">RefCell</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_global</span><span class="op">&gt;&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>
             );
 
             <span class="ident">DisplayInner</span> { <span class="ident">ptr</span>, <span class="ident">rust_globals</span> }
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_display</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_display</span> {
         <span class="self">self</span>.<span class="ident">ptr</span>
     }
 
@@ -282,11 +283,11 @@
         <span class="ident">version</span>: <span class="ident">u32</span>,
         <span class="ident">implementation</span>: <span class="ident">F1</span>,
         <span class="ident">filter</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">F2</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GlobalInner</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="ident">GlobalInner</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span>,
         <span class="ident">F1</span>: <span class="ident">FnMut</span>(<span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">u32</span>, <span class="kw">crate</span>::<span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">F2</span>: <span class="ident">FnMut</span>(<span class="ident">ClientInner</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        <span class="ident">F2</span>: <span class="ident">FnMut</span>(<span class="ident">ClientInner</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">GlobalData</span>::<span class="ident">new</span>(<span class="ident">implementation</span>, <span class="ident">filter</span>));
         <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
@@ -308,7 +309,7 @@
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">flush_clients</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>) {
-        <span class="kw">super</span>::<span class="ident">with_dispatch_data</span>(<span class="ident">data</span>, <span class="op">|</span><span class="op">|</span> {
+        <span class="kw">super</span>::<span class="ident">with_dispatch_data</span>(<span class="ident">data</span>, <span class="op">||</span> {
             <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
             <span class="kw">unsafe</span> { <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_display_flush_clients</span>, <span class="self">self</span>.<span class="ident">ptr</span>) };
         })
@@ -318,8 +319,8 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">timeout</span>: <span class="ident">i32</span>,
         <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">with_dispatch_data</span>(<span class="ident">data</span>, <span class="op">|</span><span class="op">|</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">with_dispatch_data</span>(<span class="ident">data</span>, <span class="op">||</span> {
             <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
             <span class="kw">unsafe</span> {
                 <span class="kw">let</span> <span class="ident">evl_ptr</span> <span class="op">=</span>
@@ -335,27 +336,27 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_poll_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawFd</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_poll_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">RawFd</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">evl_ptr</span> <span class="op">=</span> <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_display_get_event_loop</span>, <span class="self">self</span>.<span class="ident">ptr</span>);
             <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_event_loop_get_fd</span>, <span class="ident">evl_ptr</span>)
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">add_socket</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">add_socket</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
         <span class="kw">let</span> <span class="ident">cname</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">name</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">s</span>.<span class="ident">as_ref</span>().<span class="ident">as_bytes</span>())) {
-            <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">n</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">n</span>),
-            <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">n</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">n</span>),
+            <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="kw">_</span>)) <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">new</span>(
                     <span class="ident">ErrorKind</span>::<span class="ident">InvalidInput</span>,
                     <span class="string">&quot;nulls are not allowed in socket name&quot;</span>,
                 ));
             }
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
         };
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="macro">ffi_dispatch</span><span class="macro">!</span>(
@@ -365,12 +366,12 @@
                 <span class="ident">cname</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">as_ptr</span>()).<span class="ident">unwrap_or</span>(<span class="ident">ptr</span>::<span class="ident">null</span>())
             )
         };
-        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
+        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
             <span class="comment">// lets try to be helpful</span>
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">socket_name</span> <span class="op">=</span> <span class="ident">get_runtime_dir</span>()<span class="question-mark">?</span>;
             <span class="kw">match</span> <span class="ident">name</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">socket_name</span>.<span class="ident">push</span>(<span class="ident">s</span>.<span class="ident">as_ref</span>()),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">socket_name</span>.<span class="ident">push</span>(<span class="string">&quot;wayland-0&quot;</span>),
+                <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> <span class="ident">socket_name</span>.<span class="ident">push</span>(<span class="ident">s</span>.<span class="ident">as_ref</span>()),
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">socket_name</span>.<span class="ident">push</span>(<span class="string">&quot;wayland-0&quot;</span>),
             }
             <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">new</span>(
                 <span class="ident">ErrorKind</span>::<span class="ident">PermissionDenied</span>,
@@ -381,7 +382,7 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">add_socket_auto</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">add_socket_auto</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span>
             <span class="kw">unsafe</span> { <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_display_add_socket_auto</span>, <span class="self">self</span>.<span class="ident">ptr</span>) };
@@ -398,10 +399,10 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">add_socket_fd</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">add_socket_fd</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_display_add_socket_fd</span>, <span class="self">self</span>.<span class="ident">ptr</span>, <span class="ident">fd</span>);
-        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else</span> {
             <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">InvalidInput</span>, <span class="string">&quot;invalid socket fd&quot;</span>))
@@ -412,8 +413,8 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">fd</span>: <span class="ident">RawFd</span>,
         <span class="ident">data</span>: <span class="kw">crate</span>::<span class="ident">DispatchData</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ClientInner</span> {
-        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">with_dispatch_data</span>(<span class="ident">data</span>, <span class="op">|</span><span class="op">|</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">ClientInner</span> {
+        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">with_dispatch_data</span>(<span class="ident">data</span>, <span class="op">||</span> {
             <span class="kw">let</span> <span class="ident">_c_safety_guard</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">C_SAFETY</span>.<span class="ident">lock</span>();
             <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_SERVER_HANDLE</span>, <span class="ident">wl_client_create</span>, <span class="self">self</span>.<span class="ident">ptr</span>, <span class="ident">fd</span>)
         });

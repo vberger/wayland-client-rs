@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["wayland_cursor"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/ops/index/trait.Index.html\" title=\"trait core::ops::index::Index\">Index</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/nightly/std/primitive.usize.html\">usize</a>&gt; for <a class=\"struct\" href=\"wayland_cursor/struct.Cursor.html\" title=\"struct wayland_cursor::Cursor\">Cursor</a>","synthetic":false,"types":["wayland_cursor::Cursor"]}];
+implementors["wayland_cursor"] = [{"text":"impl Index&lt;usize&gt; for Cursor","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

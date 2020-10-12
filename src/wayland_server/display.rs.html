@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `wayland-server/src/display.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>display.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../wayland_server/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `wayland-server/src/display.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>display.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../wayland_server/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -279,7 +280,7 @@
     <span class="doccomment">/// Note that at this point, your server is not yet ready to receive connections,</span>
     <span class="doccomment">/// your need to add listening sockets using the `add_socket*` methods.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">new_without_default</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Display</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">Display</span> {
         <span class="ident">Display</span> { <span class="ident">inner</span>: <span class="ident">DisplayInner</span>::<span class="ident">new</span>() }
     }
 
@@ -294,13 +295,13 @@
     <span class="doccomment">/// The version specified is the **highest supported version**, you must</span>
     <span class="doccomment">/// be able to handle clients that choose to instantiate this global with</span>
     <span class="doccomment">/// a lower version number.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_global</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">filter</span>: <span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_global</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">filter</span>: <span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span>,
         <span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">u32</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
         <span class="macro">assert</span><span class="macro">!</span>(
-            <span class="ident">version</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">I</span>::<span class="ident">VERSION</span>,
+            <span class="ident">version</span> <span class="op">&lt;=</span> <span class="ident">I</span>::<span class="ident">VERSION</span>,
             <span class="string">&quot;Cannot create global {} with version {}, maximum protocol version is {}.&quot;</span>,
             <span class="ident">I</span>::<span class="ident">NAME</span>,
             <span class="ident">version</span>,
@@ -309,7 +310,7 @@
         <span class="ident">Global</span>::<span class="ident">create</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">create_global</span>(
             <span class="ident">version</span>,
             <span class="kw">move</span> <span class="op">|</span><span class="ident">main</span>, <span class="ident">id</span>, <span class="ident">ddata</span><span class="op">|</span> <span class="ident">filter</span>.<span class="ident">send</span>((<span class="ident">main</span>, <span class="ident">id</span>).<span class="ident">into</span>(), <span class="ident">ddata</span>),
-            <span class="prelude-val">None</span>::<span class="op">&lt;</span><span class="kw">fn</span>(<span class="kw">_</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span><span class="op">&gt;</span>,
+            <span class="prelude-val">None</span>::<span class="op">&lt;</span><span class="kw">fn</span>(<span class="kw">_</span>) <span class="op">-&gt;</span> <span class="ident">bool</span><span class="op">&gt;</span>,
         ))
     }
 
@@ -332,14 +333,14 @@
         <span class="ident">version</span>: <span class="ident">u32</span>,
         <span class="ident">filter</span>: <span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>,
         <span class="kw-2">mut</span> <span class="ident">client_filter</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
+    ) <span class="op">-&gt;</span> <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span>,
         <span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">u32</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">Client</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">Client</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
         <span class="macro">assert</span><span class="macro">!</span>(
-            <span class="ident">version</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">I</span>::<span class="ident">VERSION</span>,
+            <span class="ident">version</span> <span class="op">&lt;=</span> <span class="ident">I</span>::<span class="ident">VERSION</span>,
             <span class="string">&quot;Cannot create global {} with version {}, maximum protocol version is {}.&quot;</span>,
             <span class="ident">I</span>::<span class="ident">NAME</span>,
             <span class="ident">version</span>,
@@ -387,7 +388,7 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">timeout</span>: <span class="ident">std</span>::<span class="ident">time</span>::<span class="ident">Duration</span>,
         <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">DispatchData</span>::<span class="ident">wrap</span>(<span class="ident">data</span>);
         <span class="kw">let</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">timeout</span>.<span class="ident">as_millis</span>();
         <span class="kw">let</span> <span class="ident">clamped_timeout</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ms</span> <span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">i32</span>::<span class="ident">MAX</span> <span class="kw">as</span> <span class="ident">u128</span> { <span class="ident">std</span>::<span class="ident">i32</span>::<span class="ident">MAX</span> } <span class="kw">else</span> { <span class="ident">ms</span> <span class="kw">as</span> <span class="ident">i32</span> };
@@ -401,7 +402,7 @@
     <span class="doccomment">/// you call `dispatch` with a timeout of 0.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// You should not use this file descriptor for any other purpose than monitoring it.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_poll_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawFd</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_poll_fd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">RawFd</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_poll_fd</span>()
     }
 }
@@ -420,7 +421,7 @@
     <span class="doccomment">/// Errors if `name` contains an interior null, or if `XDG_RUNTIME_DIR` is not set,</span>
     <span class="doccomment">/// or if specified could not be bound (either it is already used or the compositor</span>
     <span class="doccomment">/// does not have the rights to create it).</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_socket</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_socket</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span>,
     {
@@ -436,7 +437,7 @@
     <span class="doccomment">/// `0 &lt;= $d &lt; 32` and the first available one is used.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Errors if `XDG_RUNTIME_DIR` is not set, or all 32 names are already in use.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_socket_auto</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_socket_auto</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">OsString</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">add_socket_auto</span>()
     }
 
@@ -448,7 +449,7 @@
     <span class="doccomment">/// The fd must be properly set to CLOEXEC and bound to a socket file</span>
     <span class="doccomment">/// with both bind() and listen() already called. An error is returned</span>
     <span class="doccomment">/// otherwise.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_socket_from</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">socket</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_socket_from</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">socket</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">IntoRawFd</span>,
     {
@@ -468,7 +469,7 @@
     <span class="doccomment">/// The fd must be properly set to CLOEXEC and bound to a socket file</span>
     <span class="doccomment">/// with both bind() and listen() already called. An error is returned</span>
     <span class="doccomment">/// otherwise.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">add_socket_fd</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">add_socket_fd</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>) <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">add_socket_fd</span>(<span class="ident">fd</span>)
     }
 
@@ -477,7 +478,7 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The provided file descriptor must be associated to a valid client connection.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">create_client</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Client</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">create_client</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fd</span>: <span class="ident">RawFd</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">Client</span> {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">DispatchData</span>::<span class="ident">wrap</span>(<span class="ident">data</span>);
         <span class="ident">Client</span>::<span class="ident">make</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">create_client</span>(<span class="ident">fd</span>, <span class="ident">data</span>))
     }
@@ -486,15 +487,15 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_system_lib&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Display</span> {
     <span class="doccomment">/// Retrieve a pointer from the C lib to this `wl_display`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">c_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_display</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">c_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_display</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">ptr</span>()
     }
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_runtime_dir</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_runtime_dir</span>() <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">env</span>::<span class="ident">var_os</span>(<span class="string">&quot;XDG_RUNTIME_DIR&quot;</span>) {
-        <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">s</span>.<span class="ident">into</span>()),
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">NotFound</span>, <span class="string">&quot;XDG_RUNTIME_DIR env variable is not set&quot;</span>)),
+        <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">s</span>.<span class="ident">into</span>()),
+        <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">new</span>(<span class="ident">ErrorKind</span>::<span class="ident">NotFound</span>, <span class="string">&quot;XDG_RUNTIME_DIR env variable is not set&quot;</span>)),
     }
 }
 </pre></div>
