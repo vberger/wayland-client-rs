@@ -18,6 +18,11 @@ assigned.</p>
 or committed is a client error, and any attempts by a client to attach
 or manipulate a buffer prior to the first layer_surface.configure call
 must also be treated as errors.</p>
+<p>After creating a layer_surface object and setting it up, the client
+must perform an initial commit without any buffer attached.
+The compositor will reply with a layer_surface.configure event.
+The client must acknowledge it and is then allowed to attach a buffer
+to map the surface.</p>
 <p>You may pass NULL for output to allow the compositor to decide which
 output to use. Generally this will be the one that the user most
 recently interacted with.</p>

@@ -6,6 +6,12 @@ environment.</p>
 <p>Layer surface state (layer, size, anchor, exclusive zone,
 margin, interactivity) is double-buffered, and will be applied at the
 time wl_surface.commit of the corresponding wl_surface is called.</p>
+<p>Attaching a null buffer to a layer surface unmaps it.</p>
+<p>Unmapping a layer_surface means that the surface cannot be shown by the
+compositor until it is explicitly mapped again. The layer_surface
+returns to the state it had right after layer_shell.get_layer_surface.
+The client can re-map the surface by performing a commit without any
+buffer attached, waiting for a configure event and handling it as usual.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table><tr class='module-item'><td><a class="struct" href="struct.Anchor.html" title='wayland_protocols::wlr::unstable::layer_shell::v1::server::zwlr_layer_surface_v1::Anchor struct'>Anchor</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="struct" href="struct.ZwlrLayerSurfaceV1.html" title='wayland_protocols::wlr::unstable::layer_shell::v1::server::zwlr_layer_surface_v1::ZwlrLayerSurfaceV1 struct'>ZwlrLayerSurfaceV1</a></td><td class='docblock-short'></td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table><tr class='module-item'><td><a class="enum" href="enum.Error.html" title='wayland_protocols::wlr::unstable::layer_shell::v1::server::zwlr_layer_surface_v1::Error enum'>Error</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="enum" href="enum.Event.html" title='wayland_protocols::wlr::unstable::layer_shell::v1::server::zwlr_layer_surface_v1::Event enum'>Event</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="enum" href="enum.Request.html" title='wayland_protocols::wlr::unstable::layer_shell::v1::server::zwlr_layer_surface_v1::Request enum'>Request</a></td><td class='docblock-short'></td></tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
