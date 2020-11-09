@@ -385,20 +385,6 @@
 <span id="384">384</span>
 <span id="385">385</span>
 <span id="386">386</span>
-<span id="387">387</span>
-<span id="388">388</span>
-<span id="389">389</span>
-<span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
-<span id="393">393</span>
-<span id="394">394</span>
-<span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -441,23 +427,28 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">env</span>,
-    <span class="ident">fs</span>::<span class="ident">File</span>,
-    <span class="ident">io</span>::{<span class="ident">Read</span>, <span class="ident">Seek</span>, <span class="ident">SeekFrom</span>, <span class="ident">Write</span>},
-    <span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">Index</span>},
-    <span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::{<span class="ident">AsRawFd</span>, <span class="ident">FromRawFd</span>},
-};
-<span class="kw">use</span> <span class="ident">wayland_client</span>::{
-    <span class="ident">protocol</span>::{
-        <span class="ident">wl_buffer</span>::<span class="ident">WlBuffer</span>,
-        <span class="ident">wl_shm</span>::{<span class="ident">Format</span>, <span class="ident">WlShm</span>},
-        <span class="ident">wl_shm_pool</span>::<span class="ident">WlShmPool</span>,
-    },
-    <span class="ident">Attached</span>, <span class="ident">Main</span>,
-};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">IoError</span>, <span class="ident">Read</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">IoResult</span>, <span class="ident">Seek</span>, <span class="ident">SeekFrom</span>, <span class="ident">Write</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">Index</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::{<span class="ident">AsRawFd</span>, <span class="ident">FromRawFd</span>, <span class="ident">RawFd</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::{<span class="ident">SystemTime</span>, <span class="ident">UNIX_EPOCH</span>};
+
+<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">errno</span>::<span class="ident">Errno</span>;
+<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">fcntl</span>;
+<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">sys</span>::{<span class="ident">mman</span>, <span class="ident">stat</span>};
+<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">unistd</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
+<span class="kw">use</span> {<span class="ident">nix</span>::<span class="ident">sys</span>::<span class="ident">memfd</span>, <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>};
+
+<span class="kw">use</span> <span class="ident">wayland_client</span>::<span class="ident">protocol</span>::<span class="ident">wl_buffer</span>::<span class="ident">WlBuffer</span>;
+<span class="kw">use</span> <span class="ident">wayland_client</span>::<span class="ident">protocol</span>::<span class="ident">wl_shm</span>::{<span class="ident">Format</span>, <span class="ident">WlShm</span>};
+<span class="kw">use</span> <span class="ident">wayland_client</span>::<span class="ident">protocol</span>::<span class="ident">wl_shm_pool</span>::<span class="ident">WlShmPool</span>;
+<span class="kw">use</span> <span class="ident">wayland_client</span>::{<span class="ident">Attached</span>, <span class="ident">Main</span>};
+
 <span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">parser</span> <span class="kw">as</span> <span class="ident">xparser</span>;
 <span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">CursorTheme</span> <span class="kw">as</span> <span class="ident">XCursorTheme</span>;
+<span class="kw">use</span> <span class="ident">xparser</span>::<span class="ident">Image</span> <span class="kw">as</span> <span class="ident">XCursorImage</span>;
 
 <span class="doccomment">/// Represents a cursor theme loaded from the system.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CursorTheme</span> {
@@ -524,13 +515,11 @@
     <span class="doccomment">/// This method returns `None` if this cursor is not provided</span>
     <span class="doccomment">/// either by the theme, or by one of its parents.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_cursor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Cursor</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">cur</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cursors</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">i</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">name</span>);
-
-        <span class="kw">match</span> <span class="ident">cur</span> {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">cursors</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">cursor</span><span class="op">|</span> <span class="ident">cursor</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">name</span>) {
             <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">cursors</span>[<span class="ident">i</span>]),
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
-                <span class="kw">let</span> <span class="ident">cur</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">load_cursor</span>(<span class="ident">name</span>, <span class="self">self</span>.<span class="ident">size</span>)<span class="question-mark">?</span>;
-                <span class="self">self</span>.<span class="ident">cursors</span>.<span class="ident">push</span>(<span class="ident">cur</span>);
+                <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">load_cursor</span>(<span class="ident">name</span>, <span class="self">self</span>.<span class="ident">size</span>)<span class="question-mark">?</span>;
+                <span class="self">self</span>.<span class="ident">cursors</span>.<span class="ident">push</span>(<span class="ident">cursor</span>);
                 <span class="self">self</span>.<span class="ident">cursors</span>.<span class="ident">iter</span>().<span class="ident">last</span>()
             }
         }
@@ -550,8 +539,7 @@
             <span class="ident">xparser</span>::<span class="ident">parse_xcursor</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)<span class="question-mark">?</span>
         };
 
-        <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">images</span>, <span class="ident">size</span>);
-        <span class="prelude-val">Some</span>(<span class="ident">cursor</span>)
+        <span class="prelude-val">Some</span>(<span class="ident">Cursor</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">images</span>, <span class="ident">size</span>))
     }
 
     <span class="doccomment">/// Grow the wl_shm_pool this theme is stored on.</span>
@@ -579,37 +567,36 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Each of the provided images will be written into `theme`.</span>
     <span class="doccomment">/// This will also grow `theme.pool` if necessary.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xparser</span>::<span class="ident">Image</span>], <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffers</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">images</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">nearest_size</span>(<span class="ident">size</span>, <span class="ident">images</span>);
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">XCursorImage</span>], <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total_duration</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="ident">images</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CursorImageBuffer</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">nearest_images</span>(<span class="ident">size</span>, <span class="ident">images</span>)
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">image</span><span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">CursorImageBuffer</span>::<span class="ident">new</span>(<span class="ident">theme</span>, <span class="ident">image</span>);
+                <span class="ident">total_duration</span> <span class="op">+=</span> <span class="ident">buffer</span>.<span class="ident">delay</span>;
 
-        <span class="ident">images</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">el</span>.<span class="ident">width</span> <span class="op">==</span> <span class="ident">size</span> <span class="op">&amp;&amp;</span> <span class="ident">el</span>.<span class="ident">height</span> <span class="op">==</span> <span class="ident">size</span>)
-            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">buffers</span>.<span class="ident">push</span>(<span class="ident">CursorImageBuffer</span>::<span class="ident">new</span>(<span class="ident">theme</span>, <span class="ident">el</span>)));
+                <span class="ident">buffer</span>
+            })
+            .<span class="ident">collect</span>();
 
-        <span class="kw">let</span> <span class="ident">total_duration</span> <span class="op">=</span> <span class="ident">buffers</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">el</span><span class="op">|</span> <span class="ident">el</span>.<span class="ident">delay</span>).<span class="ident">sum</span>();
-
-        <span class="ident">Cursor</span> { <span class="ident">total_duration</span>, <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>), <span class="ident">images</span>: <span class="ident">buffers</span> }
+        <span class="ident">Cursor</span> { <span class="ident">total_duration</span>, <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>), <span class="ident">images</span> }
     }
 
-    <span class="kw">fn</span> <span class="ident">nearest_size</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">xparser</span>::<span class="ident">Image</span>]) <span class="op">-&gt;</span> <span class="ident">u32</span> {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">size</span> <span class="kw">as</span> <span class="ident">i32</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_sizes</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+    <span class="kw">fn</span> <span class="ident">nearest_images</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">XCursorImage</span>]) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">XCursorImage</span><span class="op">&gt;</span> {
+        <span class="comment">// Since cursor could have shapes other than squares we find nearest image by its square,</span>
+        <span class="comment">// instead of side size.</span>
+        <span class="kw">let</span> <span class="ident">target_square</span> <span class="op">=</span> (<span class="ident">size</span> <span class="op">*</span> <span class="ident">size</span>) <span class="kw">as</span> <span class="ident">i32</span>;
 
-        <span class="kw">for</span> <span class="ident">img</span> <span class="kw">in</span> <span class="ident">images</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">all_sizes</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span>(<span class="ident">img</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>)) {
-                <span class="ident">all_sizes</span>.<span class="ident">push</span>(<span class="ident">img</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>);
-            }
-        }
+        <span class="kw">let</span> <span class="ident">nearest_image</span> <span class="op">=</span> <span class="ident">images</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">min_by_key</span>(<span class="op">|</span><span class="ident">image</span><span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">image_square</span> <span class="op">=</span> (<span class="ident">image</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">image</span>.<span class="ident">height</span>) <span class="kw">as</span> <span class="ident">i32</span>;
+                (<span class="ident">target_square</span> <span class="op">-</span> <span class="ident">image_square</span>).<span class="ident">abs</span>()
+            })
+            .<span class="ident">unwrap</span>();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">min</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">width</span>) <span class="kw">in</span> <span class="ident">all_sizes</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> (<span class="ident">width</span> <span class="op">-</span> <span class="ident">size</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> (<span class="ident">all_sizes</span>[<span class="ident">min</span>] <span class="op">-</span> <span class="ident">size</span>).<span class="ident">abs</span>() {
-                <span class="ident">min</span> <span class="op">=</span> <span class="ident">i</span>;
-            }
-        }
-        <span class="ident">all_sizes</span>[<span class="ident">min</span>] <span class="kw">as</span> <span class="ident">u32</span>
+        <span class="ident">images</span>.<span class="ident">iter</span>().<span class="ident">filter</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">image</span><span class="op">|</span> {
+            <span class="ident">image</span>.<span class="ident">width</span> <span class="op">==</span> <span class="ident">nearest_image</span>.<span class="ident">width</span> <span class="op">&amp;&amp;</span> <span class="ident">image</span>.<span class="ident">height</span> <span class="op">==</span> <span class="ident">nearest_image</span>.<span class="ident">height</span>
+        })
     }
 
     <span class="doccomment">/// Given a time, calculate which frame to show, and how much time remains until the next frame.</span>
@@ -666,7 +653,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function appends the pixels of the image to the provided file,</span>
     <span class="doccomment">/// and constructs a wl_buffer on that data.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">image</span>: <span class="kw-2">&amp;</span><span class="ident">xparser</span>::<span class="ident">Image</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">image</span>: <span class="kw-2">&amp;</span><span class="ident">XCursorImage</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">image</span>.<span class="ident">pixels_rgba</span>;
         <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">theme</span>.<span class="ident">file</span>.<span class="ident">seek</span>(<span class="ident">SeekFrom</span>::<span class="ident">End</span>(<span class="number">0</span>)).<span class="ident">unwrap</span>();
 
@@ -730,26 +717,11 @@
     <span class="kw">pub</span> <span class="ident">frame_duration</span>: <span class="ident">u32</span>,
 }
 
-<span class="doccomment">/// Create a shared file descriptor in memory</span>
-<span class="kw">use</span> {
-    <span class="ident">nix</span>::{
-        <span class="ident">errno</span>::<span class="ident">Errno</span>,
-        <span class="ident">fcntl</span>,
-        <span class="ident">sys</span>::{<span class="ident">mman</span>, <span class="ident">stat</span>},
-        <span class="ident">unistd</span>,
-    },
-    <span class="ident">std</span>::{
-        <span class="ident">io</span>,
-        <span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::<span class="ident">RawFd</span>,
-        <span class="ident">time</span>::{<span class="ident">SystemTime</span>, <span class="ident">UNIX_EPOCH</span>},
-    },
-};
-
-<span class="kw">fn</span> <span class="ident">create_shm_fd</span>() <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawFd</span><span class="op">&gt;</span> {
-    <span class="comment">// Only try memfd on linux</span>
+<span class="doccomment">/// Create a shared file descriptor in memory.</span>
+<span class="kw">fn</span> <span class="ident">create_shm_fd</span>() <span class="op">-&gt;</span> <span class="ident">IoResult</span><span class="op">&lt;</span><span class="ident">RawFd</span><span class="op">&gt;</span> {
+    <span class="comment">// Only try memfd on linux.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
     <span class="kw">loop</span> {
-        <span class="kw">use</span> {<span class="ident">nix</span>::<span class="ident">sys</span>::<span class="ident">memfd</span>, <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>};
         <span class="kw">match</span> <span class="ident">memfd</span>::<span class="ident">memfd_create</span>(
             <span class="ident">CStr</span>::<span class="ident">from_bytes_with_nul</span>(<span class="string">b&quot;wayland-cursor-rs\0&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">memfd</span>::<span class="ident">MemFdCreateFlag</span>::<span class="ident">MFD_CLOEXEC</span>,
@@ -757,12 +729,12 @@
             <span class="prelude-val">Ok</span>(<span class="ident">fd</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">fd</span>),
             <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">EINTR</span>)) <span class="op">=&gt;</span> <span class="kw">continue</span>,
             <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">ENOSYS</span>)) <span class="op">=&gt;</span> <span class="kw">break</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io</span>::<span class="ident">Error</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
+            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(<span class="ident">err</span>),
         }
     }
 
-    <span class="comment">// Fallback to using shm_open</span>
+    <span class="comment">// Fallback to using shm_open.</span>
     <span class="kw">let</span> <span class="ident">sys_time</span> <span class="op">=</span> <span class="ident">SystemTime</span>::<span class="ident">now</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mem_file_handle</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(
         <span class="string">&quot;/wayland-cursor-rs-{}&quot;</span>,
@@ -780,8 +752,8 @@
             <span class="prelude-val">Ok</span>(<span class="ident">fd</span>) <span class="op">=&gt;</span> <span class="kw">match</span> <span class="ident">mman</span>::<span class="ident">shm_unlink</span>(<span class="ident">mem_file_handle</span>.<span class="ident">as_str</span>()) {
                 <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">fd</span>),
                 <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">match</span> <span class="ident">unistd</span>::<span class="ident">close</span>(<span class="ident">fd</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io</span>::<span class="ident">Error</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
-                    <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io</span>::<span class="ident">Error</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
+                    <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
+                    <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
                     <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="ident">err</span>),
                 },
                 <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="ident">err</span>),
@@ -795,7 +767,7 @@
                 <span class="kw">continue</span>;
             }
             <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">EINTR</span>)) <span class="op">=&gt;</span> <span class="kw">continue</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io</span>::<span class="ident">Error</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
+            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
             <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(<span class="ident">err</span>),
         }
     }
