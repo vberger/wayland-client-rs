@@ -101,6 +101,18 @@
 <span id="98"> 98</span>
 <span id="99"> 99</span>
 <span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">Arc</span>;
 
@@ -200,6 +212,18 @@
         <span class="ident">version</span>: <span class="ident">u32</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">create_resource</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">version</span>).<span class="ident">map</span>(<span class="ident">Main</span>::<span class="ident">wrap</span>)
+    }
+
+    <span class="doccomment">/// Retrieve a resource of this client for a given id</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// You need to know in advance which is the interface of this object. If the given id does</span>
+    <span class="doccomment">/// not correspond to an existing object or the existing object is not of the requested</span>
+    <span class="doccomment">/// interface, this call returns `None`.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_resource</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">id</span>: <span class="ident">u32</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_resource</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">id</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">obj</span><span class="op">|</span> <span class="ident">Resource</span>::<span class="ident">wrap</span>(<span class="ident">obj</span>).<span class="ident">into</span>())
     }
 }
 </pre></div>

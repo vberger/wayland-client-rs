@@ -293,6 +293,7 @@
 <span id="290">290</span>
 <span id="291">291</span>
 <span id="292">292</span>
+<span id="293">293</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Bindings to the client library `libwayland-server.so`</span>
 <span class="doccomment">//!</span>
@@ -405,6 +406,7 @@
         <span class="kw">fn</span> <span class="ident">wl_resource_set_user_data</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>, <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> (),
         <span class="kw">fn</span> <span class="ident">wl_resource_get_user_data</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="kw">fn</span> <span class="ident">wl_resource_get_version</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>,
+        <span class="kw">fn</span> <span class="ident">wl_resource_get_class</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="kw">fn</span> <span class="ident">wl_resource_set_destructor</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">wl_resource_destroy_func_t</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> (),
         <span class="kw">fn</span> <span class="ident">wl_resource_instance_of</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>, <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_interface</span>, <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>,
         <span class="kw">fn</span> <span class="ident">wl_resource_add_destroy_listener</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_resource</span>, <span class="ident">wl_notify_func_t</span>) <span class="op">-</span><span class="op">&gt;</span> (),
