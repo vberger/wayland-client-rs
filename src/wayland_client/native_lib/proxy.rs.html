@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `wayland-client/src/native_lib/proxy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>proxy.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../wayland_client/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `wayland-client/src/native_lib/proxy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>proxy.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../wayland_client/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -514,25 +516,25 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ProxyInternal</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">user_data</span>: <span class="ident">UserData</span>) <span class="op">-&gt;</span> <span class="ident">ProxyInternal</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">user_data</span>: <span class="ident">UserData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ProxyInternal</span> {
         <span class="ident">ProxyInternal</span> { <span class="ident">alive</span>: <span class="ident">AtomicBool</span>::<span class="ident">new</span>(<span class="bool-val">true</span>), <span class="ident">user_data</span> }
     }
 }
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ProxyInner</span> {
-    <span class="ident">internal</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ProxyInternal</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">internal</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ProxyInternal</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span>,
     <span class="ident">wrapping</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">display</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Weak</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">display</span>::<span class="ident">DisplayGuard</span><span class="op">&gt;&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">display</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Weak</span><span class="op">&lt;</span><span class="kw">super</span>::<span class="ident">display</span>::<span class="ident">DisplayGuard</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">ProxyInner</span> {}
 <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">ProxyInner</span> {}
 
 <span class="kw">impl</span> <span class="ident">ProxyInner</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_alive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_alive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">weak</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">display</span> {
-            <span class="kw">if</span> <span class="ident">Weak</span>::<span class="ident">strong_count</span>(<span class="ident">weak</span>) <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">if</span> <span class="ident">Weak</span>::<span class="ident">strong_count</span>(<span class="ident">weak</span>) <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                 <span class="comment">// the connection is dead</span>
                 <span class="kw">return</span> <span class="bool-val">false</span>;
             }
@@ -541,17 +543,17 @@
         <span class="self">self</span>.<span class="ident">internal</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">i</span>.<span class="ident">alive</span>.<span class="ident">load</span>(<span class="ident">Ordering</span>::<span class="ident">Acquire</span>)).<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>)
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_external</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_external</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">internal</span>.<span class="ident">is_none</span>()
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_alive</span>() {
             <span class="kw">return</span> <span class="number">0</span>;
         }
         <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span>
             <span class="kw">unsafe</span> { <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_get_version</span>, <span class="self">self</span>.<span class="ident">ptr</span>) <span class="kw">as</span> <span class="ident">u32</span> };
-        <span class="kw">if</span> <span class="ident">version</span> <span class="op">==</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">version</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="comment">// For backcompat reasons the C libs return 0 as a version for the wl_display</span>
             <span class="comment">// So override it</span>
             <span class="kw">return</span> <span class="number">1</span>;
@@ -559,7 +561,7 @@
         <span class="ident">version</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_interface</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_interface</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_alive</span>() {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
@@ -567,31 +569,31 @@
             <span class="kw">let</span> <span class="ident">c_class_ptr</span> <span class="op">=</span> <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_get_class</span>, <span class="self">self</span>.<span class="ident">ptr</span>);
             <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>::<span class="ident">from_ptr</span>(<span class="ident">c_class_ptr</span>);
             <span class="kw">let</span> <span class="ident">i_class</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>::<span class="ident">from_ptr</span>((<span class="kw-2">*</span><span class="ident">I</span>::<span class="ident">c_interface</span>()).<span class="ident">name</span>);
-            <span class="ident">class</span> <span class="op">==</span> <span class="ident">i_class</span>
+            <span class="ident">class</span> <span class="op">=</span><span class="op">=</span> <span class="ident">i_class</span>
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_alive</span>() {
             <span class="kw">return</span> <span class="number">0</span>;
         }
         <span class="kw">unsafe</span> { <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_get_id</span>, <span class="self">self</span>.<span class="ident">ptr</span>) }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">user_data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">UserData</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">user_data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">UserData</span> {
         <span class="kw">static</span> <span class="ident">INVALID_USERDATA</span>: <span class="ident">UserData</span> <span class="op">=</span> <span class="ident">UserData</span>::<span class="ident">new</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">internal</span> {
             <span class="kw-2">&amp;</span><span class="ident">inner</span>.<span class="ident">user_data</span>
         } <span class="kw">else</span> {
-            <span class="ident">INVALID_USERDATA</span>.<span class="ident">set_threadsafe</span>(<span class="op">||</span> ());
+            <span class="ident">INVALID_USERDATA</span>.<span class="ident">set_threadsafe</span>(<span class="op">|</span><span class="op">|</span> ());
             <span class="kw-2">&amp;</span><span class="ident">INVALID_USERDATA</span>
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">send</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">J</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">I</span>::<span class="ident">Request</span>, <span class="ident">version</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ProxyInner</span><span class="op">&gt;</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">send</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">J</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">I</span>::<span class="ident">Request</span>, <span class="ident">version</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ProxyInner</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">Interface</span>,
-        <span class="ident">J</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">J</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">J</span><span class="op">&gt;&gt;</span>,
+        <span class="ident">J</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">J</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">J</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">destructor</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">is_destructor</span>();
         <span class="kw">let</span> <span class="ident">opcode</span> <span class="op">=</span> <span class="ident">msg</span>.<span class="ident">opcode</span>();
@@ -600,7 +602,7 @@
         <span class="kw">let</span> <span class="ident">nid_idx</span> <span class="op">=</span> <span class="ident">I</span>::<span class="ident">Request</span>::<span class="ident">MESSAGES</span>[<span class="ident">opcode</span> <span class="kw">as</span> <span class="ident">usize</span>]
             .<span class="ident">signature</span>
             .<span class="ident">iter</span>()
-            .<span class="ident">position</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span> <span class="op">==</span> <span class="ident">ArgumentType</span>::<span class="ident">NewId</span>);
+            .<span class="ident">position</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span> <span class="op">=</span><span class="op">=</span> <span class="ident">ArgumentType</span>::<span class="ident">NewId</span>);
 
         <span class="kw">let</span> <span class="ident">alive</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">is_alive</span>();
 
@@ -612,10 +614,10 @@
             } <span class="kw">else</span> {
                 <span class="comment">// there is no target interface in the protocol, this is a generic object-creating</span>
                 <span class="comment">// function (likely wl_registry.bind), the newid arg will thus expand to (str, u32, obj)</span>
-                <span class="ident">nid_idx</span> <span class="op">+=</span> <span class="number">2</span>;
+                <span class="ident">nid_idx</span> <span class="op">+</span><span class="op">=</span> <span class="number">2</span>;
             }
 
-            <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">version</span>.<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="self">self</span>.<span class="ident">version</span>());
+            <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">version</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">version</span>());
 
             <span class="kw">if</span> <span class="ident">alive</span> {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">wrapping</span>.<span class="ident">is_none</span>() {
@@ -674,14 +676,14 @@
         <span class="ident">ret</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">equals</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ProxyInner</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">equals</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ProxyInner</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_alive</span>() {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
         <span class="kw">match</span> (<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">internal</span>, <span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">internal</span>) {
-            (<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">my_inner</span>), <span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">other_inner</span>)) <span class="op">=&gt;</span> <span class="ident">Arc</span>::<span class="ident">ptr_eq</span>(<span class="ident">my_inner</span>, <span class="ident">other_inner</span>),
-            (<span class="kw-2">&amp;</span><span class="prelude-val">None</span>, <span class="kw-2">&amp;</span><span class="prelude-val">None</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">ptr</span>,
-            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+            (<span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">my_inner</span>), <span class="kw-2">&amp;</span><span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">other_inner</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Arc</span>::<span class="ident">ptr_eq</span>(<span class="ident">my_inner</span>, <span class="ident">other_inner</span>),
+            (<span class="kw-2">&amp;</span><span class="prelude-val">None</span>, <span class="kw-2">&amp;</span><span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">ptr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">ptr</span>,
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
         }
     }
 
@@ -692,7 +694,7 @@
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ptr</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">wrapping</span>.<span class="ident">take</span>() {
             <span class="comment">// self.ptr == self.wrapping means we are a Main&lt;_&gt;</span>
-            <span class="kw">if</span> <span class="ident">ptr</span> <span class="op">!=</span> <span class="self">self</span>.<span class="ident">ptr</span> {
+            <span class="kw">if</span> <span class="ident">ptr</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span> {
                 <span class="kw">unsafe</span> {
                     <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_wrapper_destroy</span>, <span class="ident">ptr</span>);
                 }
@@ -714,13 +716,13 @@
         <span class="self">self</span>.<span class="ident">wrapping</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">wrapper_ptr</span>);
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">c_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">c_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span> {
         <span class="self">self</span>.<span class="ident">wrapping</span>.<span class="ident">unwrap_or</span>(<span class="self">self</span>.<span class="ident">ptr</span>)
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assign</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>)
     <span class="kw">where</span>
-        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">Sync</span>,
+        <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sync</span>,
         <span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span>(<span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">I</span>::<span class="ident">Event</span>)<span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
         <span class="ident">I</span>::<span class="ident">Event</span>: <span class="ident">MessageGroup</span><span class="op">&lt;</span><span class="ident">Map</span> <span class="op">=</span> <span class="kw">super</span>::<span class="ident">ProxyMap</span><span class="op">&gt;</span>,
     {
@@ -744,9 +746,9 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">init_from_c_ptr</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>(
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">init_from_c_ptr</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(
         <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span>,
-    ) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">new_user_data</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ProxyUserData</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>::<span class="ident">new</span>(<span class="ident">UserData</span>::<span class="ident">new</span>()));
         <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="ident">new_user_data</span>.<span class="ident">internal</span>.<span class="ident">clone</span>();
 
@@ -763,7 +765,7 @@
         <span class="ident">ProxyInner</span> { <span class="ident">internal</span>: <span class="prelude-val">Some</span>(<span class="ident">internal</span>), <span class="ident">ptr</span>, <span class="ident">wrapping</span>: <span class="prelude-val">Some</span>(<span class="ident">ptr</span>), <span class="ident">display</span>: <span class="prelude-val">None</span> }
     }
 
-    <span class="kw">fn</span> <span class="ident">dead</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">dead</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ProxyInner</span> {
             <span class="ident">internal</span>: <span class="prelude-val">Some</span>(<span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ProxyInternal</span> {
                 <span class="ident">alive</span>: <span class="ident">AtomicBool</span>::<span class="ident">new</span>(<span class="bool-val">false</span>),
@@ -775,16 +777,16 @@
         }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_c_ptr</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>(
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_c_ptr</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(
         <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span>,
-    ) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">if</span> <span class="ident">ptr</span>.<span class="ident">is_null</span>() {
             <span class="kw">return</span> <span class="self">Self</span>::<span class="ident">dead</span>();
         }
 
         <span class="kw">let</span> <span class="ident">is_managed</span> <span class="op">=</span> {
             <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_get_listener</span>, <span class="ident">ptr</span>)
-                <span class="op">==</span> <span class="kw-2">&amp;</span>::<span class="ident">wayland_sys</span>::<span class="ident">RUST_MANAGED</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
+                <span class="op">=</span><span class="op">=</span> <span class="kw-2">&amp;</span>::<span class="ident">wayland_sys</span>::<span class="ident">RUST_MANAGED</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>
         };
         <span class="kw">let</span> <span class="ident">internal</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_managed</span> {
             <span class="kw">let</span> <span class="ident">user_data</span> <span class="op">=</span> <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_get_user_data</span>, <span class="ident">ptr</span>)
@@ -796,13 +798,13 @@
         <span class="ident">ProxyInner</span> { <span class="ident">internal</span>, <span class="ident">ptr</span>, <span class="ident">wrapping</span>: <span class="prelude-val">None</span>, <span class="ident">display</span>: <span class="prelude-val">None</span> }
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_external_display</span>(<span class="ident">d</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span>) <span class="op">-&gt;</span> <span class="ident">ProxyInner</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_external_display</span>(<span class="ident">d</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ProxyInner</span> {
         <span class="ident">ProxyInner</span> { <span class="ident">internal</span>: <span class="prelude-val">None</span>, <span class="ident">ptr</span>: <span class="ident">d</span>, <span class="ident">wrapping</span>: <span class="prelude-val">None</span>, <span class="ident">display</span>: <span class="prelude-val">None</span> }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">ProxyInner</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ProxyInner</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ProxyInner</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new</span> <span class="op">=</span> <span class="ident">ProxyInner</span> {
             <span class="ident">internal</span>: <span class="self">self</span>.<span class="ident">internal</span>.<span class="ident">clone</span>(),
             <span class="ident">ptr</span>: <span class="self">self</span>.<span class="ident">ptr</span>,
@@ -813,7 +815,7 @@
             <span class="kw">return</span> <span class="ident">new</span>;
         }
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ptr</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">wrapping</span> {
-            <span class="kw">if</span> <span class="ident">ptr</span> <span class="op">!=</span> <span class="self">self</span>.<span class="ident">ptr</span> {
+            <span class="kw">if</span> <span class="ident">ptr</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span> {
                 <span class="comment">// create a new wrapper to keep correct track of them</span>
                 <span class="kw">let</span> <span class="ident">wrapper_ptr</span>;
                 <span class="kw">unsafe</span> {
@@ -837,15 +839,15 @@
     }
 }
 
-<span class="kw">type</span> <span class="ident">BoxedCallback</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="op">&lt;</span><span class="ident">I</span> <span class="kw">as</span> <span class="ident">Interface</span><span class="op">&gt;</span>::<span class="ident">Event</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="kw">crate</span>::<span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>)<span class="op">&gt;</span>;
+<span class="kw">type</span> <span class="ident">BoxedCallback</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">dyn</span> <span class="ident">Fn</span>(<span class="op">&lt;</span><span class="ident">I</span> <span class="kw">as</span> <span class="ident">Interface</span><span class="op">&gt;</span>::<span class="ident">Event</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="kw">crate</span>::<span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>)<span class="op">&gt;</span>;
 
-<span class="kw">struct</span> <span class="ident">ProxyUserData</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span> {
+<span class="kw">struct</span> <span class="ident">ProxyUserData</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="ident">internal</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">ProxyInternal</span><span class="op">&gt;</span>,
-    <span class="ident">implem</span>: <span class="ident">RefCell</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BoxedCallback</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">implem</span>: <span class="ident">RefCell</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BoxedCallback</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span> <span class="ident">ProxyUserData</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">user_data</span>: <span class="ident">UserData</span>) <span class="op">-&gt;</span> <span class="ident">ProxyUserData</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ProxyUserData</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">user_data</span>: <span class="ident">UserData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ProxyUserData</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
         <span class="ident">ProxyUserData</span> {
             <span class="ident">internal</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">ProxyInternal</span>::<span class="ident">new</span>(<span class="ident">user_data</span>)),
             <span class="ident">implem</span>: <span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>),
@@ -859,15 +861,15 @@
     <span class="ident">opcode</span>: <span class="ident">u32</span>,
     <span class="ident">_msg</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_message</span>,
     <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>,
-) <span class="op">-&gt;</span> <span class="ident">c_int</span>
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>
 <span class="kw">where</span>
-    <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">I</span>: <span class="ident">Interface</span> <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Proxy</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">proxy</span> <span class="op">=</span> <span class="ident">proxy</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wl_proxy</span>;
 
     <span class="comment">// We don&#39;t need to worry about panic-safeness, because if there is a panic,</span>
     <span class="comment">// we&#39;ll abort the process, so no access to corrupted data is possible.</span>
-    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="kw">move</span> <span class="op">||</span> {
+    <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
         <span class="kw">let</span> <span class="ident">must_destroy</span> <span class="op">=</span> <span class="ident">I</span>::<span class="ident">Event</span>::<span class="ident">MESSAGES</span>[<span class="ident">opcode</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="ident">destructor</span>;
         <span class="comment">// retrieve the impl</span>
         <span class="kw">let</span> <span class="ident">user_data</span> <span class="op">=</span> <span class="macro">ffi_dispatch</span><span class="macro">!</span>(<span class="ident">WAYLAND_CLIENT_HANDLE</span>, <span class="ident">wl_proxy_get_user_data</span>, <span class="ident">proxy</span>);
@@ -881,7 +883,7 @@
             }
             <span class="comment">// if there is an implem, call it, otherwise call the fallback</span>
             <span class="kw">match</span> <span class="ident">implem</span>.<span class="ident">as_ref</span>() {
-                <span class="prelude-val">Some</span>(<span class="ident">implem</span>) <span class="op">=&gt;</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">implem</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="comment">// parse the message:</span>
                     <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">I</span>::<span class="ident">Event</span>::<span class="ident">from_raw_c</span>(<span class="ident">proxy</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>, <span class="ident">opcode</span>, <span class="ident">args</span>)<span class="question-mark">?</span>;
                     <span class="comment">// create the proxy object</span>
@@ -895,7 +897,7 @@
                         <span class="ident">implem</span>(<span class="ident">msg</span>, <span class="ident">proxy_obj</span>, <span class="ident">dispatch_data</span>.<span class="ident">reborrow</span>());
                     })
                 }
-                <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
+                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="comment">// parse the message:</span>
                     <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="ident">parse_raw_event</span>::<span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">opcode</span>, <span class="ident">args</span>);
                     <span class="comment">// create the proxy object</span>
@@ -916,8 +918,8 @@
     });
     <span class="comment">// check the return status</span>
     <span class="kw">match</span> <span class="ident">ret</span> {
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(())) <span class="op">=&gt;</span> <span class="number">0</span>,
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(())) <span class="op">=&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(())) <span class="op">=</span><span class="op">&gt;</span> <span class="number">0</span>,
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(())) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="macro">eprintln</span><span class="macro">!</span>(
                 <span class="string">&quot;[wayland-client error] Attempted to dispatch unknown opcode {} for {}, aborting.&quot;</span>,
                 <span class="ident">opcode</span>,
@@ -925,14 +927,14 @@
             );
             <span class="ident">libc</span>::<span class="ident">abort</span>();
         }
-        <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> {
+        <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="macro">eprintln</span><span class="macro">!</span>(<span class="string">&quot;[wayland-client error] A handler for {} panicked.&quot;</span>, <span class="ident">I</span>::<span class="ident">NAME</span>);
             <span class="ident">libc</span>::<span class="ident">abort</span>()
         }
     }
 }
 
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">parse_raw_event</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u32</span>, <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>) <span class="op">-&gt;</span> <span class="ident">RawEvent</span> {
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">parse_raw_event</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="ident">opcode</span>: <span class="ident">u32</span>, <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wl_argument</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawEvent</span> {
     <span class="kw">let</span> <span class="ident">desc</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span>::<span class="ident">Event</span>::<span class="ident">MESSAGES</span>[<span class="ident">opcode</span> <span class="kw">as</span> <span class="ident">usize</span>];
 
     <span class="kw">let</span> <span class="ident">c_args</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">args</span>, <span class="ident">desc</span>.<span class="ident">signature</span>.<span class="ident">len</span>());
@@ -941,10 +943,10 @@
     <span class="comment">// parse the arguments one by one</span>
     <span class="kw">for</span> (<span class="ident">t</span>, <span class="ident">a</span>) <span class="kw">in</span> <span class="ident">desc</span>.<span class="ident">signature</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">c_args</span>.<span class="ident">iter</span>()) {
         <span class="ident">args</span>.<span class="ident">push</span>(<span class="kw">match</span> <span class="ident">t</span> {
-            <span class="ident">ArgumentType</span>::<span class="ident">Int</span> <span class="op">=&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">a</span>.<span class="ident">i</span>),
-            <span class="ident">ArgumentType</span>::<span class="ident">Uint</span> <span class="op">=&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">a</span>.<span class="ident">u</span>),
-            <span class="ident">ArgumentType</span>::<span class="ident">Fixed</span> <span class="op">=&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Float</span>((<span class="ident">a</span>.<span class="ident">f</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="op">/</span> <span class="number">256.</span>),
-            <span class="ident">ArgumentType</span>::<span class="ident">Array</span> <span class="op">=&gt;</span> {
+            <span class="ident">ArgumentType</span>::<span class="ident">Int</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Int</span>(<span class="ident">a</span>.<span class="ident">i</span>),
+            <span class="ident">ArgumentType</span>::<span class="ident">Uint</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Uint</span>(<span class="ident">a</span>.<span class="ident">u</span>),
+            <span class="ident">ArgumentType</span>::<span class="ident">Fixed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Float</span>((<span class="ident">a</span>.<span class="ident">f</span> <span class="kw">as</span> <span class="ident">f32</span>) <span class="op">/</span> <span class="number">256.</span>),
+            <span class="ident">ArgumentType</span>::<span class="ident">Array</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">a</span>.<span class="ident">is_null</span>() {
                     <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Array</span>(<span class="prelude-val">None</span>)
                 } <span class="kw">else</span> {
@@ -955,7 +957,7 @@
                     ))
                 }
             }
-            <span class="ident">ArgumentType</span>::<span class="ident">Str</span> <span class="op">=&gt;</span> {
+            <span class="ident">ArgumentType</span>::<span class="ident">Str</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">s</span>.<span class="ident">is_null</span>() {
                     <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Str</span>(<span class="prelude-val">None</span>)
                 } <span class="kw">else</span> {
@@ -964,15 +966,15 @@
                     ))
                 }
             }
-            <span class="ident">ArgumentType</span>::<span class="ident">Fd</span> <span class="op">=&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Fd</span>(<span class="ident">a</span>.<span class="ident">h</span>),
-            <span class="ident">ArgumentType</span>::<span class="ident">Object</span> <span class="op">=&gt;</span> {
+            <span class="ident">ArgumentType</span>::<span class="ident">Fd</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Fd</span>(<span class="ident">a</span>.<span class="ident">h</span>),
+            <span class="ident">ArgumentType</span>::<span class="ident">Object</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">o</span>.<span class="ident">is_null</span>() {
                     <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="prelude-val">None</span>)
                 } <span class="kw">else</span> {
                     <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">Object</span>(<span class="prelude-val">Some</span>(<span class="ident">Proxy</span>::<span class="ident">from_c_ptr</span>(<span class="ident">a</span>.<span class="ident">o</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>)))
                 }
             }
-            <span class="ident">ArgumentType</span>::<span class="ident">NewId</span> <span class="op">=&gt;</span> {
+            <span class="ident">ArgumentType</span>::<span class="ident">NewId</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">o</span>.<span class="ident">is_null</span>() {
                     <span class="kw">crate</span>::<span class="ident">Argument</span>::<span class="ident">NewId</span>(<span class="prelude-val">None</span>)
                 } <span class="kw">else</span> {
