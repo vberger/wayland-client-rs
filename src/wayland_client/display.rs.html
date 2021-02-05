@@ -256,6 +256,8 @@
 <span id="253">253</span>
 <span id="254">254</span>
 <span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">OsString</span>;
@@ -377,6 +379,8 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">txt</span>) <span class="op">=</span> <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;WAYLAND_SOCKET&quot;</span>) {
             <span class="comment">// We should connect to the provided WAYLAND_SOCKET</span>
             <span class="kw">let</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">txt</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">ConnectError</span>::<span class="ident">InvalidFd</span>)<span class="question-mark">?</span>;
+            <span class="comment">// remove the variable so any child processes don&#39;t see it</span>
+            <span class="ident">env</span>::<span class="ident">remove_var</span>(<span class="string">&quot;WAYLAND_SOCKET&quot;</span>);
             <span class="comment">// set the CLOEXEC flag on this FD</span>
             <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">fcntl</span>::<span class="ident">fcntl</span>(<span class="ident">fd</span>, <span class="ident">fcntl</span>::<span class="ident">FcntlArg</span>::<span class="ident">F_GETFD</span>);
             <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">flags</span>
