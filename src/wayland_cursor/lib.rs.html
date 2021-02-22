@@ -381,12 +381,6 @@
 <span id="378">378</span>
 <span id="379">379</span>
 <span id="380">380</span>
-<span id="381">381</span>
-<span id="382">382</span>
-<span id="383">383</span>
-<span id="384">384</span>
-<span id="385">385</span>
-<span id="386">386</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland cursor utilities</span>
 <span class="doccomment">//!</span>
@@ -584,16 +578,10 @@
     }
 
     <span class="kw">fn</span> <span class="ident">nearest_images</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">XCursorImage</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">XCursorImage</span><span class="op">&gt;</span> {
-        <span class="comment">// Since cursor could have shapes other than squares we find nearest image by its square,</span>
-        <span class="comment">// instead of side size.</span>
-        <span class="kw">let</span> <span class="ident">target_square</span> <span class="op">=</span> (<span class="ident">size</span> <span class="op">*</span> <span class="ident">size</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-
+        <span class="comment">// Follow the nominal size of the cursor to choose the nearest</span>
         <span class="kw">let</span> <span class="ident">nearest_image</span> <span class="op">=</span> <span class="ident">images</span>
             .<span class="ident">iter</span>()
-            .<span class="ident">min_by_key</span>(<span class="op">|</span><span class="ident">image</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">image_square</span> <span class="op">=</span> (<span class="ident">image</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">image</span>.<span class="ident">height</span>) <span class="kw">as</span> <span class="ident">i32</span>;
-                (<span class="ident">target_square</span> <span class="op">-</span> <span class="ident">image_square</span>).<span class="ident">abs</span>()
-            })
+            .<span class="ident">min_by_key</span>(<span class="op">|</span><span class="ident">image</span><span class="op">|</span> (<span class="ident">size</span> <span class="kw">as</span> <span class="ident">i32</span> <span class="op">-</span> <span class="ident">image</span>.<span class="ident">size</span> <span class="kw">as</span> <span class="ident">i32</span>).<span class="ident">abs</span>())
             .<span class="ident">unwrap</span>();
 
         <span class="ident">images</span>.<span class="ident">iter</span>().<span class="ident">filter</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">image</span><span class="op">|</span> {
