@@ -645,10 +645,10 @@
     <span class="doccomment">/// Returns the number of elements written in each buffer</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Any serialized Fd will be `dup()`-ed in the process</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_to_buffers</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_to_buffers</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">payload</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">u32</span>],
-        <span class="kw-2">mut</span> <span class="ident">fds</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> [<span class="ident">RawFd</span>],
+        <span class="ident">payload</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u32</span>],
+        <span class="kw-2">mut</span> <span class="ident">fds</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">RawFd</span>],
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">MessageWriteError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">orig_payload_len</span> <span class="op">=</span> <span class="ident">payload</span>.<span class="ident">len</span>();
         <span class="kw">let</span> <span class="ident">orig_fds_len</span> <span class="op">=</span> <span class="ident">fds</span>.<span class="ident">len</span>();

@@ -237,6 +237,10 @@
 <span id="234">234</span>
 <span id="235">235</span>
 <span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland objects map</span>
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Interface</span>, <span class="ident">MessageGroup</span>, <span class="ident">NoMessage</span>};
@@ -380,6 +384,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Can fail if the requested id is not the next free id of this store.</span>
     <span class="doccomment">/// (In which case this is a protocol error)</span>
+    <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_at</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">u32</span>, <span class="ident">object</span>: <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Err</span>(())
@@ -401,6 +407,8 @@
     }
 
     <span class="doccomment">/// Mutably access an object of the map</span>
+    <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">u32</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Err</span>(())

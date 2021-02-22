@@ -221,6 +221,12 @@
 <span id="218">218</span>
 <span id="219">219</span>
 <span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Common definitions for wayland</span>
 <span class="doccomment">//!</span>
@@ -282,6 +288,8 @@
         <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">map</span>::<span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span>;
     <span class="doccomment">/// Construct a message from its raw representation</span>
+    <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">wire</span>::<span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span>;
     <span class="doccomment">/// Turn this message into its raw representation</span>
     <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">send_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">wire</span>::<span class="ident">Message</span>;
@@ -291,6 +299,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The pointers provided to this function must all be valid pointers from</span>
     <span class="doccomment">/// `libwayland-client`</span>
+    <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
         <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="ident">opcode</span>: <span class="ident">u32</span>,
@@ -300,6 +310,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// It can only be accessed from the provided closure, and this consumes</span>
     <span class="doccomment">/// the message.</span>
+    <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
     <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">syscom</span>::<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>;
