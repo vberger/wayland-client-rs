@@ -666,6 +666,9 @@
 <span id="663">663</span>
 <span id="664">664</span>
 <span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland socket manipulation</span>
 
@@ -808,6 +811,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NixResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="ident">words</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">out_data</span>.<span class="ident">get_contents</span>();
+            <span class="kw">if</span> <span class="ident">words</span>.<span class="ident">is_empty</span>() {
+                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+            }
             <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw">unsafe</span> {
                 ::<span class="ident">std</span>::<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="ident">words</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">words</span>.<span class="ident">len</span>() <span class="op">*</span> <span class="number">4</span>)
             };
