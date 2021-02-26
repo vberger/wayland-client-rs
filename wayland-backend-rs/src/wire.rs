@@ -7,6 +7,8 @@ use std::ptr;
 use nix::errno::Errno;
 use nix::{Error as NixError, Result as NixResult};
 
+use wayland_commons::ArgumentType;
+
 use smallvec::SmallVec;
 
 // The value of 4 is chosen for the following reasons:
@@ -28,27 +30,6 @@ pub struct MessageDesc {
     pub since: u32,
     /// Whether this message is a destructor
     pub destructor: bool,
-}
-
-/// Enum of possible argument types as recognized by the wire
-#[derive(Copy, Clone, PartialEq, Debug)]
-pub enum ArgumentType {
-    /// i32
-    Int,
-    /// u32
-    Uint,
-    /// fixed point, 1/256 precision
-    Fixed,
-    /// CString
-    Str,
-    /// id of a wayland object
-    Object,
-    /// id of a newly created wayland object
-    NewId,
-    /// Vec<u8>
-    Array,
-    /// RawFd
-    Fd,
 }
 
 /// Enum of possible argument as recognized by the wire, including values
