@@ -34,17 +34,16 @@ impl Socket {
     /// The `fds` slice should not be longer than `MAX_FDS_OUT`, and the `bytes`
     /// slice should not be longer than `MAX_BYTES_OUT` otherwise the receiving
     /// end may lose some data.
-    pub fn send_msg(&self, bytes: &[u8], fds: &[RawFd]) -> IoResult<()> {
+    pub fn send_msg(&self, bytes: &[u8], fds: &[RawFd]) -> IoResult<usize> {
         let iov = [uio::IoVec::from_slice(bytes)];
         if !fds.is_empty() {
             let cmsgs = [socket::ControlMessage::ScmRights(fds)];
             socket::sendmsg(self.fd, &iov, &cmsgs, socket::MsgFlags::MSG_DONTWAIT, None)
-                .map_err(nix_to_io)?;
+                .map_err(nix_to_io)
         } else {
             socket::sendmsg(self.fd, &iov, &[], socket::MsgFlags::MSG_DONTWAIT, None)
-                .map_err(nix_to_io)?;
-        };
-        Ok(())
+                .map_err(nix_to_io)
+        }
     }
 
     /// Receive a single message from the socket
@@ -131,7 +130,7 @@ impl BufferedSocket {
 
     /// Flush the contents of the outgoing buffer into the socket
     pub fn flush(&mut self) -> IoResult<()> {
-        {
+        let written = {
             let words = self.out_data.get_contents();
             if words.is_empty() {
                 return Ok(());
@@ -140,13 +139,15 @@ impl BufferedSocket {
                 ::std::slice::from_raw_parts(words.as_ptr() as *const u8, words.len() * 4)
             };
             let fds = self.out_fds.get_contents();
-            self.socket.send_msg(bytes, fds)?;
+            let written = self.socket.send_msg(bytes, fds)?;
             for &fd in fds {
                 // once the fds are sent, we can close them
                 let _ = ::nix::unistd::close(fd);
             }
-        }
-        self.out_data.clear();
+            written
+        };
+        self.out_data.offset(written / 4);
+        self.out_data.move_to_front();
         self.out_fds.clear();
         Ok(())
     }
