@@ -1,6 +1,6 @@
-use wayland_commons::Interface;
-
+#[cfg(feature = "client")]
 pub mod client;
+#[cfg(feature = "server")]
 pub mod server;
 
 mod debug;
@@ -15,9 +15,4 @@ fn nix_to_io(e: nix::Error) -> std::io::Error {
     } else {
         panic!("Unexpected nix error: {:?}", e);
     }
-}
-
-#[inline]
-fn same_interface(a: &'static Interface, b: &'static Interface) -> bool {
-    a as *const Interface == b as *const Interface || a.name == b.name
 }

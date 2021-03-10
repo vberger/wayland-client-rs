@@ -11,7 +11,7 @@ edition = "2018"
 readme = "README.md"
 
 [dependencies]
-dlib = { version = "0.5", optional = true }
+dlib = { version = "0.5" }
 libc = { version = "0.2", optional = true }
 lazy_static = { version = "1.0.2", optional = true }
 
@@ -19,11 +19,11 @@ lazy_static = { version = "1.0.2", optional = true }
 pkg-config = "0.3.7"
 
 [features]
-dlopen = ["dlib", "lazy_static"]
-client = ["dlib"]
+dlopen = ["lazy_static"]
+client = []
 cursor = ["client"]
 egl = ["client"]
-server = ["libc", "dlib"]
+server = ["libc"]
 
 [package.metadata.docs.rs]
 all-features = true
