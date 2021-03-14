@@ -14,6 +14,7 @@ readme = "README.md"
 dlib = { version = "0.5" }
 libc = { version = "0.2", optional = true }
 lazy_static = { version = "1.0.2", optional = true }
+memoffset = { version = "0.6.1", optional = true }
 
 [build-dependencies]
 pkg-config = "0.3.7"
@@ -23,7 +24,7 @@ dlopen = ["lazy_static"]
 client = []
 cursor = ["client"]
 egl = ["client"]
-server = ["libc"]
+server = ["libc", "memoffset"]
 
 [package.metadata.docs.rs]
 all-features = true
