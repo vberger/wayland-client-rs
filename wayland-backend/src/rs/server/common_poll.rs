@@ -42,7 +42,7 @@ impl<D> Backend<D> {
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        let poll_fd = kqueue().map_err(nix_to_io)?;
+        let poll_fd = kqueue().map_err(nix_to_io).map_err(InitError::Io)?;
 
         Ok(Backend { handle: Handle::new(), poll_fd })
     }
