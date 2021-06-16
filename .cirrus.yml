@@ -8,9 +8,9 @@ env:
 task:
   only_if: $CIRRUS_BRANCH == 'master' || $CIRRUS_PR != ''
   matrix:
-    - name: FreeBSD 11.3
-      freebsd_instance:
-        image_family: freebsd-11-3-snap
+    #- name: FreeBSD 11.3
+    #  freebsd_instance:
+    #  image_family: freebsd-11-3-snap
     - name: FreeBSD 12.1
       freebsd_instance:
         image_family: freebsd-12-1-snap
@@ -20,11 +20,15 @@ task:
  # Install Rust
   setup_script:
     - fetch https://sh.rustup.rs -o rustup.sh
-    - sh rustup.sh -y --default-toolchain stable
-    - pkg install -y git wayland
+    - sh rustup.sh -y --profile=minimal --default-toolchain nightly
+    - pkg install -y git wayland bash grcov
     - git submodule update --init --recursive
+    - . $HOME/.cargo/env
+    - rustup component add llvm-tools-preview
   test_script:
     - . $HOME/.cargo/env
     - mkdir -p $HOME/sockets
     - export XDG_RUNTIME_DIR="$HOME/sockets"
-    - cargo test --features "both_native" --all
+    - env LLVM_PROFILE_FILE="wayland-rs-%p-%m.profraw" RUSTFLAGS="-Zinstrument-coverage" cargo test --features "both_native" --all
+    - grcov . --binary-path ./target/debug -s . -t lcov --branch --llvm --ignore-not-existing --ignore "/*" --ignore "tests/*" --excl-br-start "mod tests \{" --excl-start "mod tests \{" --excl-br-line "#\[derive\(" --excl-line "#\[derive\(" -o lcov.info
+    - bash -c 'bash <(curl -s https://codecov.io/bash) -f lcov.info'
