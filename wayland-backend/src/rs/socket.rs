@@ -1,13 +1,16 @@
 //! Wayland socket manipulation
 
+use std::io::Result as IoResult;
 use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd, RawFd};
 
-use nix::{
-    sys::{socket, uio},
-    Result as NixResult,
-};
+use nix::sys::{socket, uio};
 
-use crate::wire::{ArgumentType, Message, MessageParseError, MessageWriteError};
+use crate::protocol::{ArgumentType, Message};
+
+use super::{
+    nix_to_io,
+    wire::{parse_message, write_to_buffers, MessageParseError, MessageWriteError},
+};
 
 /// Maximum number of FD that can be sent in a single socket message
 pub const MAX_FDS_OUT: usize = 28;
@@ -31,15 +34,16 @@ impl Socket {
     /// The `fds` slice should not be longer than `MAX_FDS_OUT`, and the `bytes`
     /// slice should not be longer than `MAX_BYTES_OUT` otherwise the receiving
     /// end may lose some data.
-    pub fn send_msg(&self, bytes: &[u8], fds: &[RawFd]) -> NixResult<()> {
+    pub fn send_msg(&self, bytes: &[u8], fds: &[RawFd]) -> IoResult<usize> {
         let iov = [uio::IoVec::from_slice(bytes)];
         if !fds.is_empty() {
             let cmsgs = [socket::ControlMessage::ScmRights(fds)];
-            socket::sendmsg(self.fd, &iov, &cmsgs, socket::MsgFlags::MSG_DONTWAIT, None)?;
+            socket::sendmsg(self.fd, &iov, &cmsgs, socket::MsgFlags::MSG_DONTWAIT, None)
+                .map_err(nix_to_io)
         } else {
-            socket::sendmsg(self.fd, &iov, &[], socket::MsgFlags::MSG_DONTWAIT, None)?;
-        };
-        Ok(())
+            socket::sendmsg(self.fd, &iov, &[], socket::MsgFlags::MSG_DONTWAIT, None)
+                .map_err(nix_to_io)
+        }
     }
 
     /// Receive a single message from the socket
@@ -53,12 +57,13 @@ impl Socket {
     /// The `buffer` slice should be at least `MAX_BYTES_OUT` long and the `fds`
     /// slice `MAX_FDS_OUT` long, otherwise some data of the received message may
     /// be lost.
-    pub fn rcv_msg(&self, buffer: &mut [u8], fds: &mut [RawFd]) -> NixResult<(usize, usize)> {
-        let mut cmsg = cmsg_space!([RawFd; MAX_FDS_OUT]);
+    pub fn rcv_msg(&self, buffer: &mut [u8], fds: &mut [RawFd]) -> IoResult<(usize, usize)> {
+        let mut cmsg = nix::cmsg_space!([RawFd; MAX_FDS_OUT]);
         let iov = [uio::IoVec::from_mut_slice(buffer)];
 
         let msg =
-            socket::recvmsg(self.fd, &iov[..], Some(&mut cmsg), socket::MsgFlags::MSG_DONTWAIT)?;
+            socket::recvmsg(self.fd, &iov[..], Some(&mut cmsg), socket::MsgFlags::MSG_DONTWAIT)
+                .map_err(nix_to_io)?;
 
         let mut fd_count = 0;
         let received_fds = msg.cmsgs().flat_map(|cmsg| match cmsg {
@@ -123,21 +128,9 @@ impl BufferedSocket {
         }
     }
 
-    /// Get direct access to the underlying socket
-    pub fn get_socket(&mut self) -> &mut Socket {
-        &mut self.socket
-    }
-
-    /// Retrieve ownership of the underlying Socket
-    ///
-    /// Any leftover content in the internal buffers will be lost
-    pub fn into_socket(self) -> Socket {
-        self.socket
-    }
-
     /// Flush the contents of the outgoing buffer into the socket
-    pub fn flush(&mut self) -> NixResult<()> {
-        {
+    pub fn flush(&mut self) -> IoResult<()> {
+        let written = {
             let words = self.out_data.get_contents();
             if words.is_empty() {
                 return Ok(());
@@ -146,15 +139,33 @@ impl BufferedSocket {
                 ::std::slice::from_raw_parts(words.as_ptr() as *const u8, words.len() * 4)
             };
             let fds = self.out_fds.get_contents();
-            self.socket.send_msg(bytes, fds)?;
+            let written = self.socket.send_msg(bytes, fds)?;
             for &fd in fds {
                 // once the fds are sent, we can close them
                 let _ = ::nix::unistd::close(fd);
             }
-        }
-        self.out_data.clear();
+            written
+        };
+        self.out_data.offset(written / 4);
+        self.out_data.move_to_front();
         self.out_fds.clear();
         Ok(())
+    }
+
+    pub fn blocking_flush(&mut self) -> IoResult<()> {
+        loop {
+            match self.flush() {
+                Ok(()) => return Ok(()),
+                Err(e) if e.kind() == std::io::ErrorKind::WouldBlock => {}
+                Err(e) => return Err(e),
+            }
+
+            nix::poll::poll(
+                &mut [nix::poll::PollFd::new(self.as_raw_fd(), nix::poll::PollFlags::POLLOUT)],
+                -1,
+            )
+            .map_err(nix_to_io)?;
+        }
     }
 
     // internal method
@@ -164,8 +175,9 @@ impl BufferedSocket {
     //
     // if false is returned, it means there is not enough space
     // in the buffer
-    fn attempt_write_message(&mut self, msg: &Message) -> NixResult<bool> {
-        match msg.write_to_buffers(
+    fn attempt_write_message(&mut self, msg: &Message<u32>) -> IoResult<bool> {
+        match write_to_buffers(
+            &msg,
             self.out_data.get_writable_storage(),
             self.out_fds.get_writable_storage(),
         ) {
@@ -185,15 +197,15 @@ impl BufferedSocket {
     ///
     /// If the message is too big to fit in the buffer, the error `Error::Sys(E2BIG)`
     /// will be returned.
-    pub fn write_message(&mut self, msg: &Message) -> NixResult<()> {
+    pub fn write_message(&mut self, msg: &Message<u32>) -> IoResult<()> {
         if !self.attempt_write_message(msg)? {
             // the attempt failed, there is not enough space in the buffer
             // we need to flush it
-            self.flush()?;
+            self.blocking_flush()?;
             if !self.attempt_write_message(msg)? {
                 // If this fails again, this means the message is too big
                 // to be transmitted at all
-                return Err(::nix::Error::Sys(::nix::errno::Errno::E2BIG));
+                return Err(::nix::errno::Errno::E2BIG.into());
             }
         }
         Ok(())
@@ -201,14 +213,10 @@ impl BufferedSocket {
 
     /// Try to fill the incoming buffers of this socket, to prepare
     /// a new round of parsing.
-    pub fn fill_incoming_buffers(&mut self) -> NixResult<()> {
-        // clear the buffers if they have no content
-        if !self.in_data.has_content() {
-            self.in_data.clear();
-        }
-        if !self.in_fds.has_content() {
-            self.in_fds.clear();
-        }
+    pub fn fill_incoming_buffers(&mut self) -> IoResult<()> {
+        // reorganize the buffers
+        self.in_data.move_to_front();
+        self.in_fds.move_to_front();
         // receive a message
         let (in_bytes, in_fds) = {
             let words = self.in_data.get_writable_storage();
@@ -220,7 +228,7 @@ impl BufferedSocket {
         };
         if in_bytes == 0 {
             // the other end of the socket was closed
-            return Err(::nix::Error::Sys(::nix::errno::Errno::EPIPE));
+            return Err(::nix::errno::Errno::EPIPE.into());
         }
         // advance the storage
         self.in_data.advance(in_bytes / 4 + if in_bytes % 4 > 0 { 1 } else { 0 });
@@ -232,18 +240,11 @@ impl BufferedSocket {
     ///
     /// This method requires one closure that given an object id and an opcode,
     /// must provide the signature of the associated request/event, in the form of
-    /// a `&'static [ArgumentType]`. If it returns `None`, meaning that
-    /// the couple object/opcode does not exist, an error will be returned.
-    ///
-    /// There are 3 possibilities of return value:
-    ///
-    /// - `Ok(Ok(msg))`: no error occurred, this is the message
-    /// - `Ok(Err(e))`: either a malformed message was encountered or we need more data,
-    ///    in the latter case you need to try calling `fill_incoming_buffers()`.
-    /// - `Err(e)`: an I/O error occurred reading from the socked, details are in `e`
-    ///   (this can be a "wouldblock" error, which just means that no message is available
-    ///   to read)
-    pub fn read_one_message<F>(&mut self, mut signature: F) -> Result<Message, MessageParseError>
+    /// a `&'static [ArgumentType]`.
+    pub fn read_one_message<F>(
+        &mut self,
+        mut signature: F,
+    ) -> Result<Message<u32>, MessageParseError>
     where
         F: FnMut(u32, u16) -> Option<&'static [ArgumentType]>,
     {
@@ -256,7 +257,7 @@ impl BufferedSocket {
             let object_id = data[0];
             let opcode = (data[1] & 0x0000_FFFF) as u16;
             if let Some(sig) = signature(object_id, opcode) {
-                match Message::from_raw(data, sig, fds) {
+                match parse_message(data, sig, fds) {
                     Ok((msg, rest_data, rest_fds)) => {
                         (msg, data.len() - rest_data.len(), fds.len() - rest_fds.len())
                     }
@@ -274,95 +275,11 @@ impl BufferedSocket {
 
         Ok(msg)
     }
+}
 
-    /// Read and deserialize messages from the socket
-    ///
-    /// This method requires two closures:
-    ///
-    /// - The first one, given an object id and an opcode, must provide
-    ///   the signature of the associated request/event, in the form of
-    ///   a `&'static [ArgumentType]`. If it returns `None`, meaning that
-    ///   the couple object/opcode does not exist, the parsing will be
-    ///   prematurely interrupted and this method will return a
-    ///   `MessageParseError::Malformed` error.
-    /// - The second closure is charged to process the parsed message. If it
-    ///   returns `false`, the iteration will be prematurely stopped.
-    ///
-    /// In both cases of early stopping, the remaining unused data will be left
-    /// in the buffers, and will start to be processed at the next call of this
-    /// method.
-    ///
-    /// There are 3 possibilities of return value:
-    ///
-    /// - `Ok(Ok(n))`: no error occurred, `n` messages where processed
-    /// - `Ok(Err(MessageParseError::Malformed))`: a malformed message was encountered
-    ///   (this is a protocol error and is supposed to be fatal to the connection).
-    /// - `Err(e)`: an I/O error occurred reading from the socked, details are in `e`
-    ///   (this can be a "wouldblock" error, which just means that no message is available
-    ///   to read)
-    pub fn read_messages<F1, F2>(
-        &mut self,
-        mut signature: F1,
-        mut callback: F2,
-    ) -> NixResult<Result<usize, MessageParseError>>
-    where
-        F1: FnMut(u32, u16) -> Option<&'static [ArgumentType]>,
-        F2: FnMut(Message) -> bool,
-    {
-        // message parsing
-        let mut dispatched = 0;
-
-        loop {
-            let mut err = None;
-            // first parse any leftover messages
-            loop {
-                match self.read_one_message(&mut signature) {
-                    Ok(msg) => {
-                        let keep_going = callback(msg);
-                        dispatched += 1;
-                        if !keep_going {
-                            break;
-                        }
-                    }
-                    Err(e) => {
-                        err = Some(e);
-                        break;
-                    }
-                }
-            }
-
-            // copy back any leftover content to the front of the buffer
-            self.in_data.move_to_front();
-            self.in_fds.move_to_front();
-
-            if let Some(MessageParseError::Malformed) = err {
-                // early stop here
-                return Ok(Err(MessageParseError::Malformed));
-            }
-
-            if err.is_none() && self.in_data.has_content() {
-                // we stopped reading without error while there is content? That means
-                // the user requested an early stopping
-                return Ok(Ok(dispatched));
-            }
-
-            // now, try to get more data
-            match self.fill_incoming_buffers() {
-                Ok(()) => (),
-                Err(e @ ::nix::Error::Sys(::nix::errno::Errno::EAGAIN)) => {
-                    // stop looping, returning Ok() or EAGAIN depending on whether messages
-                    // were dispatched
-                    if dispatched == 0 {
-                        return Err(e);
-                    } else {
-                        break;
-                    }
-                }
-                Err(e) => return Err(e),
-            }
-        }
-
-        Ok(Ok(dispatched))
+impl AsRawFd for BufferedSocket {
+    fn as_raw_fd(&self) -> RawFd {
+        self.socket.fd
     }
 }
 
@@ -379,11 +296,6 @@ struct Buffer<T: Copy> {
 impl<T: Copy + Default> Buffer<T> {
     fn new(size: usize) -> Buffer<T> {
         Buffer { storage: vec![T::default(); size], occupied: 0, offset: 0 }
-    }
-
-    /// Check if this buffer has content to read
-    fn has_content(&self) -> bool {
-        self.occupied > self.offset
     }
 
     /// Advance the internal counter of occupied space
@@ -433,7 +345,7 @@ impl<T: Copy + Default> Buffer<T> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::wire::{Argument, ArgumentType, Message};
+    use crate::protocol::{AllowNull, Argument, ArgumentType, Message};
 
     use std::ffi::CString;
 
@@ -449,7 +361,7 @@ mod tests {
     //
     // if arguments contain FDs, check that the fd point to
     // the same file, rather than are the same number.
-    fn assert_eq_msgs(msg1: &Message, msg2: &Message) {
+    fn assert_eq_msgs(msg1: &Message<u32>, msg2: &Message<u32>) {
         assert_eq!(msg1.sender_id, msg2.sender_id);
         assert_eq!(msg1.opcode, msg2.opcode);
         assert_eq!(msg1.args.len(), msg2.args.len());
@@ -488,31 +400,27 @@ mod tests {
         static SIGNATURE: &'static [ArgumentType] = &[
             ArgumentType::Uint,
             ArgumentType::Fixed,
-            ArgumentType::Str,
-            ArgumentType::Array,
-            ArgumentType::Object,
-            ArgumentType::NewId,
+            ArgumentType::Str(AllowNull::No),
+            ArgumentType::Array(AllowNull::No),
+            ArgumentType::Object(AllowNull::No),
+            ArgumentType::NewId(AllowNull::No),
             ArgumentType::Int,
         ];
 
-        let ret = server
-            .read_messages(
-                |sender_id, opcode| {
+        server.fill_incoming_buffers().unwrap();
+
+        let ret_msg =
+            server
+                .read_one_message(|sender_id, opcode| {
                     if sender_id == 42 && opcode == 7 {
                         Some(SIGNATURE)
                     } else {
                         None
                     }
-                },
-                |message| {
-                    assert_eq_msgs(&message, &msg);
-                    true
-                },
-            )
-            .unwrap()
-            .unwrap();
+                })
+                .unwrap();
 
-        assert_eq!(ret, 1);
+        assert_eq_msgs(&msg, &ret_msg);
     }
 
     #[test]
@@ -535,24 +443,19 @@ mod tests {
 
         static SIGNATURE: &'static [ArgumentType] = &[ArgumentType::Fd, ArgumentType::Fd];
 
-        let ret = server
-            .read_messages(
-                |sender_id, opcode| {
+        server.fill_incoming_buffers().unwrap();
+
+        let ret_msg =
+            server
+                .read_one_message(|sender_id, opcode| {
                     if sender_id == 42 && opcode == 7 {
                         Some(SIGNATURE)
                     } else {
                         None
                     }
-                },
-                |message| {
-                    assert_eq_msgs(&message, &msg);
-                    true
-                },
-            )
-            .unwrap()
-            .unwrap();
-
-        assert_eq!(ret, 1);
+                })
+                .unwrap();
+        assert_eq_msgs(&msg, &ret_msg);
     }
 
     #[test]
@@ -585,7 +488,7 @@ mod tests {
         ];
 
         static SIGNATURES: &'static [&'static [ArgumentType]] = &[
-            &[ArgumentType::Int, ArgumentType::Str],
+            &[ArgumentType::Int, ArgumentType::Str(AllowNull::No)],
             &[ArgumentType::Fd, ArgumentType::Fd],
             &[ArgumentType::Uint, ArgumentType::Fd],
         ];
@@ -599,25 +502,18 @@ mod tests {
         }
         client.flush().unwrap();
 
-        let mut recv_msgs = Vec::new();
-        let ret = server
-            .read_messages(
-                |sender_id, opcode| {
-                    if sender_id == 42 {
-                        Some(SIGNATURES[opcode as usize])
-                    } else {
-                        None
-                    }
-                },
-                |message| {
-                    recv_msgs.push(message);
-                    true
-                },
-            )
-            .unwrap()
-            .unwrap();
+        server.fill_incoming_buffers().unwrap();
 
-        assert_eq!(ret, 3);
+        let mut recv_msgs = Vec::new();
+        while let Ok(message) = server.read_one_message(|sender_id, opcode| {
+            if sender_id == 42 {
+                Some(SIGNATURES[opcode as usize])
+            } else {
+                None
+            }
+        }) {
+            recv_msgs.push(message);
+        }
         assert_eq!(recv_msgs.len(), 3);
         for (msg1, msg2) in messages.iter().zip(recv_msgs.iter()) {
             assert_eq_msgs(msg1, msg2);
@@ -644,25 +540,21 @@ mod tests {
         client.flush().unwrap();
 
         static SIGNATURE: &'static [ArgumentType] =
-            &[ArgumentType::Uint, ArgumentType::Str, ArgumentType::Uint];
+            &[ArgumentType::Uint, ArgumentType::Str(AllowNull::No), ArgumentType::Uint];
 
-        let ret = server
-            .read_messages(
-                |sender_id, opcode| {
+        server.fill_incoming_buffers().unwrap();
+
+        let ret_msg =
+            server
+                .read_one_message(|sender_id, opcode| {
                     if sender_id == 2 && opcode == 0 {
                         Some(SIGNATURE)
                     } else {
                         None
                     }
-                },
-                |message| {
-                    assert_eq_msgs(&message, &msg);
-                    true
-                },
-            )
-            .unwrap()
-            .unwrap();
+                })
+                .unwrap();
 
-        assert_eq!(ret, 1);
+        assert_eq_msgs(&msg, &ret_msg);
     }
 }

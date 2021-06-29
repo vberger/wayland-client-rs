@@ -53,6 +53,8 @@ external_library!(WaylandServer, "wayland-server",
         fn wl_client_get_destroy_listener(*mut wl_client, wl_notify_func_t) -> *mut wl_listener,
         fn wl_client_post_no_memory(*mut wl_client) -> (),
         fn wl_resource_create(*mut wl_client, *const wl_interface, c_int, u32) -> *mut wl_resource,
+        fn wl_client_get_link(*mut wl_client) -> *mut wl_list,
+        fn wl_client_from_link(*mut wl_list) -> *mut wl_client,
     // wl_display
         fn wl_client_create(*mut wl_display, c_int) -> *mut wl_client,
         fn wl_display_create() -> *mut wl_display,
@@ -74,6 +76,7 @@ external_library!(WaylandServer, "wayland-server",
         fn wl_display_init_shm(*mut wl_display) -> c_int,
         fn wl_display_add_client_created_listener(*mut wl_display, *mut wl_listener) -> (),
         fn wl_display_set_global_filter(*mut wl_display, wl_display_global_filter_func_t, *mut c_void) -> (),
+        fn wl_display_get_client_list(*mut wl_display) -> *mut wl_list,
     // wl_event_loop
         fn wl_event_loop_create() -> *mut wl_event_loop,
         fn wl_event_loop_destroy(*mut wl_event_loop) -> (),
@@ -92,6 +95,7 @@ external_library!(WaylandServer, "wayland-server",
         fn wl_event_source_remove(*mut wl_event_source) -> c_int,
         fn wl_event_source_check(*mut wl_event_source) -> (),
     // wl_global
+        fn wl_global_remove(*mut wl_global) -> (),
         fn wl_global_destroy(*mut wl_global) -> (),
         fn wl_global_get_user_data(*const wl_global) -> *mut c_void,
     // wl_resource
@@ -160,10 +164,7 @@ lazy_static::lazy_static!(
                 Ok(h) => return Some(h),
                 Err(::dlib::DlError::CantOpen(_)) => continue,
                 Err(::dlib::DlError::MissingSymbol(s)) => {
-                    if ::std::env::var_os("WAYLAND_RS_DEBUG").is_some() {
-                        // only print debug messages if WAYLAND_RS_DEBUG is set
-                        eprintln!("[wayland-server] Found library {} cannot be used: symbol {} is missing.", ver, s);
-                    }
+                    log::error!("Found library {} cannot be used: symbol {} is missing.", ver, s);
                     return None;
                 }
             }
@@ -196,21 +197,16 @@ pub mod signal {
     use std::os::raw::c_void;
     use std::ptr;
 
-    // TODO: Is this really not UB ?
-    macro_rules! offset_of(
-        ($ty:ty, $field:ident) => {
-            &(*(ptr::null() as *const $ty)).$field as *const _ as usize
-        }
-    );
+    use memoffset::offset_of;
 
     macro_rules! container_of(
-        ($ptr: expr, $container: ty, $field: ident) => {
+        ($ptr: expr, $container: ident, $field: ident) => {
             ($ptr as *mut u8).offset(-(offset_of!($container, $field) as isize)) as *mut $container
         }
     );
 
     macro_rules! list_for_each(
-        ($pos: ident, $head:expr, $container: ty, $field: ident, $action: block) => {
+        ($pos: ident, $head:expr, $container: ident, $field: ident, $action: block) => {
             let mut $pos = container_of!((*$head).next, $container, $field);
             while &mut (*$pos).$field as *mut _ != $head {
                 $action;
@@ -220,7 +216,7 @@ pub mod signal {
     );
 
     macro_rules! list_for_each_safe(
-        ($pos: ident, $head: expr, $container: ty, $field: ident, $action: block) => {
+        ($pos: ident, $head: expr, $container: ident, $field: ident, $action: block) => {
             let mut $pos = container_of!((*$head).next, $container, $field);
             let mut tmp = container_of!((*$pos).$field.next, $container, $field);
             while &mut (*$pos).$field as *mut _ != $head {

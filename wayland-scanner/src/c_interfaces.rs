@@ -4,8 +4,7 @@ use std::iter::repeat;
 use proc_macro2::{Ident, Literal, Span, TokenStream};
 use quote::quote;
 
-use crate::protocol::*;
-use crate::util::null_terminated_byte_string_literal;
+use crate::protocol::{Interface, Message, Protocol, Type};
 
 pub(crate) fn generate_interfaces_prefix(protocol: &Protocol) -> TokenStream {
     let longest_nulls = protocol.interfaces.iter().fold(0, |max, interface| {
@@ -28,13 +27,12 @@ pub(crate) fn generate_interfaces_prefix(protocol: &Protocol) -> TokenStream {
 
     let types_null_len = Literal::usize_unsuffixed(longest_nulls);
 
-    let nulls = repeat(quote!(NULLPTR as *const sys::common::wl_interface)).take(longest_nulls);
+    let nulls = repeat(quote!(NULLPTR as *const wayland_backend::protocol::wl_interface))
+        .take(longest_nulls);
 
     quote! {
-        use std::os::raw::{c_char, c_void};
-
-        const NULLPTR: *const c_void = 0 as *const c_void;
-        static mut types_null: [*const sys::common::wl_interface; #types_null_len] = [
+        const NULLPTR: *const std::os::raw::c_void = 0 as *const std::os::raw::c_void;
+        static mut types_null: [*const wayland_backend::protocol::wl_interface; #types_null_len] = [
             #(#nulls,)*
         ];
     }
@@ -49,14 +47,14 @@ pub(crate) fn generate_interface(interface: &Interface) -> TokenStream {
     let version_value = Literal::i32_unsuffixed(interface.version as i32);
     let request_count_value = Literal::i32_unsuffixed(interface.requests.len() as i32);
     let requests_value = if interface.requests.is_empty() {
-        quote!(NULLPTR as *const wl_message)
+        quote!(NULLPTR as *const wayland_backend::protocol::wl_message)
     } else {
         let requests_ident = Ident::new(&format!("{}_requests", interface.name), Span::call_site());
         quote!(unsafe { &#requests_ident as *const _ })
     };
     let event_count_value = Literal::i32_unsuffixed(interface.events.len() as i32);
     let events_value = if interface.events.is_empty() {
-        quote!(NULLPTR as *const wl_message)
+        quote!(NULLPTR as *const wayland_backend::protocol::wl_message)
     } else {
         let events_ident = Ident::new(&format!("{}_events", interface.name), Span::call_site());
         quote!(unsafe { &#events_ident as *const _ })
@@ -66,9 +64,8 @@ pub(crate) fn generate_interface(interface: &Interface) -> TokenStream {
         #requests
         #events
 
-        /// C representation of this interface, for interop
-        pub static mut #interface_ident: wl_interface = wl_interface {
-            name: #name_value as *const u8 as *const c_char,
+        pub static mut #interface_ident: wayland_backend::protocol::wl_interface = wayland_backend::protocol::wl_interface {
+            name: #name_value as *const u8 as *const std::os::raw::c_char,
             version: #version_value,
             request_count: #request_count_value,
             requests: #requests_value,
@@ -94,16 +91,15 @@ fn gen_messages(interface: &Interface, messages: &[Message], which: &str) -> Tok
             let array_len = Literal::usize_unsuffixed(msg.args.len());
             let array_values = msg.args.iter().map(|arg| match (arg.typ, &arg.interface) {
                 (Type::Object, &Some(ref inter)) | (Type::NewId, &Some(ref inter)) => {
-                    let module = Ident::new(inter, Span::call_site());
                     let interface_ident =
                         Ident::new(&format!("{}_interface", inter), Span::call_site());
-                    quote!(unsafe { &super::#module::#interface_ident as *const wl_interface })
+                    quote!(unsafe { &#interface_ident as *const wayland_backend::protocol::wl_interface })
                 }
-                _ => quote!(NULLPTR as *const wl_interface),
+                _ => quote!(NULLPTR as *const wayland_backend::protocol::wl_interface),
             });
 
             Some(quote! {
-                static mut #array_ident: [*const wl_interface; #array_len] = [
+                static mut #array_ident: [*const wayland_backend::protocol::wl_interface; #array_len] = [
                     #(#array_values,)*
                 ];
             })
@@ -127,9 +123,9 @@ fn gen_messages(interface: &Interface, messages: &[Message], which: &str) -> Tok
         };
 
         quote! {
-            wl_message {
-                name: #name_value as *const u8 as *const c_char,
-                signature: #signature_value as *const u8 as *const c_char,
+            wayland_backend::protocol::wl_message {
+                name: #name_value as *const u8 as *const std::os::raw::c_char,
+                signature: #signature_value as *const u8 as *const std::os::raw::c_char,
                 types: unsafe { &#types_ident as *const _ },
             }
         }
@@ -138,8 +134,7 @@ fn gen_messages(interface: &Interface, messages: &[Message], which: &str) -> Tok
     quote! {
         #(#types_arrays)*
 
-        /// C-representation of the messages of this interface, for interop
-        pub static mut #message_array_ident: [wl_message; #message_array_len] = [
+        pub static mut #message_array_ident: [wayland_backend::protocol::wl_message; #message_array_len] = [
             #(#message_array_values,)*
         ];
     }
@@ -176,4 +171,12 @@ fn message_signature(msg: &Message) -> Vec<u8> {
 
     res.push(0);
     res
+}
+
+pub fn null_terminated_byte_string_literal(string: &str) -> Literal {
+    let mut val = Vec::with_capacity(string.len() + 1);
+    val.extend_from_slice(string.as_bytes());
+    val.push(0);
+
+    Literal::byte_string(&val)
 }
