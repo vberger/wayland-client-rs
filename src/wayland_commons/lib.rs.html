@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `wayland-commons/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_commons/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_commons/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -248,8 +248,8 @@
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">nix</span>;
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
-<span class="kw">use</span> <span class="ident">wayland_sys</span>::<span class="ident">common</span> <span class="kw">as</span> <span class="ident">syscom</span>;
+<span class="kw">use</span> <span class="ident">std::os::raw::c_void</span>;
+<span class="kw">use</span> <span class="ident">wayland_sys::common</span> <span class="kw">as</span> <span class="ident">syscom</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">debug</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">filter</span>;
@@ -258,7 +258,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">user_data</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wire</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">smallvec</span>::<span class="ident">smallvec</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">smallvec::smallvec</span>;
 
 <span class="doccomment">/// A group of messages</span>
 <span class="doccomment">///</span>
@@ -269,7 +269,7 @@
 <span class="doccomment">/// generated using the `wayland-scanner` crate.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">MessageGroup</span>: <span class="ident">Sized</span> {
     <span class="doccomment">/// Wire representation of this MessageGroup</span>
-    <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">wire</span>::<span class="ident">MessageDesc</span>];
+    <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">wire::MessageDesc</span>];
     <span class="doccomment">/// The wrapper type for ObjectMap allowing the mapping of Object and</span>
     <span class="doccomment">/// NewId arguments to the object map during parsing.</span>
     <span class="kw">type</span> <span class="ident">Map</span>;
@@ -282,17 +282,17 @@
     <span class="doccomment">/// The minimal object version for which this message exists</span>
     <span class="kw">fn</span> <span class="ident">since</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
     <span class="doccomment">/// Retrieve the child `Object` associated with this message if any</span>
-    <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="self">self</span>::<span class="ident">map</span>::<span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(
+    <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="self">self</span><span class="ident">::map::ObjectMetadata</span><span class="op">&gt;</span>(
         <span class="ident">opcode</span>: <span class="ident">u16</span>,
         <span class="ident">version</span>: <span class="ident">u32</span>,
         <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">map</span>::<span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span><span class="ident">::map::Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span>;
     <span class="doccomment">/// Construct a message from its raw representation</span>
     <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">wire</span>::<span class="ident">Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span>;
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::result_unit_err</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">msg</span>: <span class="ident">wire::Message</span>, <span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Map</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span>;
     <span class="doccomment">/// Turn this message into its raw representation</span>
-    <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">send_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">wire</span>::<span class="ident">Message</span>;
+    <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="ident">send_id</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">wire::Message</span>;
     <span class="doccomment">/// Construct a message of this group from its C representation</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
@@ -300,21 +300,21 @@
     <span class="doccomment">/// The pointers provided to this function must all be valid pointers from</span>
     <span class="doccomment">/// `libwayland-client`</span>
     <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::result_unit_err</span>)]</span>
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
         <span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="ident">opcode</span>: <span class="ident">u32</span>,
-        <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syscom</span>::<span class="ident">wl_argument</span>,
+        <span class="ident">args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syscom::wl_argument</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span>;
     <span class="doccomment">/// Build a C representation of this message</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// It can only be accessed from the provided closure, and this consumes</span>
     <span class="doccomment">/// the message.</span>
     <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::wrong_self_convention</span>)]</span>
     <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">syscom</span>::<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>;
+        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">syscom::wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>;
 }
 
 <span class="doccomment">/// The description of a wayland interface</span>
@@ -343,7 +343,7 @@
     <span class="doccomment">/// ones the server supports.</span>
     <span class="kw">const</span> <span class="ident">VERSION</span>: <span class="ident">u32</span>;
     <span class="doccomment">/// Pointer to the C representation of this interface</span>
-    <span class="kw">fn</span> <span class="ident">c_interface</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syscom</span>::<span class="ident">wl_interface</span>;
+    <span class="kw">fn</span> <span class="ident">c_interface</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syscom::wl_interface</span>;
 }
 
 <span class="doccomment">/// An empty enum representing a MessageGroup with no messages</span>
@@ -351,7 +351,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 <span class="kw">impl</span> <span class="ident">MessageGroup</span> <span class="kw">for</span> <span class="ident">NoMessage</span> {
-    <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">wire</span>::<span class="ident">MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
+    <span class="kw">const</span> <span class="ident">MESSAGES</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">wire::MessageDesc</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
     <span class="kw">type</span> <span class="ident">Map</span> <span class="op">=</span> ();
     <span class="kw">fn</span> <span class="ident">is_destructor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
@@ -362,25 +362,25 @@
     <span class="kw">fn</span> <span class="ident">since</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {}
     }
-    <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="self">self</span>::<span class="ident">map</span>::<span class="ident">ObjectMetadata</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="ident">u16</span>, <span class="kw">_</span>: <span class="ident">u32</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">M</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">map</span>::<span class="ident">Object</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">child</span><span class="op">&lt;</span><span class="ident">M</span>: <span class="self">self</span><span class="ident">::map::ObjectMetadata</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="ident">u16</span>, <span class="kw">_</span>: <span class="ident">u32</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">M</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">crate</span><span class="ident">::map::Object</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="prelude-val">None</span>
     }
-    <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="kw">_</span>: <span class="ident">wire</span>::<span class="ident">Message</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ()) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="kw">_</span>: <span class="ident">wire::Message</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ()) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
         <span class="prelude-val">Err</span>(())
     }
-    <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">wire</span>::<span class="ident">Message</span> {
+    <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>, <span class="kw">_</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">wire::Message</span> {
         <span class="kw">match</span> <span class="self">self</span> {}
     }
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_c</span>(
         <span class="ident">_obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>,
         <span class="ident">_opcode</span>: <span class="ident">u32</span>,
-        <span class="ident">_args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syscom</span>::<span class="ident">wl_argument</span>,
+        <span class="ident">_args</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">syscom::wl_argument</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, ()<span class="op">&gt;</span> {
         <span class="prelude-val">Err</span>(())
     }
     <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">_f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">syscom</span>::<span class="ident">wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
+        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">syscom::wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
     {
         <span class="kw">match</span> <span class="self">self</span> {}
     }
@@ -392,14 +392,14 @@
 <span class="doccomment">/// If the ThreadGuard is dropped from the wrong thread,</span>
 <span class="doccomment">/// the underlying value will be leaked.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> {
-    <span class="ident">thread</span>: <span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">ThreadId</span>,
-    <span class="ident">val</span>: <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">ManuallyDrop</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">thread</span>: <span class="ident">std::thread::ThreadId</span>,
+    <span class="ident">val</span>: <span class="ident">std::mem::ManuallyDrop</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Create a new ThreadGuard wrapper</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">val</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">ThreadGuard</span> { <span class="ident">val</span>: <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">ManuallyDrop</span>::<span class="ident">new</span>(<span class="ident">val</span>), <span class="ident">thread</span>: <span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() }
+        <span class="ident">ThreadGuard</span> { <span class="ident">val</span>: <span class="ident">std::mem::ManuallyDrop::new</span>(<span class="ident">val</span>), <span class="ident">thread</span>: <span class="ident">std::thread::current</span>().<span class="ident">id</span>() }
     }
 }
 
@@ -423,7 +423,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns `None` if done on the wrong thread</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">thread</span> <span class="op">=</span><span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">thread</span> <span class="op">=</span><span class="op">=</span> <span class="ident">::std::thread::current</span>().<span class="ident">id</span>() {
             <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">val</span>)
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
@@ -434,7 +434,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns `None` if done on the wrong thread</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_get_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">thread</span> <span class="op">=</span><span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">thread</span> <span class="op">=</span><span class="op">=</span> <span class="ident">::std::thread::current</span>().<span class="ident">id</span>() {
             <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">val</span>)
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
@@ -446,8 +446,8 @@
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="comment">// We can only actually perform the drop if we are on the right thread</span>
         <span class="comment">// otherwise it may be racy, so we just leak the value</span>
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">thread</span> <span class="op">=</span><span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() {
-            <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">ManuallyDrop</span>::<span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">val</span>) }
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">thread</span> <span class="op">=</span><span class="op">=</span> <span class="ident">::std::thread::current</span>().<span class="ident">id</span>() {
+            <span class="kw">unsafe</span> { <span class="ident">std::mem::ManuallyDrop::drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">val</span>) }
         }
     }
 }
@@ -455,5 +455,5 @@
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_commons" data-search-js="../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_commons" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

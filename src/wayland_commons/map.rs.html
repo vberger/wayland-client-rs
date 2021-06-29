@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `wayland-commons/src/map.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>map.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_commons/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_commons/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -245,7 +245,7 @@
 <span class="doccomment">//! Wayland objects map</span>
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Interface</span>, <span class="ident">MessageGroup</span>, <span class="ident">NoMessage</span>};
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">Ordering</span>;
+<span class="kw">use</span> <span class="ident">std::cmp::Ordering</span>;
 
 <span class="doccomment">/// Limit separating server-created from client-created objects IDs in the namespace</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SERVER_ID_LIMIT</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0xFF00_0000</span>;
@@ -271,9 +271,9 @@
     <span class="doccomment">/// Version of this object</span>
     <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">u32</span>,
     <span class="doccomment">/// Description of the requests of this object</span>
-    <span class="kw">pub</span> <span class="ident">requests</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">crate</span>::<span class="ident">wire</span>::<span class="ident">MessageDesc</span>],
+    <span class="kw">pub</span> <span class="ident">requests</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">crate</span><span class="ident">::wire::MessageDesc</span>],
     <span class="doccomment">/// Description of the events of this object</span>
-    <span class="kw">pub</span> <span class="ident">events</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">crate</span>::<span class="ident">wire</span>::<span class="ident">MessageDesc</span>],
+    <span class="kw">pub</span> <span class="ident">events</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw">crate</span><span class="ident">::wire::MessageDesc</span>],
     <span class="doccomment">/// Metadata associated to this object (ex: its event queue client side)</span>
     <span class="kw">pub</span> <span class="ident">meta</span>: <span class="ident">Meta</span>,
     <span class="doccomment">/// A function which, from an opcode, a version, and the Meta, creates a child</span>
@@ -288,13 +288,13 @@
     <span class="doccomment">/// Create an Object corresponding to given interface and version</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_interface</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="ident">version</span>: <span class="ident">u32</span>, <span class="ident">meta</span>: <span class="ident">Meta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
         <span class="ident">Object</span> {
-            <span class="ident">interface</span>: <span class="ident">I</span>::<span class="ident">NAME</span>,
+            <span class="ident">interface</span>: <span class="ident">I::NAME</span>,
             <span class="ident">version</span>,
-            <span class="ident">requests</span>: <span class="ident">I</span>::<span class="ident">Request</span>::<span class="ident">MESSAGES</span>,
-            <span class="ident">events</span>: <span class="ident">I</span>::<span class="ident">Event</span>::<span class="ident">MESSAGES</span>,
+            <span class="ident">requests</span>: <span class="ident">I::Request::MESSAGES</span>,
+            <span class="ident">events</span>: <span class="ident">I::Event::MESSAGES</span>,
             <span class="ident">meta</span>,
-            <span class="ident">childs_from_events</span>: <span class="ident">childs_from</span>::<span class="op">&lt;</span><span class="ident">I</span>::<span class="ident">Event</span>, <span class="ident">Meta</span><span class="op">&gt;</span>,
-            <span class="ident">childs_from_requests</span>: <span class="ident">childs_from</span>::<span class="op">&lt;</span><span class="ident">I</span>::<span class="ident">Request</span>, <span class="ident">Meta</span><span class="op">&gt;</span>,
+            <span class="ident">childs_from_events</span>: <span class="ident">childs_from</span>::<span class="op">&lt;</span><span class="ident">I::Event</span>, <span class="ident">Meta</span><span class="op">&gt;</span>,
+            <span class="ident">childs_from_requests</span>: <span class="ident">childs_from</span>::<span class="op">&lt;</span><span class="ident">I::Request</span>, <span class="ident">Meta</span><span class="op">&gt;</span>,
         }
     }
 
@@ -313,7 +313,7 @@
     <span class="doccomment">/// Check whether this object is of given interface</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_interface</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Interface</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="comment">// TODO: we might want to be more robust than that</span>
-        <span class="self">self</span>.<span class="ident">interface</span> <span class="op">=</span><span class="op">=</span> <span class="ident">I</span>::<span class="ident">NAME</span>
+        <span class="self">self</span>.<span class="ident">interface</span> <span class="op">=</span><span class="op">=</span> <span class="ident">I::NAME</span>
     }
 
     <span class="doccomment">/// Create a placeholder object that will be filled-in by the message logic</span>
@@ -335,7 +335,7 @@
     <span class="ident">version</span>: <span class="ident">u32</span>,
     <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Meta</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">M</span>::<span class="ident">child</span>(<span class="ident">opcode</span>, <span class="ident">version</span>, <span class="ident">meta</span>)
+    <span class="ident">M::child</span>(<span class="ident">opcode</span>, <span class="ident">version</span>, <span class="ident">meta</span>)
 }
 
 <span class="doccomment">/// A holder for the object store of a connection</span>
@@ -351,7 +351,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">Meta</span>: <span class="ident">ObjectMetadata</span><span class="op">&gt;</span> <span class="ident">ObjectMap</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Create a new empty object map</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ObjectMap</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
-        <span class="ident">ObjectMap</span> { <span class="ident">client_objects</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(), <span class="ident">server_objects</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
+        <span class="ident">ObjectMap</span> { <span class="ident">client_objects</span>: <span class="ident">Vec::new</span>(), <span class="ident">server_objects</span>: <span class="ident">Vec::new</span>() }
     }
 
     <span class="doccomment">/// Find an object in the store</span>
@@ -359,9 +359,9 @@
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">id</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">SERVER_ID_LIMIT</span> {
-            <span class="self">self</span>.<span class="ident">server_objects</span>.<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="ident">SERVER_ID_LIMIT</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">and_then</span>(<span class="ident">Clone</span>::<span class="ident">clone</span>)
+            <span class="self">self</span>.<span class="ident">server_objects</span>.<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="ident">SERVER_ID_LIMIT</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">and_then</span>(<span class="ident">Clone::clone</span>)
         } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">client_objects</span>.<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">and_then</span>(<span class="ident">Clone</span>::<span class="ident">clone</span>)
+            <span class="self">self</span>.<span class="ident">client_objects</span>.<span class="ident">get</span>((<span class="ident">id</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">and_then</span>(<span class="ident">Clone::clone</span>)
         }
     }
 
@@ -385,7 +385,7 @@
     <span class="doccomment">/// Can fail if the requested id is not the next free id of this store.</span>
     <span class="doccomment">/// (In which case this is a protocol error)</span>
     <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::result_unit_err</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_at</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">u32</span>, <span class="ident">object</span>: <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Err</span>(())
@@ -408,7 +408,7 @@
 
     <span class="doccomment">/// Mutably access an object of the map</span>
     <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">result_unit_err</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::result_unit_err</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">id</span>: <span class="ident">u32</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, ()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">id</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Err</span>(())
@@ -448,7 +448,7 @@
     <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">object</span>: <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
-    <span class="kw">match</span> <span class="ident">store</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="prelude-ty">Option</span>::<span class="ident">is_none</span>) {
+    <span class="kw">match</span> <span class="ident">store</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="ident">Option::is_none</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">store</span>[<span class="ident">id</span>] <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">object</span>);
             <span class="ident">id</span> <span class="kw">as</span> <span class="ident">u32</span>
@@ -467,12 +467,12 @@
     <span class="ident">object</span>: <span class="ident">Object</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), ()<span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">id</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">store</span>.<span class="ident">len</span>()) {
-        <span class="ident">Ordering</span>::<span class="ident">Greater</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
-        <span class="ident">Ordering</span>::<span class="ident">Equal</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Ordering::Greater</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+        <span class="ident">Ordering::Equal</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">store</span>.<span class="ident">push</span>(<span class="prelude-val">Some</span>(<span class="ident">object</span>));
             <span class="prelude-val">Ok</span>(())
         }
-        <span class="ident">Ordering</span>::<span class="ident">Less</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Ordering::Less</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">previous</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">store</span>[<span class="ident">id</span>];
             <span class="kw">if</span> <span class="op">!</span><span class="ident">previous</span>.<span class="ident">is_none</span>() {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(());
@@ -483,5 +483,5 @@
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_commons" data-search-js="../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_commons" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `wayland-client/src/event_queue.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>event_queue.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_client/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_client/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -267,9 +267,9 @@
 <span id="264">264</span>
 <span id="265">265</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">io</span>, <span class="ident">rc</span>::<span class="ident">Rc</span>};
+<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">io</span>, <span class="ident">rc::Rc</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">imp</span>::<span class="ident">EventQueueInner</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::imp::EventQueueInner</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AnonymousObject</span>, <span class="ident">DispatchData</span>, <span class="ident">Display</span>, <span class="ident">Main</span>, <span class="ident">RawEvent</span>};
 
 <span class="doccomment">/// An event queue for protocol messages</span>
@@ -385,7 +385,7 @@
 
 <span class="kw">impl</span> <span class="ident">EventQueue</span> {
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">EventQueueInner</span>, <span class="ident">display</span>: <span class="ident">Display</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EventQueue</span> {
-        <span class="ident">EventQueue</span> { <span class="ident">inner</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">inner</span>), <span class="ident">display</span> }
+        <span class="ident">EventQueue</span> { <span class="ident">inner</span>: <span class="ident">Rc::new</span>(<span class="ident">inner</span>), <span class="ident">display</span> }
     }
     <span class="doccomment">/// Dispatches events from the internal buffer.</span>
     <span class="doccomment">///</span>
@@ -401,11 +401,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If an error is returned, your connection with the wayland compositor is probably lost.</span>
     <span class="doccomment">/// You may want to check `Display::protocol_error()` to see if it was caused by a protocol error.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">fallback</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std::any::Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">fallback</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">RawEvent</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>, <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>),
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">DispatchData</span>::<span class="ident">wrap</span>(<span class="ident">data</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">DispatchData::wrap</span>(<span class="ident">data</span>);
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">dispatch</span>(<span class="ident">data</span>.<span class="ident">reborrow</span>(), <span class="ident">fallback</span>)
     }
 
@@ -421,15 +421,15 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If an error is returned, your connection with the wayland compositor is probably lost.</span>
     <span class="doccomment">/// You may want to check `Display::protocol_error()` to see if it was caused by a protocol error.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch_pending</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch_pending</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std::any::Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
         <span class="ident">fallback</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">RawEvent</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>, <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>),
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">DispatchData</span>::<span class="ident">wrap</span>(<span class="ident">data</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">DispatchData::wrap</span>(<span class="ident">data</span>);
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">dispatch_pending</span>(<span class="ident">data</span>.<span class="ident">reborrow</span>(), <span class="ident">fallback</span>)
     }
 
@@ -448,15 +448,15 @@
     <span class="doccomment">/// On success returns the number of dispatched events.</span>
     <span class="doccomment">/// If an error is returned, your connection with the wayland compositor is probably lost.</span>
     <span class="doccomment">/// You may want to check `Display::protocol_error()` to see if it was caused by a protocol error.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sync_roundtrip</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sync_roundtrip</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std::any::Any</span>, <span class="ident">F</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
         <span class="ident">fallback</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">RawEvent</span>, <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">AnonymousObject</span><span class="op">&gt;</span>, <span class="ident">DispatchData</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>),
     {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">DispatchData</span>::<span class="ident">wrap</span>(<span class="ident">data</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">DispatchData::wrap</span>(<span class="ident">data</span>);
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">sync_roundtrip</span>(<span class="ident">data</span>.<span class="ident">reborrow</span>(), <span class="ident">fallback</span>)
     }
 
@@ -510,7 +510,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Reads events from the server socket. If other `ReadEventsGuard` exists, will block</span>
     <span class="doccomment">/// until they are all consumed or destroyed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_events</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_events</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">done</span> <span class="op">=</span> <span class="bool-val">true</span>;
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">read_events</span>()
     }
@@ -533,5 +533,5 @@
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_client" data-search-js="../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_client" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

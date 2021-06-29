@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `wayland-server/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_server/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_server/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -350,13 +350,13 @@
 <span class="kw">mod</span> <span class="ident">globals</span>;
 <span class="kw">mod</span> <span class="ident">resource</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">client</span>::<span class="ident">Client</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">display</span>::<span class="ident">Display</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">globals</span>::<span class="ident">Global</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">client::Client</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">display::Display</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">globals::Global</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">resource</span>::{<span class="ident">Main</span>, <span class="ident">Resource</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">anonymous_object</span>::<span class="ident">AnonymousObject</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">wayland_commons</span>::<span class="ident">user_data</span>::<span class="ident">UserDataMap</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">anonymous_object::AnonymousObject</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">wayland_commons::user_data::UserDataMap</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">wayland_commons</span>::{
     <span class="ident">filter</span>::{<span class="ident">DispatchData</span>, <span class="ident">Filter</span>},
     <span class="ident">Interface</span>, <span class="ident">MessageGroup</span>, <span class="ident">NoMessage</span>,
@@ -379,26 +379,26 @@
 <span class="attribute">#[<span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;native_lib/mod.rs&quot;</span>]</span>
 <span class="kw">mod</span> <span class="ident">imp</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">imp</span>::<span class="ident">ResourceMap</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">imp::ResourceMap</span>;
 
 <span class="doccomment">/// Generated interfaces for the core wayland protocol</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">protocol</span> {
     <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>, <span class="ident">non_camel_case_types</span>, <span class="ident">unused_unsafe</span>, <span class="ident">unused_variables</span>)]</span>
     <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>, <span class="ident">non_snake_case</span>, <span class="ident">unused_imports</span>)]</span>
-    <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">missing_docs</span>, <span class="ident">clippy</span>::<span class="ident">all</span>)]</span>
+    <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">missing_docs</span>, <span class="ident">clippy::all</span>)]</span>
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">AnonymousObject</span>, <span class="ident">Main</span>, <span class="ident">Resource</span>, <span class="ident">ResourceMap</span>};
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons</span>::<span class="ident">map</span>::{<span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>};
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons</span>::<span class="ident">smallvec</span>;
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons</span>::<span class="ident">wire</span>::{<span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>};
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons::map</span>::{<span class="ident">Object</span>, <span class="ident">ObjectMetadata</span>};
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons::smallvec</span>;
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons::wire</span>::{<span class="ident">Argument</span>, <span class="ident">ArgumentType</span>, <span class="ident">Message</span>, <span class="ident">MessageDesc</span>};
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_commons</span>::{<span class="ident">Interface</span>, <span class="ident">MessageGroup</span>};
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident">wayland_sys</span> <span class="kw">as</span> <span class="ident">sys</span>;
-    <span class="macro">include</span><span class="macro">!</span>(<span class="macro">concat</span><span class="macro">!</span>(<span class="macro">env</span><span class="macro">!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/wayland_api.rs&quot;</span>));
+    <span class="macro">include!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/wayland_api.rs&quot;</span>));
 }
 
 <span class="kw">mod</span> <span class="ident">anonymous_object</span> {
     <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Interface</span>, <span class="ident">NoMessage</span>, <span class="ident">Resource</span>};
-    <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
+    <span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
 
     <span class="doccomment">/// Anonymous interface</span>
     <span class="doccomment">///</span>
@@ -412,8 +412,8 @@
         <span class="kw">type</span> <span class="ident">Event</span> <span class="op">=</span> <span class="ident">NoMessage</span>;
         <span class="kw">const</span> <span class="ident">NAME</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;&lt;anonymous&gt;&quot;</span>;
         <span class="kw">const</span> <span class="ident">VERSION</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">fn</span> <span class="ident">c_interface</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">wayland_sys</span>::<span class="ident">common</span>::<span class="ident">wl_interface</span> {
-            ::<span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">null</span>()
+        <span class="kw">fn</span> <span class="ident">c_interface</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">::wayland_sys::common::wl_interface</span> {
+            <span class="ident">::std::ptr::null</span>()
         }
     }
 
@@ -436,8 +436,8 @@
         }
     }
     <span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">AnonymousObject</span> {
-        <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-            <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>))
+        <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+            <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>))
         }
     }
 }
@@ -504,15 +504,15 @@
 <span class="doccomment">/// directly be provided into a `Filter&lt;MyEnum&gt;`.</span>
 
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">request_enum</span>(
+<span class="macro">macro_rules!</span> <span class="ident">request_enum</span>(
     ($(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attrs</span>:<span class="ident">meta</span>]</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span>:<span class="ident">ident</span> <span class="op">|</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span>:<span class="ident">ident</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span>:<span class="ident">ty</span>),<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">request_enum</span><span class="macro">!</span>($(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attrs</span>]</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> <span class="op">|</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span>),<span class="op">*</span> <span class="op">|</span> );
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro">::request_enum!</span>($(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attrs</span>]</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> <span class="op">|</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span>),<span class="op">*</span> <span class="op">|</span> );
     };
     ($(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attrs</span>:<span class="ident">meta</span>]</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span>:<span class="ident">ident</span> <span class="op">|</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span>:<span class="ident">ident</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span>:<span class="ident">ty</span>),<span class="op">*</span> <span class="op">|</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">ty</span>),<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
         $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attrs</span>]</span>)<span class="op">*</span>
         <span class="kw">pub</span> <span class="kw">enum</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> {
             $(
-                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span> { <span class="ident">request</span>: <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Interface</span><span class="op">&gt;</span>::<span class="ident">Request</span>, <span class="ident">object</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Main</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span><span class="op">&gt;</span> },
+                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span> { <span class="ident">request</span>: <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro-nonterminal">::Interface</span><span class="op">&gt;</span><span class="ident">::Request</span>, <span class="ident">object</span>: <span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro-nonterminal">::Main</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span><span class="op">&gt;</span> },
             )<span class="op">*</span>
             $(
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>),
@@ -520,8 +520,8 @@
         }
 
         $(
-            <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>(<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Main</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span><span class="op">&gt;</span>, <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Interface</span><span class="op">&gt;</span>::<span class="ident">Request</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> {
-                <span class="kw">fn</span> <span class="ident">from</span>((<span class="ident">object</span>, <span class="ident">request</span>): (<span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Main</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span><span class="op">&gt;</span>, <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Interface</span><span class="op">&gt;</span>::<span class="ident">Request</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> {
+            <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>(<span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro-nonterminal">::Main</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span><span class="op">&gt;</span>, <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro-nonterminal">::Interface</span><span class="op">&gt;</span><span class="ident">::Request</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> {
+                <span class="kw">fn</span> <span class="ident">from</span>((<span class="ident">object</span>, <span class="ident">request</span>): (<span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro-nonterminal">::Main</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span><span class="op">&gt;</span>, <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">iface</span> <span class="kw">as</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span><span class="macro-nonterminal">::Interface</span><span class="op">&gt;</span><span class="ident">::Request</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span> {
                     <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enu</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">evt_name</span> { <span class="ident">request</span>, <span class="ident">object</span> }
                 }
             }
@@ -537,5 +537,5 @@
     };
 );
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_server" data-search-js="../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_server" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>

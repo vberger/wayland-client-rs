@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `wayland-cursor/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_cursor/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wayland_cursor/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -421,28 +421,28 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">IoError</span>, <span class="ident">Read</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">IoResult</span>, <span class="ident">Seek</span>, <span class="ident">SeekFrom</span>, <span class="ident">Write</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">Index</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">unix</span>::<span class="ident">io</span>::{<span class="ident">AsRawFd</span>, <span class="ident">FromRawFd</span>, <span class="ident">RawFd</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">time</span>::{<span class="ident">SystemTime</span>, <span class="ident">UNIX_EPOCH</span>};
+<span class="kw">use</span> <span class="ident">std::env</span>;
+<span class="kw">use</span> <span class="ident">std::fs::File</span>;
+<span class="kw">use</span> <span class="ident">std::io</span>::{<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">IoError</span>, <span class="ident">Read</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">IoResult</span>, <span class="ident">Seek</span>, <span class="ident">SeekFrom</span>, <span class="ident">Write</span>};
+<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">Index</span>};
+<span class="kw">use</span> <span class="ident">std::os::unix::io</span>::{<span class="ident">AsRawFd</span>, <span class="ident">FromRawFd</span>, <span class="ident">RawFd</span>};
+<span class="kw">use</span> <span class="ident">std::time</span>::{<span class="ident">SystemTime</span>, <span class="ident">UNIX_EPOCH</span>};
 
-<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">errno</span>::<span class="ident">Errno</span>;
-<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">fcntl</span>;
-<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">sys</span>::{<span class="ident">mman</span>, <span class="ident">stat</span>};
-<span class="kw">use</span> <span class="ident">nix</span>::<span class="ident">unistd</span>;
+<span class="kw">use</span> <span class="ident">nix::errno::Errno</span>;
+<span class="kw">use</span> <span class="ident">nix::fcntl</span>;
+<span class="kw">use</span> <span class="ident">nix::sys</span>::{<span class="ident">mman</span>, <span class="ident">stat</span>};
+<span class="kw">use</span> <span class="ident">nix::unistd</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-<span class="kw">use</span> {<span class="ident">nix</span>::<span class="ident">sys</span>::<span class="ident">memfd</span>, <span class="ident">std</span>::<span class="ident">ffi</span>::<span class="ident">CStr</span>};
+<span class="kw">use</span> {<span class="ident">nix::sys::memfd</span>, <span class="ident">std::ffi::CStr</span>};
 
-<span class="kw">use</span> <span class="ident">wayland_client</span>::<span class="ident">protocol</span>::<span class="ident">wl_buffer</span>::<span class="ident">WlBuffer</span>;
-<span class="kw">use</span> <span class="ident">wayland_client</span>::<span class="ident">protocol</span>::<span class="ident">wl_shm</span>::{<span class="ident">Format</span>, <span class="ident">WlShm</span>};
-<span class="kw">use</span> <span class="ident">wayland_client</span>::<span class="ident">protocol</span>::<span class="ident">wl_shm_pool</span>::<span class="ident">WlShmPool</span>;
+<span class="kw">use</span> <span class="ident">wayland_client::protocol::wl_buffer::WlBuffer</span>;
+<span class="kw">use</span> <span class="ident">wayland_client::protocol::wl_shm</span>::{<span class="ident">Format</span>, <span class="ident">WlShm</span>};
+<span class="kw">use</span> <span class="ident">wayland_client::protocol::wl_shm_pool::WlShmPool</span>;
 <span class="kw">use</span> <span class="ident">wayland_client</span>::{<span class="ident">Attached</span>, <span class="ident">Main</span>};
 
-<span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">parser</span> <span class="kw">as</span> <span class="ident">xparser</span>;
-<span class="kw">use</span> <span class="ident">xcursor</span>::<span class="ident">CursorTheme</span> <span class="kw">as</span> <span class="ident">XCursorTheme</span>;
-<span class="kw">use</span> <span class="ident">xparser</span>::<span class="ident">Image</span> <span class="kw">as</span> <span class="ident">XCursorImage</span>;
+<span class="kw">use</span> <span class="ident">xcursor::parser</span> <span class="kw">as</span> <span class="ident">xparser</span>;
+<span class="kw">use</span> <span class="ident">xcursor::CursorTheme</span> <span class="kw">as</span> <span class="ident">XCursorTheme</span>;
+<span class="kw">use</span> <span class="ident">xparser::Image</span> <span class="kw">as</span> <span class="ident">XCursorImage</span>;
 
 <span class="doccomment">/// Represents a cursor theme loaded from the system.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CursorTheme</span> {
@@ -459,7 +459,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Same as calling `load_or(&quot;default&quot;, size, shm)`</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">shm</span>: <span class="kw-2">&amp;</span><span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">WlShm</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident">CursorTheme</span>::<span class="ident">load_or</span>(<span class="string">&quot;default&quot;</span>, <span class="ident">size</span>, <span class="ident">shm</span>)
+        <span class="ident">CursorTheme::load_or</span>(<span class="string">&quot;default&quot;</span>, <span class="ident">size</span>, <span class="ident">shm</span>)
     }
 
     <span class="doccomment">/// Load a cursor theme, using `name` as fallback.</span>
@@ -468,16 +468,16 @@
     <span class="doccomment">/// `XCURSOR_SIZE` environment variables, respectively, or from the provided variables</span>
     <span class="doccomment">/// if those are invalid.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load_or</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">mut</span> <span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">shm</span>: <span class="kw-2">&amp;</span><span class="ident">Attached</span><span class="op">&lt;</span><span class="ident">WlShm</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">name_string</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>);
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;XCURSOR_THEME&quot;</span>).<span class="ident">unwrap_or</span>(<span class="ident">name_string</span>);
+        <span class="kw">let</span> <span class="ident">name_string</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="ident">name</span>);
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">env::var</span>(<span class="string">&quot;XCURSOR_THEME&quot;</span>).<span class="ident">unwrap_or</span>(<span class="ident">name_string</span>);
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">var</span>) <span class="op">=</span> <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;XCURSOR_SIZE&quot;</span>) {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">var</span>) <span class="op">=</span> <span class="ident">env::var</span>(<span class="string">&quot;XCURSOR_SIZE&quot;</span>) {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">int</span>) <span class="op">=</span> <span class="ident">var</span>.<span class="ident">parse</span>() {
                 <span class="ident">size</span> <span class="op">=</span> <span class="ident">int</span>;
             }
         }
 
-        <span class="ident">CursorTheme</span>::<span class="ident">load_from_name</span>(<span class="ident">name</span>, <span class="ident">size</span>, <span class="ident">shm</span>)
+        <span class="ident">CursorTheme::load_from_name</span>(<span class="ident">name</span>, <span class="ident">size</span>, <span class="ident">shm</span>)
     }
 
     <span class="doccomment">/// Create a new cursor theme, ignoring the system defaults.</span>
@@ -489,7 +489,7 @@
 
         <span class="comment">//  Create shm.</span>
         <span class="kw">let</span> <span class="ident">mem_fd</span> <span class="op">=</span> <span class="ident">create_shm_fd</span>().<span class="ident">expect</span>(<span class="string">&quot;Shm fd allocation failed&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">File</span>::<span class="ident">from_raw_fd</span>(<span class="ident">mem_fd</span>) };
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">File::from_raw_fd</span>(<span class="ident">mem_fd</span>) };
         <span class="ident">file</span>.<span class="ident">set_len</span>(<span class="ident">INITIAL_POOL_SIZE</span> <span class="kw">as</span> <span class="ident">u64</span>).<span class="ident">expect</span>(<span class="string">&quot;Failed to set buffer length&quot;</span>);
 
         <span class="comment">// Ensure that we have the same we requested.</span>
@@ -499,9 +499,9 @@
 
         <span class="kw">let</span> <span class="ident">pool</span> <span class="op">=</span> <span class="ident">shm</span>.<span class="ident">create_pool</span>(<span class="ident">file</span>.<span class="ident">as_raw_fd</span>(), <span class="ident">INITIAL_POOL_SIZE</span>);
 
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>);
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String::from</span>(<span class="ident">name</span>);
 
-        <span class="ident">CursorTheme</span> { <span class="ident">name</span>, <span class="ident">file</span>, <span class="ident">size</span>, <span class="ident">pool</span>, <span class="ident">pool_size</span>: <span class="ident">INITIAL_POOL_SIZE</span>, <span class="ident">cursors</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
+        <span class="ident">CursorTheme</span> { <span class="ident">name</span>, <span class="ident">file</span>, <span class="ident">size</span>, <span class="ident">pool</span>, <span class="ident">pool_size</span>: <span class="ident">INITIAL_POOL_SIZE</span>, <span class="ident">cursors</span>: <span class="ident">Vec::new</span>() }
     }
 
     <span class="doccomment">/// Retrieve a cursor from the theme.</span>
@@ -524,16 +524,16 @@
     <span class="doccomment">/// Keep in mind that if the cursor is already loaded,</span>
     <span class="doccomment">/// the function will make a duplicate.</span>
     <span class="kw">fn</span> <span class="ident">load_cursor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Cursor</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">XCursorTheme</span>::<span class="ident">load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>).<span class="ident">load_icon</span>(<span class="ident">name</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">icon_file</span> <span class="op">=</span> <span class="ident">File</span>::<span class="ident">open</span>(<span class="ident">icon_path</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">XCursorTheme::load</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>).<span class="ident">load_icon</span>(<span class="ident">name</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">icon_file</span> <span class="op">=</span> <span class="ident">File::open</span>(<span class="ident">icon_path</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
         <span class="kw">let</span> <span class="ident">images</span> <span class="op">=</span> {
             <span class="ident">icon_file</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>;
-            <span class="ident">xparser</span>::<span class="ident">parse_xcursor</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)<span class="question-mark">?</span>
+            <span class="ident">xparser::parse_xcursor</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)<span class="question-mark">?</span>
         };
 
-        <span class="prelude-val">Some</span>(<span class="ident">Cursor</span>::<span class="ident">new</span>(<span class="ident">name</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">images</span>, <span class="ident">size</span>))
+        <span class="prelude-val">Some</span>(<span class="ident">Cursor::new</span>(<span class="ident">name</span>, <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">images</span>, <span class="ident">size</span>))
     }
 
     <span class="doccomment">/// Grow the wl_shm_pool this theme is stored on.</span>
@@ -563,16 +563,16 @@
     <span class="doccomment">/// This will also grow `theme.pool` if necessary.</span>
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">XCursorImage</span>], <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total_duration</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">images</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CursorImageBuffer</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Cursor</span>::<span class="ident">nearest_images</span>(<span class="ident">size</span>, <span class="ident">images</span>)
+        <span class="kw">let</span> <span class="ident">images</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CursorImageBuffer</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Cursor::nearest_images</span>(<span class="ident">size</span>, <span class="ident">images</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">image</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">CursorImageBuffer</span>::<span class="ident">new</span>(<span class="ident">theme</span>, <span class="ident">image</span>);
+                <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">CursorImageBuffer::new</span>(<span class="ident">theme</span>, <span class="ident">image</span>);
                 <span class="ident">total_duration</span> <span class="op">+</span><span class="op">=</span> <span class="ident">buffer</span>.<span class="ident">delay</span>;
 
                 <span class="ident">buffer</span>
             })
             .<span class="ident">collect</span>();
 
-        <span class="ident">Cursor</span> { <span class="ident">total_duration</span>, <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">name</span>), <span class="ident">images</span> }
+        <span class="ident">Cursor</span> { <span class="ident">total_duration</span>, <span class="ident">name</span>: <span class="ident">String::from</span>(<span class="ident">name</span>), <span class="ident">images</span> }
     }
 
     <span class="kw">fn</span> <span class="ident">nearest_images</span>(<span class="ident">size</span>: <span class="ident">u32</span>, <span class="ident">images</span>: <span class="kw-2">&amp;</span>[<span class="ident">XCursorImage</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">XCursorImage</span><span class="op">&gt;</span> {
@@ -613,7 +613,7 @@
 <span class="kw">impl</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Cursor</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">CursorImageBuffer</span>;
 
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Output</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">images</span>[<span class="ident">index</span>]
     }
 }
@@ -641,7 +641,7 @@
     <span class="doccomment">/// and constructs a wl_buffer on that data.</span>
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">theme</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CursorTheme</span>, <span class="ident">image</span>: <span class="kw-2">&amp;</span><span class="ident">XCursorImage</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">buf</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">image</span>.<span class="ident">pixels_rgba</span>;
-        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">theme</span>.<span class="ident">file</span>.<span class="ident">seek</span>(<span class="ident">SeekFrom</span>::<span class="ident">End</span>(<span class="number">0</span>)).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">theme</span>.<span class="ident">file</span>.<span class="ident">seek</span>(<span class="ident">SeekFrom::End</span>(<span class="number">0</span>)).<span class="ident">unwrap</span>();
 
         <span class="comment">// Resize memory before writing to it to handle shm correctly.</span>
         <span class="kw">let</span> <span class="ident">new_size</span> <span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">buf</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u64</span>;
@@ -654,7 +654,7 @@
             <span class="ident">image</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">i32</span>,
             <span class="ident">image</span>.<span class="ident">height</span> <span class="kw">as</span> <span class="ident">i32</span>,
             (<span class="ident">image</span>.<span class="ident">width</span> <span class="op">*</span> <span class="number">4</span>) <span class="kw">as</span> <span class="ident">i32</span>,
-            <span class="ident">Format</span>::<span class="ident">Argb8888</span>,
+            <span class="ident">Format::Argb8888</span>,
         );
         <span class="ident">buffer</span>.<span class="ident">quick_assign</span>(<span class="op">|</span><span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span><span class="op">|</span> {});
 
@@ -708,56 +708,56 @@
     <span class="comment">// Only try memfd on linux.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
     <span class="kw">loop</span> {
-        <span class="kw">match</span> <span class="ident">memfd</span>::<span class="ident">memfd_create</span>(
-            <span class="ident">CStr</span>::<span class="ident">from_bytes_with_nul</span>(<span class="string">b&quot;wayland-cursor-rs\0&quot;</span>).<span class="ident">unwrap</span>(),
-            <span class="ident">memfd</span>::<span class="ident">MemFdCreateFlag</span>::<span class="ident">MFD_CLOEXEC</span>,
+        <span class="kw">match</span> <span class="ident">memfd::memfd_create</span>(
+            <span class="ident">CStr::from_bytes_with_nul</span>(<span class="string">b&quot;wayland-cursor-rs\0&quot;</span>).<span class="ident">unwrap</span>(),
+            <span class="ident">memfd::MemFdCreateFlag::MFD_CLOEXEC</span>,
         ) {
             <span class="prelude-val">Ok</span>(<span class="ident">fd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">fd</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">EINTR</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">ENOSYS</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(<span class="ident">err</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">Errno::EINTR</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
+            <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">Errno::ENOSYS</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
+            <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError::from</span>(<span class="ident">errno</span>)),
+            <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="ident">err</span>),
         }
     }
 
     <span class="comment">// Fallback to using shm_open.</span>
-    <span class="kw">let</span> <span class="ident">sys_time</span> <span class="op">=</span> <span class="ident">SystemTime</span>::<span class="ident">now</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mem_file_handle</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(
+    <span class="kw">let</span> <span class="ident">sys_time</span> <span class="op">=</span> <span class="ident">SystemTime::now</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mem_file_handle</span> <span class="op">=</span> <span class="macro">format!</span>(
         <span class="string">&quot;/wayland-cursor-rs-{}&quot;</span>,
         <span class="ident">sys_time</span>.<span class="ident">duration_since</span>(<span class="ident">UNIX_EPOCH</span>).<span class="ident">unwrap</span>().<span class="ident">subsec_nanos</span>()
     );
     <span class="kw">loop</span> {
-        <span class="kw">match</span> <span class="ident">mman</span>::<span class="ident">shm_open</span>(
+        <span class="kw">match</span> <span class="ident">mman::shm_open</span>(
             <span class="ident">mem_file_handle</span>.<span class="ident">as_str</span>(),
-            <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_CREAT</span>
-                <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_EXCL</span>
-                <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_RDWR</span>
-                <span class="op">|</span> <span class="ident">fcntl</span>::<span class="ident">OFlag</span>::<span class="ident">O_CLOEXEC</span>,
-            <span class="ident">stat</span>::<span class="ident">Mode</span>::<span class="ident">S_IRUSR</span> <span class="op">|</span> <span class="ident">stat</span>::<span class="ident">Mode</span>::<span class="ident">S_IWUSR</span>,
+            <span class="ident">fcntl::OFlag::O_CREAT</span>
+                <span class="op">|</span> <span class="ident">fcntl::OFlag::O_EXCL</span>
+                <span class="op">|</span> <span class="ident">fcntl::OFlag::O_RDWR</span>
+                <span class="op">|</span> <span class="ident">fcntl::OFlag::O_CLOEXEC</span>,
+            <span class="ident">stat::Mode::S_IRUSR</span> <span class="op">|</span> <span class="ident">stat::Mode::S_IWUSR</span>,
         ) {
-            <span class="prelude-val">Ok</span>(<span class="ident">fd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">mman</span>::<span class="ident">shm_unlink</span>(<span class="ident">mem_file_handle</span>.<span class="ident">as_str</span>()) {
+            <span class="prelude-val">Ok</span>(<span class="ident">fd</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">mman::shm_unlink</span>(<span class="ident">mem_file_handle</span>.<span class="ident">as_str</span>()) {
                 <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">fd</span>),
-                <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">unistd</span>::<span class="ident">close</span>(<span class="ident">fd</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
-                    <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
-                    <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>),
+                <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">unistd::close</span>(<span class="ident">fd</span>) {
+                    <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError::from</span>(<span class="ident">errno</span>)),
+                    <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError::from</span>(<span class="ident">errno</span>)),
+                    <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>),
                 },
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>),
+                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>),
             },
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">EEXIST</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">Errno::EEXIST</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="comment">// If a file with that handle exists then change the handle</span>
-                <span class="ident">mem_file_handle</span> <span class="op">=</span> <span class="macro">format</span><span class="macro">!</span>(
+                <span class="ident">mem_file_handle</span> <span class="op">=</span> <span class="macro">format!</span>(
                     <span class="string">&quot;/wayland-cursor-rs-{}&quot;</span>,
                     <span class="ident">sys_time</span>.<span class="ident">duration_since</span>(<span class="ident">UNIX_EPOCH</span>).<span class="ident">unwrap</span>().<span class="ident">subsec_nanos</span>()
                 );
                 <span class="kw">continue</span>;
             }
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">Errno</span>::<span class="ident">EINTR</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">nix</span>::<span class="ident">Error</span>::<span class="ident">Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError</span>::<span class="ident">from</span>(<span class="ident">errno</span>)),
-            <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(<span class="ident">err</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">Errno::EINTR</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
+            <span class="prelude-val">Err</span>(<span class="ident">nix::Error::Sys</span>(<span class="ident">errno</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">IoError::from</span>(<span class="ident">errno</span>)),
+            <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="ident">err</span>),
         }
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_cursor" data-search-js="../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wayland_cursor" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>
