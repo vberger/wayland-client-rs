@@ -669,6 +669,8 @@
 <span id="666">666</span>
 <span id="667">667</span>
 <span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Wayland socket manipulation</span>
 
@@ -691,6 +693,7 @@
  */</span>
 
 <span class="doccomment">/// A wayland socket</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Socket</span> {
     <span class="ident">fd</span>: <span class="ident">RawFd</span>,
 }
@@ -775,6 +778,7 @@
 
 <span class="doccomment">/// An adapter around a raw Socket that directly handles buffering and</span>
 <span class="doccomment">/// conversion from/to wayland messages</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BufferedSocket</span> {
     <span class="ident">socket</span>: <span class="ident">Socket</span>,
     <span class="ident">in_data</span>: <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
@@ -1041,7 +1045,7 @@
 <span class="comment">/*
  * Buffer
  */</span>
-
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">struct</span> <span class="ident">Buffer</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span><span class="op">&gt;</span> {
     <span class="ident">storage</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
     <span class="ident">occupied</span>: <span class="ident">usize</span>,

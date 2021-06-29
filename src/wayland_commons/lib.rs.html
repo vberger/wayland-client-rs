@@ -227,6 +227,8 @@
 <span id="224">224</span>
 <span id="225">225</span>
 <span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Common definitions for wayland</span>
 <span class="doccomment">//!</span>
@@ -243,7 +245,7 @@
 <span class="doccomment">//! this trait is auto-implemented for closures with appropriate signature, for</span>
 <span class="doccomment">//! convenience.</span>
 
-<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>, <span class="ident">missing_debug_implementations</span>)]</span>
 
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">nix</span>;
@@ -311,7 +313,7 @@
     <span class="doccomment">/// It can only be accessed from the provided closure, and this consumes</span>
     <span class="doccomment">/// the message.</span>
     <span class="comment">// -- The lint is allowed because fixing it would be a breaking change --</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::wrong_self_convention</span>)]</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::wrong_self_convention</span>)]</span>
     <span class="kw">fn</span> <span class="ident">as_raw_c_in</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">syscom::wl_argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>;
@@ -347,6 +349,7 @@
 }
 
 <span class="doccomment">/// An empty enum representing a MessageGroup with no messages</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">NoMessage</span> {}
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
@@ -391,6 +394,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// If the ThreadGuard is dropped from the wrong thread,</span>
 <span class="doccomment">/// the underlying value will be leaked.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ThreadGuard</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> {
     <span class="ident">thread</span>: <span class="ident">std::thread::ThreadId</span>,
     <span class="ident">val</span>: <span class="ident">std::mem::ManuallyDrop</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,

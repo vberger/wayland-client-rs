@@ -342,6 +342,8 @@
 <span id="339">339</span>
 <span id="340">340</span>
 <span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std::sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>};
 
@@ -349,6 +351,7 @@
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::protocol::wl_registry</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Attached</span>, <span class="ident">DispatchData</span>, <span class="ident">Interface</span>, <span class="ident">Main</span>, <span class="ident">Proxy</span>};
 
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">struct</span> <span class="ident">Inner</span> {
     <span class="ident">list</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">String</span>, <span class="ident">u32</span>)<span class="op">&gt;</span>,
 }
@@ -358,7 +361,7 @@
 <span class="doccomment">/// This utility provides an implemenation for the registry</span>
 <span class="doccomment">/// that track the list of globals for you, as well as utilities</span>
 <span class="doccomment">/// to bind them.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GlobalManager</span> {
     <span class="ident">inner</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">Inner</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">registry</span>: <span class="ident">Main</span><span class="op">&lt;</span><span class="ident">wl_registry::WlRegistry</span><span class="op">&gt;</span>,
@@ -388,6 +391,7 @@
 }
 
 <span class="doccomment">/// Event provided to the user callback of GlobalManager</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">GlobalEvent</span> {
     <span class="doccomment">/// A new global was created</span>
     <span class="ident">New</span> {
