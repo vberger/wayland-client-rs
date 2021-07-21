@@ -112,7 +112,7 @@
     }
 );
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unstable_protocols&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;staging_protocols&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unstable_protocols&quot;</span>))]</span>
 <span class="attribute">#[<span class="ident">macro_escape</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">wayland_protocol_versioned</span>(
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">version</span>: <span class="ident">ident</span>),<span class="kw-2">*</span>], <span class="macro-nonterminal">$</span><span class="macro-nonterminal">std_imports</span>:<span class="ident">tt</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">prot_imports</span>:<span class="ident">tt</span>) <span class="op">=</span><span class="op">&gt;</span> {
